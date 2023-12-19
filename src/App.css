@@ -1,0 +1,16 @@
+#map {
+  width: 100%;
+  height: 80vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px 5vw;
+}
+
+menu {
+  display: flex;
+  gap: 5vw;
+}
