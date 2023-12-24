@@ -1,10 +1,78 @@
-#map {
-  width: 100%;
-  height: 80vh;
+/* Import of fonts */
+
+@font-face {
+  font-family: Fredericka;
+  src: url(./src/assets/fonts/Fredericka_the_Great/FrederickatheGreat-Regular.ttf);
 }
+
+@font-face {
+  font-family: Laila;
+  src: url(./src/assets/fonts/Laila/Laila-Medium.ttf);
+}
+
+/*General settings */
+
+:root {
+  --primary-bg-color: #FFEBD1;
+  --secondary-bg-color: #9C4324;
+  --primary-color: black;
+  --secondary-color: #FFEBD1;
+  --highlight-one: #7D9EB4;
+  --highlight-two: #196D45; 
+}
+
+/* Dark Mode */
+/* :root {
+  --primary-bg-color: #032236;
+  --secondary-bg-color: #803015;
+  --primary-color: #D4A66A;
+  --secondary-color: #D4A66A;
+  --highlight-one: #D4A66A;
+  --highlight-two: #4A9470; 
+} */
+
+body {
+  background-color: var(--primary-bg-color);
+  color: var(--primary-color);
+  font-family: Laila;
+}
+
+h1, h2 {
+  font-family: Fredericka;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration:none;
+}
+
+a:hover {
+  font-style: italic;
+}
+
+button {
+  background-color: var(--highlight-one);
+  border: none;
+  color: white;
+  font-size: inherit
+}
+
+.btn-secondary {
+  border: 3px solid var(--highlight-one);
+  background: none;
+  color:black;
+}
+
+footer {
+  text-align: center;
+  font-size: smaller;
+}
+
+/* Header */
 
 header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin: 0px 5vw;
@@ -13,4 +81,65 @@ header {
 menu {
   display: flex;
   gap: 5vw;
+}
+
+/* About Page */
+
+#about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#about > * {
+  width: 100%;
+  display: flex;
+  flex-wrap: flex;
+  justify-content: center;
+  margin: 10px 0px;
+  padding: 10px 0px;
+}
+
+#title { 
+  background-image: url("./src/assets/header_himmel.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#teaser-map {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#teaser-footprint {
+  flex-direction: column;
+  align-items: center;
+  border: 2px dashed var(--highlight-two);
+}
+
+#teaser-single {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #9C4324;
+  color: var(--secondary-color);
+}
+
+#teaser-all {
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Map Page */
+
+#map {
+  width: 100%;
+  height: 80vh;
 }

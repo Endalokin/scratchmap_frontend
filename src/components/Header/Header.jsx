@@ -4,12 +4,12 @@ import { NavLink } from 'react-router-dom'
 export default function Header() {
   return (
     <header>
-      <div>ScratchMap</div>
+      <h2>ScratchMap</h2>
       <menu>
-        <NavLink>About</NavLink>
+        <NavLink to="/about">About</NavLink>
         <NavLink to="/map">Map</NavLink>
         <NavLink>Travels</NavLink>
-        <NavLink>Footprint</NavLink>
+        <NavLink to="/footprint">Footprint</NavLink>
       </menu>
     </header>
   )
