@@ -1,17 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import fetchData from '../../../utils/fetchAPI'
+import React from 'react'
+import { MapContainer, TileLayer, Marker, Popup, Rectangle } from 'react-leaflet'
+import { useOutletContext } from 'react-router-dom'
 
 export default function Map() {
-
-    const [experiences, setExperiences] = useState()
-    const testURL = "http://localhost:8080/contentful/experiences"
-
-    useEffect(() => {
-        fetchData(testURL, (data) => {
-            setExperiences(data)
-        })
-    }, [])
+    const [experiences] = useOutletContext();
 
     return (
         <MapContainer center={[40.505, -0.09]} zoom={3} scrollWheelZoom={false} id="map">
@@ -19,6 +11,7 @@ export default function Map() {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {experiences?.map(e => <Marker key={e.id} position={[e.location.lat, e.location.lon]} />)}
+            {/* {experiences?.map(e => <Marker key={e.id} position={[e.location.lat, e.location.lon]} />)} */}
+            {experiences?.map(e => <Rectangle key={e.id} bounds={[[Math.ceil(e.location.lat)-0.005, Math.ceil(e.location.lon)-0.005], [Math.floor(e.location.lat)+0.005, Math.floor(e.location.lon)+0.005]]} pathOptions={{color: e.imgColour}} /> )}
         </MapContainer>)
 }
