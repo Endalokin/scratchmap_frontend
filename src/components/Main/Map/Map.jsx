@@ -13,7 +13,7 @@ export default function Map() {
                 
             />
             {/* {experiences?.map(e => <Marker key={e.id} position={[e.location.lat, e.location.lon]} />)} */}
-            {experiences?.map(e => <Rectangle key={e.id} bounds={[[Math.ceil(e.location.lat)-0.005, Math.ceil(e.location.lon)-0.005], [Math.floor(e.location.lat)+0.005, Math.floor(e.location.lon)+0.005]]} pathOptions={{color: e.imgColour, fillOpacity:0.5}} >      <Popup>
+            {experiences?.map(e => <Rectangle key={e.id} bounds={[[Math.ceil(e.location.lat)-0.005, Math.ceil(e.location.lon)-0.005], [Math.floor(e.location.lat)+0.005, Math.floor(e.location.lon)+0.005]]} pathOptions={{color: e.imgAccentColour ? e.imgAccentColour : e.imgColour, fillOpacity:0.5}} >      <Popup>
         {e.image.sys.id} <br/>
         <a href={e.imgUrl} target="_blank">{e.imgUrl}</a>
       </Popup></Rectangle> )}
