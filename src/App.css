@@ -13,22 +13,22 @@
 /*General settings */
 
 :root {
-  --primary-bg-color: #FFEBD1;
-  --secondary-bg-color: #9C4324;
+  --primary-bg-color: #ffebd1;
+  --secondary-bg-color: #9c4324;
   --primary-color: black;
-  --secondary-color: #FFEBD1;
-  --highlight-one: #7D9EB4;
-  --highlight-two: #196D45; 
+  --secondary-color: #ffebd1;
+  --highlight-one: #7d9eb4;
+  --highlight-two: #196d45;
 }
 
 /* Dark Mode */
 .dark {
   --primary-bg-color: #032236;
   --secondary-bg-color: #803015;
-  --primary-color: #D4A66A;
-  --secondary-color: #D4A66A;
-  --highlight-one: #D4A66A;
-  --highlight-two: #4A9470; 
+  --primary-color: #d4a66a;
+  --secondary-color: #d4a66a;
+  --highlight-one: #d4a66a;
+  --highlight-two: #4a9470;
 }
 
 body {
@@ -37,13 +37,14 @@ body {
   font-family: Laila;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-family: Fredericka;
 }
 
 a {
   color: var(--primary-color);
-  text-decoration:none;
+  text-decoration: none;
 }
 
 a:hover {
@@ -54,13 +55,7 @@ button {
   background-color: var(--highlight-one);
   border: none;
   color: white;
-  font-size: inherit
-}
-
-.btn-secondary {
-  border: 3px solid var(--highlight-one);
-  background: none;
-  color:black;
+  font-size: inherit;
 }
 
 footer {
@@ -101,7 +96,7 @@ menu {
   padding: 10px 0px;
 }
 
-#title { 
+#title {
   background-image: url("./src/assets/header_himmel.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -129,7 +124,7 @@ menu {
 #teaser-single {
   display: flex;
   flex-wrap: wrap;
-  background-color: #9C4324;
+  background-color: #9c4324;
   color: var(--secondary-color);
 }
 
@@ -146,28 +141,28 @@ menu {
 }
 
 .notching {
-  padding: 2px 30px;
-  background: 
-      linear-gradient(135deg, transparent 10px, var(--highlight-one) 0) top left,
-      linear-gradient(-135deg, transparent 10px, var(--highlight-one) 0) top right,
-      linear-gradient(-45deg, transparent 10px, var(--highlight-one) 0) bottom right,
-      linear-gradient(45deg, transparent 10px, var(--highlight-one) 0) bottom left;
-  background-size: 50% 50%;
+  padding: 5px 45px;
+  background: linear-gradient(135deg, transparent 10px, var(--highlight-one) 0)
+      top left,
+    linear-gradient(-135deg, transparent 10px, var(--highlight-one) 0) top right,
+    linear-gradient(-45deg, transparent 10px, var(--highlight-one) 0) bottom
+      right,
+    linear-gradient(45deg, transparent 10px, var(--highlight-one) 0) bottom left;
+  /* background-size: 50% 50%; */
   background-repeat: no-repeat;
   clip-path: polygon(
     15px 0,
     calc(100% - 15px) 0,
-    100% 15px,
+    101% 15px,
     100% calc(100% - 15px),
     calc(100% - 15px) 100%,
     15px 100%,
     0 calc(100% - 15px),
-    0 15px
-);
+    -1% 15px
+  );
 }
 
-
-.rotating{
+.rotating {
   animation: rotation 4s infinite linear;
 }
 

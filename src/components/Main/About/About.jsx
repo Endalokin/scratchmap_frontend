@@ -47,14 +47,13 @@ export default function About() {
                             <li>No borders</li>
                         </ul>
                     </p>
-                    <Link to="/map"><button>Go to map</button></Link>
+                    <Link to="/map"><button className="notching">Go to map</button></Link>
                 </div>
             </div>
             <div id="teaser-footprint">
                 <h2>Got to know your footprint</h2>
                 <p>Some further explanation about it</p>
-                <Link to="/footprint"><button class="btn-secondary">Go to footprint overview</button></Link>
-                <div className="notching">Something</div>
+                <Link to="/footprint"><button className="notching">Go to footprint overview</button></Link>
                 <div>{trips.map((trip) => <CompensationTree compensatedTrip={trip.compensated} />)}</div>
             </div>
             <div id="teaser-single">
