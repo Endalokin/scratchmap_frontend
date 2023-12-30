@@ -7,7 +7,7 @@ export default function AllTripsTagView({trips}) {
         <>
             <h2>Discover all your trips</h2>
             <p>{trips.map(trip => <TripTag trip={trip} /> )}</p>
-            <Link to="/"><button>Discover trips</button></Link>
+            <Link to="/"><button className="notching">Discover trips</button></Link>
         </>
     )
 }
