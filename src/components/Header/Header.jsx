@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import RefreshPage from './RefreshPage'
+import ChangeTheme from './ChangeTheme'
 
 export default function Header({experiences, setExperiences}) {
   
@@ -13,6 +14,7 @@ export default function Header({experiences, setExperiences}) {
         <NavLink>Travels</NavLink>
         <NavLink to="/footprint">Footprint</NavLink>
         <RefreshPage experiences={experiences} setExperiences={setExperiences} />
+        <ChangeTheme />
       </menu>
     </header>
   )

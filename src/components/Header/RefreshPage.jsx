@@ -1,22 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import fetchData from '../../utils/fetchAPI'
 
 export default function RefreshPage({ experiences, setExperiences }) {
     const location = useLocation()
+    const [rotate, setRotate] = useState()
 
-    // map-method in useState? oder besser mit setExperiences arbeiten?
-    experiences?.map(e => {
-        if (!e.imgColour) {
-            const URL = `http://localhost:8080/contentful/images/colour?id=${e.image.sys.id}&url=${e.imgUrl}`;
-            fetchData(URL, (data) => {
-                console.log(data)
-            }, 'POST')
+    async function handleClick(e) {
+        e.preventDefault();
+        setRotate("rotating")
+        for (let experience of experiences) {
+            if (!experience.imgColour) {
+                const URL = `http://localhost:8080/contentful/images/colour?id=${experience.image.sys.id}&url=${experience.imgUrl}`;
+                await fetchData(URL, (data) => {
+                    console.log(`${experience.id} was updated`)
+                }, 'POST')
+            }
         }
-        return e
-    })
+        window.location.reload()
+        
+    }
 
     return (
-        <NavLink to={location}>{'\u27F3'}</NavLink>
+        <NavLink onClick={handleClick} className={rotate}>{'\u27F3'}</NavLink>
     )
 }
