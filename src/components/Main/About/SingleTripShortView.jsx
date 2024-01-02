@@ -6,12 +6,12 @@ export default function SingleTripShortView({trip}) {
         <>
             <div>
                 <h2>{trip.name}</h2>
-                <p>
+                <div>
                     <ul>
                         <li>From: {trip.placeFrom}</li>
                         <li>To: {trip.placeTo}</li>
                     </ul>
-                </p>
+                </div>
                 <Link to="/"><button className="notching">Show trip details</button></Link>
             </div>
             <div>Here comes an image of the trip</div>

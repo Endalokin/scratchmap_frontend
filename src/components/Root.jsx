@@ -8,20 +8,27 @@ import fetchData from '../utils/fetchAPI'
 export default function Root() {
 
   const [experiences, setExperiences] = useState()
-  const URL = "http://localhost:8080/contentful/experiences"
+  const EXPERIENCES_URL = "http://localhost:8080/experiences"
+
+  const [trips, setTrips] = useState()
+  const TRIPS_URL = "http://localhost:8080/trips"
 
   useEffect(() => {
-      fetchData(URL, (data) => {
+      fetchData(EXPERIENCES_URL, (data) => {
           setExperiences(data)
           console.log(data)
       })
+      fetchData(TRIPS_URL, (data) => {
+        setTrips(data)
+        console.log(data)
+    })
   }, [])
 
   return (
     <>
-      <Header experiences={experiences} setExperiences={setExperiences} />
+      <Header experiences={experiences} trips={trips} />
       <main>
-        <Outlet context={[experiences, setExperiences]} />
+        <Outlet context={[experiences, setExperiences, trips]} />
       </main>
       <Footer />
     </>

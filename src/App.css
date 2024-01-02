@@ -12,13 +12,15 @@
 
 /*General settings */
 
+/* Light Mode */
 :root {
   --primary-bg-color: #ffebd1;
   --secondary-bg-color: #9c4324;
   --primary-color: black;
   --secondary-color: #ffebd1;
   --highlight-one: #7d9eb4;
-  --highlight-two: #196d45;
+  
+  --highlight-two: #4a9470;
 }
 
 /* Dark Mode */
@@ -28,13 +30,14 @@
   --primary-color: #d4a66a;
   --secondary-color: #d4a66a;
   --highlight-one: #d4a66a;
-  --highlight-two: #4a9470;
+  --highlight-two: #196d45;
 }
 
 body {
   background-color: var(--primary-bg-color);
   color: var(--primary-color);
   font-family: Laila;
+  margin: 0;
 }
 
 h1,
@@ -58,9 +61,26 @@ button {
   font-size: inherit;
 }
 
+.fixed-site {
+  margin: 0px 5vw;
+}
+
+@media only screen and (max-width: 1600px) {
+  .fixed-site {
+    margin: 0px 0.5vw;
+  }
+}
+
 footer {
   text-align: center;
   font-size: smaller;
+  position: fixed;
+  padding: 15px 0px;
+  width: 100%;
+  bottom: 0px;
+  /* background: linear-gradient(180deg, var(--secondary-bg-color) 0%, var(--primary-bg-color) 30%, var(--primary-bg-color) 70%, var(--secondary-bg-color) 100%); */
+  background-color: var(--primary-bg-color);
+  border-top: 2px dotted var(--secondary-bg-color);
 }
 
 /* Header */
@@ -79,6 +99,41 @@ menu {
   font-size: larger;
 }
 
+.notching {
+  padding: 5px 45px;
+  background: linear-gradient(135deg, transparent 10px, var(--highlight-one) 0)
+      top left,
+    linear-gradient(-135deg, transparent 10px, var(--highlight-one) 0) top right,
+    linear-gradient(-45deg, transparent 10px, var(--highlight-one) 0) bottom
+      right,
+    linear-gradient(45deg, transparent 10px, var(--highlight-one) 0) bottom left;
+  /* background-size: 50% 50%; */
+  background-repeat: no-repeat;
+  clip-path: polygon(
+    15px 0,
+    calc(100% - 15px) 0,
+    101% 15px,
+    100% calc(100% - 15px),
+    calc(100% - 15px) 100%,
+    15px 100%,
+    0 calc(100% - 15px),
+    -1% 15px
+  );
+}
+
+.rotating {
+  animation: rotation 4s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* About Page */
 
 #about {
@@ -92,8 +147,8 @@ menu {
   display: flex;
   flex-wrap: flex;
   justify-content: center;
-  margin: 10px 0px;
-  padding: 10px 0px;
+  margin: 25px 0px;
+  padding: 50px 0px;
 }
 
 #title {
@@ -140,37 +195,12 @@ menu {
   height: 80vh;
 }
 
-.notching {
-  padding: 5px 45px;
-  background: linear-gradient(135deg, transparent 10px, var(--highlight-one) 0)
-      top left,
-    linear-gradient(-135deg, transparent 10px, var(--highlight-one) 0) top right,
-    linear-gradient(-45deg, transparent 10px, var(--highlight-one) 0) bottom
-      right,
-    linear-gradient(45deg, transparent 10px, var(--highlight-one) 0) bottom left;
-  /* background-size: 50% 50%; */
-  background-repeat: no-repeat;
-  clip-path: polygon(
-    15px 0,
-    calc(100% - 15px) 0,
-    101% 15px,
-    100% calc(100% - 15px),
-    calc(100% - 15px) 100%,
-    15px 100%,
-    0 calc(100% - 15px),
-    -1% 15px
-  );
+/* Footprint page */
+
+th {
+  background-color: var(--highlight-two);
 }
 
-.rotating {
-  animation: rotation 4s infinite linear;
-}
-
-@keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+table {
+  width: 100%;
 }
