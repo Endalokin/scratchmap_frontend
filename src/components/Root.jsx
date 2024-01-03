@@ -7,11 +7,14 @@ import fetchData from '../utils/fetchAPI'
 
 export default function Root() {
 
+  const { VITE_SERVER_URL } = import.meta.env;
+  console.log(VITE_SERVER_URL)
+  console.log(import.meta.env)
   const [experiences, setExperiences] = useState()
-  const EXPERIENCES_URL = "http://localhost:8080/experiences"
+  const EXPERIENCES_URL = `${VITE_SERVER_URL}/experiences`
 
   const [trips, setTrips] = useState()
-  const TRIPS_URL = "http://localhost:8080/trips"
+  const TRIPS_URL = `${VITE_SERVER_URL}/trips`
 
   useEffect(() => {
       fetchData(EXPERIENCES_URL, (data) => {

@@ -71,6 +71,14 @@ button {
   }
 }
 
+@media only screen and (max-width: 900px) {
+  .hide-xs {
+    display: none;
+  }
+}
+
+/* Footer */
+
 footer {
   text-align: center;
   font-size: smaller;
