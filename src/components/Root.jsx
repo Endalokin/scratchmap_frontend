@@ -8,8 +8,6 @@ import fetchData from '../utils/fetchAPI'
 export default function Root() {
 
   const { VITE_SERVER_URL } = import.meta.env;
-  console.log(VITE_SERVER_URL)
-  console.log(import.meta.env)
   const [experiences, setExperiences] = useState()
   const EXPERIENCES_URL = `${VITE_SERVER_URL}/experiences`
 
