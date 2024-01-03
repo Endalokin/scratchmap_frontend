@@ -28,7 +28,7 @@ export default function Root() {
     <>
       <Header experiences={experiences} trips={trips} />
       <main>
-        <Outlet context={[experiences, setExperiences, trips]} />
+        <Outlet context={[experiences, setExperiences, trips, setTrips]} />
       </main>
       <Footer />
     </>
