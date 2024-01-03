@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
-import { useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
-
 import TableRowPerTrip from './TableRowPerTrip'
 import CompensationTree from './CompensationTree'
 
@@ -47,7 +45,7 @@ export default function Footprint() {
                     <thead>
                         <tr>
                             <th onClick={sortBy}>Name of the Trip {'\u21F5'}</th>
-                            <th>Directions</th>
+                            <th className="hide-xs">Directions</th>
                             <th onClick={sortBy}>Distance {'\u21F5'}</th>
                             <th onClick={sortBy}>Emission {'\u21F5'}</th>
                             <th>Amount</th>
