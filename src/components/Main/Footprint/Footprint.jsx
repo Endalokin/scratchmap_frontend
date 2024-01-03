@@ -1,56 +1,64 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { useOutletContext } from 'react-router-dom'
 
 import TableRowPerTrip from './TableRowPerTrip'
 import CompensationTree from './CompensationTree'
 
 export default function Footprint() {
 
-    /* Contentful API nachschauen: Extend oder expand um Verknüpfungen sichtbar zu machen! Dadurch weniger Abfragen von Foto -> Asset nötig!!! */
-    const [trips, setTrips] = useState([
-        {
-            name: "Griechenland 2023",
-            periodFrom: "18.06.2023",
-            periodTo: "30.06.2023",
-            placeFrom: "Frankfurt Hahn",
-            placeTo: "Corfu",
-            vehicle: "Plane",
-            travellers: 2,
-            emissions: 234.567,
-            compensated: true
-        },
-        {
-            name: "Schweden 2023",
-            periodFrom: "02.09.2023",
-            periodTo: "18.09.2023",
-            placeFrom: "Rostock",
-            placeTo: "Göteborg",
-            vehicle: "Car",
-            travellers: 5,
-            emissions: 43.567,
-            compensated: false
-        }
-    ])
+    const [, , trips, setTrips] = useOutletContext();
+
+    useEffect(() => {
+        trips?.sort((a, b) => {
+            if (a.footprint?.amount > b.footprint?.amount) {
+                return -1
+            } else if (a.footprint?.amount < b.footprint?.amount) {
+                return 1
+            }
+            return 0
+        })
+    }, [])
+
+
+    function sortBy(e) {
+        e.preventDefault();
+        let sortTerm = e.target.textContent.toLowerCase().split(" ")[0]
+        let sorted = [...trips]?.sort((a, b) => {
+            if (a.footprint && a.footprint[sortTerm] > b.footprint[sortTerm]) {
+                return -1
+            } else if (a.footprint && a.footprint[sortTerm] < b.footprint[sortTerm]) {
+                return 1
+            } else if (a[sortTerm] > b[sortTerm]) {
+                return 1
+            } else if (a[sortTerm] < b[sortTerm]) {
+                return -1
+            }
+            return 0
+        })
+        setTrips(sorted)
+    }
 
     return (
-        <>
-            <div>{trips.map((trip) => <CompensationTree compensatedTrip={trip.compensated}/>)} </div>
-            <div class="full-width">
+        <div className="fixed-site">
+            <div>{trips?.map((trip) => <CompensationTree key={`tree-${trip.id}`} compensatedTrip={trip.compensated} />)} </div>
+            <div className="full-width">
                 <table>
                     <thead>
                         <tr>
-
-                            <th>Trip</th>
-                            <th>Emissions</th>
-                            <th></th>
+                            <th onClick={sortBy}>Name of the Trip {'\u21F5'}</th>
+                            <th>Directions</th>
+                            <th onClick={sortBy}>Distance {'\u21F5'}</th>
+                            <th onClick={sortBy}>Emission {'\u21F5'}</th>
+                            <th>Amount</th>
                             <th>Compensated</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {trips.map((trip) => <TableRowPerTrip trip={trip} />)}
+                        {trips?.map((trip) => <TableRowPerTrip key={`row-${trip.id}`} trip={trip} />)}
                     </tbody>
                 </table>
             </div>
-        </>
+        </div>
     )
 }
