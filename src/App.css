@@ -2,12 +2,12 @@
 
 @font-face {
   font-family: Fredericka;
-  src: url(./assets/fonts/Fredericka_the_Great/FrederickatheGreat-Regular.ttf);
+  src: url(./fonts/Fredericka_the_Great/FrederickatheGreat-Regular.ttf);
 }
 
 @font-face {
   font-family: Laila;
-  src: url(./assets/fonts/Laila/Laila-Medium.ttf);
+  src: url(./fonts/Laila/Laila-Medium.ttf);
 }
 
 /*General settings */
@@ -160,7 +160,7 @@ menu {
 }
 
 #title {
-  background-image: url("./assets/header_himmel.jpg");
+  background-image: url("./header_himmel.jpg");
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -175,6 +175,7 @@ menu {
 
 #teaser-map {
   display: flex;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
@@ -186,6 +187,7 @@ menu {
 
 #teaser-single {
   display: flex;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   background-color: #9c4324;
   color: var(--secondary-color);
