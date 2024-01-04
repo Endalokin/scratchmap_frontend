@@ -175,6 +175,7 @@ menu {
 
 #teaser-map {
   display: flex;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
@@ -186,6 +187,7 @@ menu {
 
 #teaser-single {
   display: flex;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   background-color: #9c4324;
   color: var(--secondary-color);

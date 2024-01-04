@@ -7,7 +7,7 @@ import TitleSection from './TitleSection'
 
 export default function About() {
 
-    const [,, trips] = useOutletContext();
+    const [experiences,, trips] = useOutletContext();
 
     return (
         <div id="about">
@@ -34,7 +34,7 @@ export default function About() {
                 <div>{trips?.map((trip) => <CompensationTree key={`about-tree-${trip.id}`} compensatedTrip={trip.compensated} />)}</div>
             </div>
             <div id="teaser-single">
-                {trips && trips[0] && <SingleTripShortView trip={trips[0]} />}
+                {trips && trips[0] && <SingleTripShortView trip={trips[0]} experiences={experiences} />}
             </div>
             <div id="teaser-all">
                 <AllTripsTagView trips={trips} />
