@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import TableRowPerTrip from './TableRowPerTrip'
 import CompensationTree from './CompensationTree'
+import CalculateNextTrip from './CalculateNextTrip'
 
 export default function Footprint() {
 
@@ -57,6 +58,7 @@ export default function Footprint() {
                     </tbody>
                 </table>
             </div>
+            <CalculateNextTrip />
         </div>
     )
 }

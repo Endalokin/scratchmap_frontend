@@ -77,6 +77,15 @@ button {
   }
 }
 
+.centered-element {
+  text-align: center;
+  padding: 20px;
+}
+
+form > * {
+  margin: 10px;
+}
+
 /* Footer */
 
 footer {
