@@ -2,10 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function SingleTripShortView({trip, experiences}) {
-    console.log(trip)
-    console.log(experiences)
     const displayImage = experiences?.find((e) => e.trip.sys.id == trip.id)
-    console.log(displayImage)
     return (
         <>
             <div>
