@@ -11,25 +11,40 @@ export default function Root() {
   const [experiences, setExperiences] = useState()
   const EXPERIENCES_URL = `${VITE_SERVER_URL}/experiences`
 
+  const [mapExperiences, setMapExperiences] = useState()
+
   const [trips, setTrips] = useState()
   const TRIPS_URL = `${VITE_SERVER_URL}/trips`
 
   useEffect(() => {
-      fetchData(EXPERIENCES_URL, (data) => {
-          setExperiences(data)
-          console.log(data)
-      })
-      fetchData(TRIPS_URL, (data) => {
-        setTrips(data)
-        console.log(data)
+    fetchData(EXPERIENCES_URL, (data) => {
+      setExperiences(data)
+      console.log(data)
+    })
+    fetchData(TRIPS_URL, (data) => {
+      setTrips(data)
+      console.log(data)
     })
   }, [])
+
+  useEffect(() => {
+    function uniquePlaces(data, key) {
+      return [...new Map(data.map(x => {
+        return [`${Math.ceil(x.location.lon)}, ${Math.ceil(x.location.lat)}`, x]
+      })).values()
+      ]
+    }
+    if (experiences) {
+      setMapExperiences(uniquePlaces(experiences, it => it.location))
+    }
+
+  }, [experiences])
 
   return (
     <>
       <Header experiences={experiences} trips={trips} />
       <main>
-        <Outlet context={[experiences, setExperiences, trips, setTrips]} />
+        <Outlet context={[experiences, setExperiences, trips, setTrips, mapExperiences]} />
       </main>
       <Footer />
     </>

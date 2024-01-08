@@ -25,8 +25,6 @@ export {ChartJS}
 
 ChartJS.defaults.color = getComputedStyle(document.body).color;
 
-console.log(getComputedStyle(document.body).color)
-
 export const options = {
     responsive: true,
     plugins: {
