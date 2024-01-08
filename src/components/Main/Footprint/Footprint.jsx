@@ -3,6 +3,7 @@ import { useOutletContext } from 'react-router-dom'
 import TableRowPerTrip from './TableRowPerTrip'
 import CompensationTree from './CompensationTree'
 import CalculateNextTrip from './CalculateNextTrip'
+import FootprintComparisonChart from './FootprintComparisonChart'
 
 export default function Footprint() {
 
@@ -59,6 +60,7 @@ export default function Footprint() {
                 </table>
             </div>
             <CalculateNextTrip />
+            <FootprintComparisonChart trips={trips}/>
         </div>
     )
 }

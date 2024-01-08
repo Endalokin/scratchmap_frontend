@@ -40,6 +40,10 @@ body {
   margin: 0;
 }
 
+main {
+  margin: 50px 0px;
+}
+
 h1,
 h2 {
   font-family: Fredericka;
@@ -222,4 +226,8 @@ th {
 
 table {
   width: 100%;
+}
+
+#footprint-comparison-chart {
+  max-height: 80%;
 }
