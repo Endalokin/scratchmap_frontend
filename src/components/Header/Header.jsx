@@ -7,9 +7,8 @@ export default function Header({experiences, trips}) {
   
   return (
     <header>
-      <h2>ScratchMap</h2>
+      <NavLink to="/about"><h2>ScratchMap</h2></NavLink>
       <menu>
-        <NavLink to="/about">About</NavLink>
         <NavLink to="/map">Map</NavLink>
         <NavLink>Travels</NavLink>
         <NavLink to="/footprint">Footprint</NavLink>

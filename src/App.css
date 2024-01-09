@@ -43,12 +43,18 @@ body {
 }
 
 main {
-  margin: 50px 0px;
+  margin: 0px 0px 50px 0px;
 }
 
 h1,
 h2 {
   font-family: Fredericka;
+}
+
+h1 {
+  background-color: white;
+  color: var(--secondary-bg-color);
+  padding: 0.5rem 0.5rem 2rem 0.5rem;
 }
 
 a {
@@ -71,17 +77,7 @@ button {
   margin: 0px 5vw;
 }
 
-@media only screen and (max-width: 1600px) {
-  .fixed-site {
-    margin: 0px 0.5vw;
-  }
-}
 
-@media only screen and (max-width: 900px) {
-  .hide-xs {
-    display: none;
-  }
-}
 
 .centered-element {
   text-align: center;
@@ -175,9 +171,10 @@ menu {
 }
 
 #title {
-  background-image: url("./header_himmel.jpg");
+  background-image: url("./pexels-andrea-piacquadio-3769138.jpg");
   background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .grid-3 {
@@ -188,6 +185,78 @@ menu {
   gap: 20px;
 }
 
+.polaroid {
+  background: #fff;
+  padding: 0.5rem 0.5rem 2rem 0.5rem;
+  box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+  max-height: 30vh;
+  max-width: 10vw;
+  margin: auto;
+}
+.polaroid > img {
+  max-width: 70%;
+  max-height: 70%;
+  height: auto;
+  filter: grayscale(100%);
+  transition: 0.7s;
+}
+
+.polaroid > img:hover {
+  filter: grayscale(0%);
+}
+
+.polaroid-1 {
+  animation: shake-1 2.2s ease-in;
+  animation-timeline: initial;
+  rotate: -5deg;
+}
+
+.polaroid-2 {
+  animation: shake-2 1.8s ease-in;
+  animation-timeline: initial;
+  rotate: 5deg;
+}
+
+.polaroid-3 {
+  animation: shake-3 1.6s ease-in;
+  animation-timeline: initial;
+  rotate: 0;
+}
+
+@keyframes shake-1 {
+  0% {
+    transform:  rotate(-10deg) scale(1.5) translateX(10px);
+    opacity: 0;
+  }
+  40% {
+    transform:  scale(1) translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes shake-2 {
+  0% {
+    transform:  rotate(-10deg) scale(1.5) translateX(-10px);
+    opacity: 0;
+  }
+  40% {
+    transform:  scale(1) translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes shake-3 {
+  0% {
+    transform:  rotate(10deg) scale(1.5);
+    opacity: 0;
+  }
+  40% {
+    transform:   scale(1);
+    opacity: 1;
+  }
+
+}
+
 #teaser-map {
   display: flex;
   justify-content: space-evenly;
@@ -195,6 +264,7 @@ menu {
 }
 
 #teaser-footprint {
+  width: calc(100% - 50px);
   flex-direction: column;
   align-items: center;
   border: 2px dashed var(--highlight-two);
@@ -210,19 +280,16 @@ menu {
 }
 
 #animated-img {
-
-  /* Animation */
-  animation: slide-in 1ms linear;
+  animation: slide-in 1ms ease-in;
   animation-timeline: view();
 }
 
 @keyframes slide-in {
   0% {
-    /* Ausgangszustand */
-    transform: translateX(50rem);
+    transform: translateX(50rem) translateY(-20rem) rotate(-0.25turn);
   }
-  30% {
-    transform: translateX(0);
+  40% {
+    transform: translateX(0) translateY(0) rotate(0);
   }
 }
 
@@ -311,4 +378,23 @@ table {
 
 #footprint-comparison-chart {
   max-height: 80%;
+}
+
+.drop-shadow {
+  filter: drop-shadow(0px -6px 6px var(--secondary-color));
+}
+
+@media only screen and (max-width: 1600px) {
+  .fixed-site {
+    margin: 0px 0.5vw;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .hide-xs {
+    display: none;
+  }
+  .polaroid {
+    max-width: 20vw;
+  }
 }
