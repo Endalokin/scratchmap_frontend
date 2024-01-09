@@ -24,7 +24,7 @@ export default function Map() {
     return (
         <div className="fixed-site">
             <MapFilters displaySeasons={displaySeasons} setDisplaySeasons={setDisplaySeasons}/>
-            <MapContainer center={[40.505, -0.09]} zoom={zoomLevel} minZoom={1} maxZoom={19} scrollWheelZoom={true} id="map" /* ref={(ref) => { this.map = ref; }} */>
+            <MapContainer center={[40.505, -0.09]} zoom={zoomLevel} minZoom={1} maxZoom={19} scrollWheelZoom={true} className="map" /* ref={(ref) => { this.map = ref; }} */>
                 <ZoomTeller />
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'

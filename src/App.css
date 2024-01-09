@@ -19,7 +19,6 @@
   --primary-color: black;
   --secondary-color: #ffebd1;
   --highlight-one: #7d9eb4;
-
   --highlight-two: #4a9470;
   --opposite-color: #032236;
 }
@@ -76,8 +75,6 @@ button {
 .fixed-site {
   margin: 0px 5vw;
 }
-
-
 
 .centered-element {
   text-align: center;
@@ -162,12 +159,12 @@ menu {
 }
 
 #about > * {
-  width: 100%;
+  width: 70%;
   display: flex;
-  flex-wrap: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  margin: 25px 0px;
-  padding: 50px 0px;
+  margin: 25px 50px;
+  padding: 50px 15%;
 }
 
 #title {
@@ -254,7 +251,6 @@ menu {
     transform:   scale(1);
     opacity: 1;
   }
-
 }
 
 #teaser-map {
@@ -271,13 +267,20 @@ menu {
 }
 
 #teaser-single {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  background-color: #9c4324;
-  color: var(--secondary-color);
-  overflow-y: clip;
+  background-color: var(--secondary-bg-color);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
+
+#teaser-single > div:nth-child(3) {
+  margin: auto 0px ;
+}
+
+#teaser-single > div:nth-child(even) {
+  text-align: right;
+}
+
 
 #animated-img {
   animation: slide-in 1ms ease-in;
@@ -300,7 +303,7 @@ menu {
 
 /* Map Page */
 
-#map {
+.map {
   width: 100%;
   height: 80vh;
 }
@@ -398,3 +401,33 @@ table {
     max-width: 20vw;
   }
 }
+
+/* Trip Detail Page */
+
+#single-details {
+  background-color: var(--secondary-bg-color);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 50px 50px;
+  align-items:start;
+}
+
+
+/* #single-details {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  background-color: #9c4324;
+  color: var(--secondary-color);
+  overflow-y: clip;
+}
+
+#single-details > * {
+  margin: 25px 0px;
+  padding: 50px 0px;
+}
+
+#single-details > #teaser-single {
+  min-width: 70%;
+} */

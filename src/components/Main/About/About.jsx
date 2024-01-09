@@ -7,7 +7,7 @@ import TitleSection from './TitleSection'
 
 export default function About() {
 
-    const [experiences,, trips] = useOutletContext();
+    const [experiences, , trips] = useOutletContext();
 
     return (
         <div id="about">
