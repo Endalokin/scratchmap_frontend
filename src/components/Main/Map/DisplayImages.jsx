@@ -1,6 +1,6 @@
 import React from 'react'
 import L from 'leaflet'
-import { MapContainer, TileLayer, Marker, Popup, Rectangle, useMapEvents } from 'react-leaflet'
+import { Marker, Popup } from 'react-leaflet'
 
 export default function DisplayImages({ experiences }) {
     return (
