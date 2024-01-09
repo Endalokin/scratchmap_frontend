@@ -1,11 +1,15 @@
 import React from 'react'
 import L from 'leaflet'
-import { MapContainer, TileLayer, Marker, Popup, Rectangle, useMapEvents } from 'react-leaflet'
+import { Marker, Popup } from 'react-leaflet'
+import filteredArray from './filteredArray'
 
-export default function DisplayImages({ experiences }) {
+export default function DisplayImages({ experiences, displaySeasons }) {
+
+    let currentArray = filteredArray(experiences, displaySeasons)
+
     return (
         <>
-            {experiences?.map(e => {
+            {currentArray?.map(e => {
                 return <Marker key={e.id} position={[e.location.lat, e.location.lon]} icon={L.icon({ iconUrl: `${e?.imgUrl}?fm=webp&w=80` })} >
                     <Popup>
                         {e.image.sys.id} <br />

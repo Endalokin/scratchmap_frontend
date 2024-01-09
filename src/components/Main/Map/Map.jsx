@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
 import { useOutletContext } from 'react-router-dom'
 import DisplayImages from './DisplayImages'
 import DisplayColourTiles from './DisplayColourTiles'
+import MapFilters from './MapFilters'
 
 
 export default function Map() {
@@ -18,8 +19,11 @@ export default function Map() {
         return null
     }
 
+    const [displaySeasons, setDisplaySeasons] = useState([])
+
     return (
         <div className="fixed-site">
+            <MapFilters displaySeasons={displaySeasons} setDisplaySeasons={setDisplaySeasons}/>
             <MapContainer center={[40.505, -0.09]} zoom={zoomLevel} minZoom={1} maxZoom={19} scrollWheelZoom={true} id="map" /* ref={(ref) => { this.map = ref; }} */>
                 <ZoomTeller />
                 <TileLayer
@@ -28,8 +32,8 @@ export default function Map() {
 
                 />
                 {zoomLevel < 8 ?
-                    <DisplayColourTiles mapExperiences={mapExperiences} />
-                    : <DisplayImages experiences={experiences} />
+                    <DisplayColourTiles mapExperiences={mapExperiences} displaySeasons={displaySeasons}/>
+                    : <DisplayImages experiences={experiences} displaySeasons={displaySeasons} />
                 }
             </MapContainer>
         </div>
