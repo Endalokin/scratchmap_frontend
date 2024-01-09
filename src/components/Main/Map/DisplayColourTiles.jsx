@@ -1,12 +1,24 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Popup, Rectangle } from 'react-leaflet'
 import filteredArray from './filteredArray'
 
 
 
-export default function DisplayColourTiles({ mapExperiences, displaySeasons }) {
+export default function DisplayColourTiles({ experiences, displaySeasons }) {
 
-    let currentArray = filteredArray(mapExperiences, displaySeasons)
+    function uniquePlaces(data) {
+        return [...new Map(data.map(x => {
+            return [`${Math.ceil(x.location.lon)}, ${Math.ceil(x.location.lat)}`, x]
+        })).values()
+        ]
+    }
+
+    let currentArray
+
+    if (experiences) {
+        let tileExperiences = uniquePlaces(experiences)
+        currentArray = filteredArray(tileExperiences, displaySeasons)
+    }
 
     return (
         <>

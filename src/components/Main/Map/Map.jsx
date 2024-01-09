@@ -7,7 +7,7 @@ import MapFilters from './MapFilters'
 
 
 export default function Map() {
-    const [experiences, , , , mapExperiences] = useOutletContext();
+    const [experiences, , , ] = useOutletContext();
     const [zoomLevel, setZoomLevel] = useState(3);
 
     function ZoomTeller() {
@@ -32,7 +32,7 @@ export default function Map() {
 
                 />
                 {zoomLevel < 8 ?
-                    <DisplayColourTiles mapExperiences={mapExperiences} displaySeasons={displaySeasons}/>
+                    <DisplayColourTiles experiences={experiences} displaySeasons={displaySeasons}/>
                     : <DisplayImages experiences={experiences} displaySeasons={displaySeasons} />
                 }
             </MapContainer>

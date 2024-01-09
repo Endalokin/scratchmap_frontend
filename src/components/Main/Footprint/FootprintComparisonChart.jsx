@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -22,8 +22,6 @@ ChartJS.register(
 );
 
 export {ChartJS}
-
-
 
 export const options = {
     responsive: true,
