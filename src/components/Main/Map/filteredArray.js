@@ -1,4 +1,4 @@
-export default function filteredArray (array, filterArgument) {
+export default function filteredArray (array, filterArgument = 0) {
     let newArray = []
     if (array) {
         if (filterArgument == 0) {
