@@ -15,7 +15,7 @@ export default function SingleTripShortView({trip, experiences}) {
                 </div>
                 <Link to="/"><button className="notching">Show trip details</button></Link>
             </div>
-            <div><img src={`${displayImage?.imgUrl}?fm=webp&w=600`} alt={`${displayImage?.name}`} /></div>
+            <div id="animated-img"><img  src={`${displayImage?.imgUrl}?fm=webp&w=600`} alt={`${displayImage?.name}`} /></div>
         </>
     )
 }

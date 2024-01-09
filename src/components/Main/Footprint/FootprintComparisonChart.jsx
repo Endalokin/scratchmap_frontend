@@ -23,7 +23,7 @@ ChartJS.register(
 
 export {ChartJS}
 
-ChartJS.defaults.color = getComputedStyle(document.body).color;
+
 
 export const options = {
     responsive: true,
@@ -40,6 +40,8 @@ export const options = {
 
 
 export default function FootprintComparisonChart({ trips }) {
+
+    ChartJS.defaults.color = getComputedStyle(document.body).color;
 
     let minValue = Math.min.apply(null,
         trips?.map((o) => { return Number(o.periodFrom?.split("-")[0]) }));

@@ -21,8 +21,6 @@ export default function Map() {
 
     const [displaySeasons, setDisplaySeasons] = useState([])
 
-    console.log("parent is rendered")
-
     return (
         <div className="fixed-site">
             <MapFilters displaySeasons={displaySeasons} setDisplaySeasons={setDisplaySeasons}/>
@@ -35,7 +33,7 @@ export default function Map() {
                 />
                 {zoomLevel < 8 ?
                     <DisplayColourTiles mapExperiences={mapExperiences} displaySeasons={displaySeasons}/>
-                    : <DisplayImages experiences={experiences} />
+                    : <DisplayImages experiences={experiences} displaySeasons={displaySeasons} />
                 }
             </MapContainer>
         </div>

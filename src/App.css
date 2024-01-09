@@ -19,8 +19,9 @@
   --primary-color: black;
   --secondary-color: #ffebd1;
   --highlight-one: #7d9eb4;
-  
+
   --highlight-two: #4a9470;
+  --opposite-color: #032236;
 }
 
 /* Dark Mode */
@@ -31,6 +32,7 @@
   --secondary-color: #d4a66a;
   --highlight-one: #d4a66a;
   --highlight-two: #196d45;
+  --opposite-color: #ffebd1;
 }
 
 body {
@@ -204,6 +206,24 @@ menu {
   flex-wrap: wrap;
   background-color: #9c4324;
   color: var(--secondary-color);
+  overflow-y: clip;
+}
+
+#animated-img {
+
+  /* Animation */
+  animation: slide-in 1ms linear;
+  animation-timeline: view();
+}
+
+@keyframes slide-in {
+  0% {
+    /* Ausgangszustand */
+    transform: translateX(50rem);
+  }
+  30% {
+    transform: translateX(0);
+  }
 }
 
 #teaser-all {
@@ -230,15 +250,53 @@ menu {
   border: 1px solid var(--highlight-two);
   line-height: 50px;
   font-size: 2em;
-  cursor: pointer
+  cursor: pointer;
 }
 
-#season-winter:checked ~ label[for="season-winter"], 
+#season-winter:checked ~ label[for="season-winter"],
 #season-spring:checked ~ label[for="season-spring"],
 #season-summer:checked ~ label[for="season-summer"],
 #season-autumn:checked ~ label[for="season-autumn"] {
   background: var(--highlight-two);
   color: #fff;
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: var(--opposite-color);
+  color: var(--primary-bg-color);
+  text-align: center;
+  padding: 5px 5px;
+  border-radius: 6px;
+  font-size: smaller;
+  position: absolute;
+  bottom: 100%;
+  left: 0%;
+  z-index: 1;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--opposite-color) transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 
 /* Footprint page */
