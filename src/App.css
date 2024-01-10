@@ -11,7 +11,7 @@
 }
 @font-face {
   font-family: Permanent-Marker;
-  src: url(.fonts/Permanent_Marker/PermanentMarker-Regular.ttf);
+  src: url(./fonts/Permanent_Marker/PermanentMarker-Regular.ttf);
 }
 
 /*General settings */
