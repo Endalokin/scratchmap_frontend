@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom'
 import Footer from './Footer/Footer'
 import { useState, useEffect } from 'react'
 import fetchData from '../utils/fetchAPI'
+import LoadingBar from './LoadingBar'
 
 export default function Root() {
 
@@ -14,7 +15,10 @@ export default function Root() {
   const [trips, setTrips] = useState()
   const TRIPS_URL = `${VITE_SERVER_URL}/trips`
 
+  const [loadingData, setLoadingData] = useState(false)
+
   useEffect(() => {
+    setLoadingData(true)
     fetchData(EXPERIENCES_URL, (data) => {
       setExperiences(data)
       console.log(data)
@@ -25,8 +29,13 @@ export default function Root() {
     })
   }, [])
 
+  if (experiences && trips && loadingData) {
+      setLoadingData(false)
+  }
+
   return (
     <>
+      <LoadingBar loadingData={loadingData} />
       <Header experiences={experiences} trips={trips} />
       <main>
         <Outlet context={[experiences, setExperiences, trips, setTrips]} />

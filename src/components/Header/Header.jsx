@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import RefreshPage from './RefreshPage'
 import ChangeTheme from './ChangeTheme'
 
-export default function Header({experiences, trips}) {
+export default function Header({experiences, trips, rotate, setRotate}) {
   
   return (
     <header>
@@ -12,7 +12,7 @@ export default function Header({experiences, trips}) {
         <NavLink to="/map">Map</NavLink>
         <NavLink>Travels</NavLink>
         <NavLink to="/footprint">Footprint</NavLink>
-        <RefreshPage experiences={experiences} trips={trips} />
+        <RefreshPage experiences={experiences} trips={trips} rotate={rotate} setRotate={setRotate} />
         <ChangeTheme />
       </menu>
     </header>
