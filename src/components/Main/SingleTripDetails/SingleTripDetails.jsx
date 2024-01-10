@@ -44,7 +44,7 @@ export default function SingleTripDetails() {
                         </ul>
                     </div>
                 </div>
-                {singleTripExperiences && <div id="animated-img"><img src={`${singleTripExperiences[0].imgUrl}?fm=webp&w=600`} alt={`${singleTripExperiences[0].name}`} /></div>}
+                {singleTripExperiences && singleTripExperiences[0] && <div id="animated-img" className="polaroid polaroid-big"><img src={`${singleTripExperiences[0].imgUrl}?fm=webp&w=600`} alt={`${singleTripExperiences[0].name}`} /><h2 className="edding">{singleTripExperiences[0].name.substr(0,29)}</h2></div>}
                 <div className="img-gallery">
                     <ImgGallery singleTripExperiences={singleTripExperiences} />
                 </div>
