@@ -13,7 +13,7 @@ const router = createBrowserRouter(
       <Route index element={<About />} />
       <Route path="/about" element={<About />} />
       <Route path="/map" element={<Map />} />
-      <Route path="/footprint" element={<Footprint />} />
+      <Route path="/footprint/:display?" element={<Footprint />} />
       <Route path="/test" element={<Test />} />
       <Route path="/trip/:id/:imgid?" element={<SingleTripDetails />} />
     </Route>

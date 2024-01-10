@@ -454,7 +454,7 @@ table {
 }
 
 #footprint-comparison-chart {
-  max-height: 80%;
+  min-height: 250px ;
 }
 
 .drop-shadow {
@@ -491,4 +491,23 @@ table {
   .img-gallery {
     rotate: 270deg;
   }
+}
+
+/* HTML: <div class="ribbon">Your text content</div> */
+.ribbon {
+  --f: .5em; /* control the folded part*/
+  --r: .8em; /* control the ribbon shape */
+  
+  position: absolute;
+  top: 15vh;
+  right: calc(-1*var(--f));
+  padding-inline: .25em;
+  line-height: 1.8;
+  background: var(--highlight-one);
+  border-bottom: var(--f) solid #0005;
+  border-left: var(--r) solid #0000;
+  clip-path: 
+    polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
+      calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
+      var(--r) calc(50% - var(--f)/2));
 }

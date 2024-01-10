@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useOutletContext } from 'react-router-dom'
+import { useOutletContext, useParams, Link } from 'react-router-dom'
 import TableRowPerTrip from './TableRowPerTrip'
 import CompensationTree from './CompensationTree'
 import CalculateNextTrip from './CalculateNextTrip'
@@ -20,6 +20,7 @@ export default function Footprint() {
         })
     }, [])
 
+    const { display = "table" } = useParams()
 
     function sortBy(e) {
         e.preventDefault();
@@ -41,26 +42,33 @@ export default function Footprint() {
 
     return (
         <div className="fixed-site">
-            <div>{trips?.map((trip) => <CompensationTree key={`tree-${trip.id}`} compensatedTrip={trip.footprint.compensated} />)} </div>
-            <div className="full-width vertical-scroll-80">
-                <table>
-                    <thead>
-                        <tr>
-                            <th onClick={sortBy}>Name of the Trip {'\u21F5'}</th>
-                            <th className="hide-xs">Directions</th>
-                            <th onClick={sortBy}>Distance {'\u21F5'}</th>
-                            <th onClick={sortBy}>Emission {'\u21F5'}</th>
-                            <th>Amount</th>
-                            <th>Compensated</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {trips?.map((trip) => <TableRowPerTrip key={`row-${trip.id}`} trip={trip} setTrips={setTrips} />)}
-                    </tbody>
-                </table>
+            <div>
+                <div>
+                    {display == "chart" ? <Link to={`${window.location.origin}/footprint/table`}><button class="ribbon">Show Table</button></Link> : <Link to={`${window.location.origin}/footprint/chart`}><button class="ribbon">Show Chart</button></Link>}
+                </div>
+                
             </div>
-            <CalculateNextTrip />
-            <FootprintComparisonChart trips={trips}/>
+            {display == "chart" ? <FootprintComparisonChart trips={trips} /> :
+                <div className="full-width">
+                    <div style={{ height: "89px" }} >{trips?.map((trip) => <CompensationTree key={`tree-${trip.id}`} compensatedTrip={trip.footprint.compensated} />)} </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th onClick={sortBy}>Name of the Trip {'\u21F5'}</th>
+                                <th className="hide-xs">Directions</th>
+                                <th onClick={sortBy}>Distance {'\u21F5'}</th>
+                                <th onClick={sortBy}>Emission {'\u21F5'}</th>
+                                <th>Amount</th>
+                                <th>Compensated</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {trips?.map((trip) => <TableRowPerTrip key={`row-${trip.id}`} trip={trip} setTrips={setTrips} />)}
+                        </tbody>
+                    </table>
+                    <CalculateNextTrip />
+                </div>
+            }
         </div>
     )
 }
