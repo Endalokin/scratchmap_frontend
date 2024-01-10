@@ -70,6 +70,7 @@ button {
   border: none;
   color: white;
   font-size: inherit;
+  margin: 1rem;
 }
 
 .fixed-site {
@@ -267,18 +268,12 @@ menu {
 }
 
 #teaser-single {
-  background-color: var(--secondary-bg-color);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-#teaser-single > div:nth-child(3) {
-  margin: auto 0px ;
-}
-
-#teaser-single > div:nth-child(even) {
-  text-align: right;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  background-color: #9c4324;
+  color: var(--secondary-color);
+  overflow-y: clip;
 }
 
 
@@ -387,47 +382,33 @@ table {
   filter: drop-shadow(0px -6px 6px var(--secondary-color));
 }
 
+/* Trip Detail Page */
+
+#single-details {
+  background-color: var(--secondary-bg-color);
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 50px 50px;
+  align-items:start;
+}
+
 @media only screen and (max-width: 1600px) {
   .fixed-site {
     margin: 0px 0.5vw;
   }
+
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 880px) {
   .hide-xs {
     display: none;
   }
   .polaroid {
     max-width: 20vw;
   }
+  .img-gallery {
+    rotate: 270deg
+  }
+
 }
-
-/* Trip Detail Page */
-
-#single-details {
-  background-color: var(--secondary-bg-color);
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 50px 50px;
-  align-items:start;
-}
-
-
-/* #single-details {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  background-color: #9c4324;
-  color: var(--secondary-color);
-  overflow-y: clip;
-}
-
-#single-details > * {
-  margin: 25px 0px;
-  padding: 50px 0px;
-}
-
-#single-details > #teaser-single {
-  min-width: 70%;
-} */

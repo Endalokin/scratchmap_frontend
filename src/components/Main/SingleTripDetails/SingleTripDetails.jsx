@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams, useOutletContext } from 'react-router-dom'
 import SingleTripShortView from '../About/SingleTripShortView';
 import ImgGallery from './ImgGallery';
-import { MapContainer, Polyline, TileLayer, Marker} from 'react-leaflet'
+import { MapContainer, Polyline, TileLayer, Marker } from 'react-leaflet'
 import DisplayImages from '../Map/DisplayImages';
 
 export default function SingleTripDetails() {
@@ -20,24 +20,32 @@ export default function SingleTripDetails() {
     const lineOptions = { color: getComputedStyle(document.body).color }
 
     if (singleTripExperiences) {
-        singleTripExperiences.sort((a,b) => {
+        singleTripExperiences.sort((a, b) => {
             if (a.date > b.date) {
                 return -1
             } else if (a.date < b.date) {
                 return 1
             }
-                return 0
-        } )
+            return 0
+        })
     }
 
 
     return (
         <>
             <div id="single-details">
-                <div id="teaser-single">
-                    <SingleTripShortView trip={singleTripDetails} experiences={experiences} />
-                </div>
                 <div>
+                    <h2>{singleTripDetails?.name}</h2>
+                    <div>
+                        <ul>
+                            <li>From: {singleTripDetails?.placeDeparture}</li>
+                            <li>To: {singleTripDetails?.placeArrival}</li>
+                            <li>{new Date(singleTripDetails?.periodFrom).toLocaleDateString()} - {new Date(singleTripDetails?.periodUntil).toLocaleDateString()}</li>
+                        </ul>
+                    </div>
+                </div>
+                {singleTripExperiences && <div id="animated-img"><img src={`${singleTripExperiences[0].imgUrl}?fm=webp&w=600`} alt={`${singleTripExperiences[0].name}`} /></div>}
+                <div className="img-gallery">
                     <ImgGallery singleTripExperiences={singleTripExperiences} />
                 </div>
             </div>
@@ -47,7 +55,7 @@ export default function SingleTripDetails() {
                     url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                 />
                 <DisplayImages experiences={singleTripExperiences} />
-                <Polyline pathOptions={lineOptions}  positions={singleTripExperiences?.map((ste) => [ste.location.lat, ste.location.lon])} />
+                <Polyline pathOptions={lineOptions} positions={singleTripExperiences?.map((ste) => [ste.location.lat, ste.location.lon])} />
                 <Marker position={[singleTripDetails?.placeArrivalCoords.lat, singleTripDetails?.placeArrivalCoords.lon]} />
             </MapContainer>
             }

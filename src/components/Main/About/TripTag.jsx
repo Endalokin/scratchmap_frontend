@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function TripTag({trip}) {
 
@@ -6,6 +7,6 @@ export default function TripTag({trip}) {
     fontSize > 8 && fontSize < 36 ? fontSize : fontSize = 16
 
   return (
-    <span style={{fontSize: fontSize}}>{trip.name} </span>
+    <span style={{fontSize: fontSize}}><Link to={`${window.location.origin}/trip/${trip.id}`}> {trip.name}</Link> </span>
   )
 }
