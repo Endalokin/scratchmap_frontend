@@ -1,6 +1,5 @@
 import React from 'react'
 import { useParams, useOutletContext } from 'react-router-dom'
-import SingleTripShortView from '../About/SingleTripShortView';
 import ImgGallery from './ImgGallery';
 import { MapContainer, Polyline, TileLayer, Marker } from 'react-leaflet'
 import DisplayImages from '../Map/DisplayImages';
@@ -35,8 +34,6 @@ export default function SingleTripDetails() {
             mainImage = singleTripExperiences[0]
         }
     }
-
-
 
     return (
         <>

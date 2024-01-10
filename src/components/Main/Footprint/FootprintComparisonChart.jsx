@@ -21,7 +21,7 @@ ChartJS.register(
     Legend
 );
 
-export {ChartJS}
+export { ChartJS }
 
 export const options = {
     responsive: true,
@@ -89,8 +89,11 @@ export default function FootprintComparisonChart({ trips }) {
     };
 
     return (
-        <div id="footprint-comparison-chart">
-            <Line options={options} data={data} />
-        </div>
+        <>
+            <div style={{ height: "89px" }}></div>
+            <div id="footprint-comparison-chart">
+                <Line options={options} data={data} height={"80vh"} />
+            </div>
+        </>
     )
 }
