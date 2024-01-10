@@ -11,7 +11,7 @@ export default function SingleTripDetails() {
 
 
     let { id, imgid } = useParams()
-    
+
     const singleTripDetails = trips?.find(t => t.id == id)
     const singleTripExperiences = experiences?.filter(e => {
         return e.trip.sys.id == singleTripDetails?.id
@@ -41,17 +41,20 @@ export default function SingleTripDetails() {
     return (
         <>
             <div id="single-details">
-                <div>
+                <div >
                     <h2>{singleTripDetails?.name}</h2>
                     <div>
-                        <ul>
-                            <li>From: {singleTripDetails?.placeDeparture}</li>
-                            <li>To: {singleTripDetails?.placeArrival}</li>
-                            <li>{new Date(singleTripDetails?.periodFrom).toLocaleDateString()} - {new Date(singleTripDetails?.periodUntil).toLocaleDateString()}</li>
-                        </ul>
+                        <p style={{ textAlign:"center" }}>{singleTripDetails?.placeDeparture} ↔ {singleTripDetails?.placeArrival} </p>
+                        <p style={{ textAlign:"center" }}>{singleTripDetails?.vehicle == "flight-economy" ? `\u2708` : singleTripDetails?.vehicle == "car" ? '\u{1F697}' : '\u{1F686}'} {[...Array(singleTripDetails?.travellers)].map(() => '\u{026F9}')}</p>
                     </div>
+                    <div>
+                        <div className="flex-between"><p>{'\u{1F5D3}'}</p> <p>{new Date(singleTripDetails?.periodFrom).toLocaleDateString()} - {new Date(singleTripDetails?.periodUntil).toLocaleDateString()}</p></div>
+                        <div className="flex-between"><p>CO₂</p> <p>{singleTripDetails?.footprint.emission} kg</p></div>
+                        <div className="flex-between"><p>{'\u{1F5BD}'}</p><p>{singleTripDetails?.experiences.length}</p></div>
+                    </div>
+
                 </div>
-                {singleTripExperiences && singleTripExperiences[0] && <div id="animated-img" className="polaroid polaroid-big"><img src={`${mainImage.imgUrl}?fm=webp&w=600`} alt={`${mainImage.name}`} /><h2 className="edding">{mainImage.name.substr(0,29)}</h2></div>}
+                {singleTripExperiences && singleTripExperiences[0] && <div id="animated-img" className="polaroid polaroid-big"><img src={`${mainImage.imgUrl}?fm=webp&w=600`} alt={`${mainImage.name}`} /><h2 className="edding">{mainImage.name.substr(0, 29)}</h2></div>}
                 <div className="img-gallery">
                     <ImgGallery singleTripExperiences={singleTripExperiences} />
                 </div>

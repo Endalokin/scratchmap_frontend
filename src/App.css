@@ -75,6 +75,11 @@ h2 {
   word-spacing: 0.4rem;
 }
 
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
 a {
   color: var(--primary-color);
   text-decoration: none;
@@ -203,7 +208,7 @@ menu {
 
 .vertical-scroll-80::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  background-color: var(--highlight-two);
+  background-color: var(--highlight-one);
 }
 
 /* About Page */
