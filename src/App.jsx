@@ -15,7 +15,7 @@ const router = createBrowserRouter(
       <Route path="/map" element={<Map />} />
       <Route path="/footprint" element={<Footprint />} />
       <Route path="/test" element={<Test />} />
-      <Route path="/trip/:id" element={<SingleTripDetails />} />
+      <Route path="/trip/:id/:imgid?" element={<SingleTripDetails />} />
     </Route>
   )
 )

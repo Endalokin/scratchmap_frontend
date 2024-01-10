@@ -42,7 +42,7 @@ export default function Footprint() {
     return (
         <div className="fixed-site">
             <div>{trips?.map((trip) => <CompensationTree key={`tree-${trip.id}`} compensatedTrip={trip.footprint.compensated} />)} </div>
-            <div className="full-width">
+            <div className="full-width vertical-scroll-80">
                 <table>
                     <thead>
                         <tr>

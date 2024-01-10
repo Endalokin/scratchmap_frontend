@@ -9,6 +9,10 @@
   font-family: Laila;
   src: url(./fonts/Laila/Laila-Medium.ttf);
 }
+@font-face {
+  font-family: Permanent-Marker;
+  src: url(.fonts/Permanent_Marker/PermanentMarker-Regular.ttf);
+}
 
 /*General settings */
 
@@ -39,6 +43,7 @@ body {
   color: var(--primary-color);
   font-family: Laila;
   margin: 0;
+  font-size: 18px;
 }
 
 main {
@@ -46,7 +51,8 @@ main {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-family: Fredericka;
 }
 
@@ -54,6 +60,19 @@ h1 {
   background-color: white;
   color: var(--secondary-bg-color);
   padding: 0.5rem 0.5rem 2rem 0.5rem;
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+.edding {
+  font-style: italic;
+  font-family: Permanent-Marker;
+  color: var(--highlight-one);
+  letter-spacing: 0.4rem;
+  word-spacing: 0.4rem;
 }
 
 a {
@@ -70,6 +89,7 @@ button {
   border: none;
   color: white;
   font-size: inherit;
+  margin: 1rem;
 }
 
 .fixed-site {
@@ -150,6 +170,42 @@ menu {
   }
 }
 
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 100%;
+  height: 10px;
+  transform: skewX(-45deg);
+  background: 
+    linear-gradient(var(--secondary-bg-color) 0 0) left -30px top 0/30px 20px no-repeat 
+    #ccc;
+  animation: l3 10s infinite linear;
+}
+
+@keyframes l3 {
+  100% {background-position: right -30px top 0}
+}
+
+.vertical-scroll-80 {
+  overflow: auto;
+  max-height: 80vh;
+}
+
+.vertical-scroll-80::-webkit-scrollbar {
+  width: 8px;
+}
+
+.vertical-scroll-80::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #e7e7e7;
+  border: 1px solid #cacaca;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+}
+
+.vertical-scroll-80::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: var(--highlight-two);
+}
+
 /* About Page */
 
 #about {
@@ -186,20 +242,40 @@ menu {
   background: #fff;
   padding: 0.5rem 0.5rem 2rem 0.5rem;
   box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+  filter: grayscale(100%);
+  max-height: 80vh;
+  max-width: 80vw;
+}
+
+.polaroid > img {
+  max-height: 60vh;
+  max-width: 80vw;
+}
+
+.polaroid:hover {
+  filter: grayscale(0%);
+}
+
+.polaroid-big {
+  filter: grayscale(0%);
+  padding: 0.5rem;
+}
+
+.polaroid-1,
+.polaroid-2,
+.polaroid-3 {
   max-height: 30vh;
   max-width: 10vw;
   margin: auto;
 }
-.polaroid > img {
+
+.polaroid-1 > img,
+.polaroid-2 > img,
+.polaroid-3 > img {
   max-width: 70%;
   max-height: 70%;
   height: auto;
-  filter: grayscale(100%);
   transition: 0.7s;
-}
-
-.polaroid > img:hover {
-  filter: grayscale(0%);
 }
 
 .polaroid-1 {
@@ -222,33 +298,33 @@ menu {
 
 @keyframes shake-1 {
   0% {
-    transform:  rotate(-10deg) scale(1.5) translateX(10px);
+    transform: rotate(-10deg) scale(1.5) translateX(10px);
     opacity: 0;
   }
   40% {
-    transform:  scale(1) translateX(0px);
+    transform: scale(1) translateX(0px);
     opacity: 1;
   }
 }
 
 @keyframes shake-2 {
   0% {
-    transform:  rotate(-10deg) scale(1.5) translateX(-10px);
+    transform: rotate(-10deg) scale(1.5) translateX(-10px);
     opacity: 0;
   }
   40% {
-    transform:  scale(1) translateX(0px);
+    transform: scale(1) translateX(0px);
     opacity: 1;
   }
 }
 
 @keyframes shake-3 {
   0% {
-    transform:  rotate(10deg) scale(1.5);
+    transform: rotate(10deg) scale(1.5);
     opacity: 0;
   }
   40% {
-    transform:   scale(1);
+    transform: scale(1);
     opacity: 1;
   }
 }
@@ -260,27 +336,20 @@ menu {
 }
 
 #teaser-footprint {
-  width: calc(100% - 50px);
+  width: calc(70% - 50px);
   flex-direction: column;
   align-items: center;
   border: 2px dashed var(--highlight-two);
 }
 
 #teaser-single {
-  background-color: var(--secondary-bg-color);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  background-color: #9c4324;
+  color: var(--secondary-color);
+  overflow-y: clip;
 }
-
-#teaser-single > div:nth-child(3) {
-  margin: auto 0px ;
-}
-
-#teaser-single > div:nth-child(even) {
-  text-align: right;
-}
-
 
 #animated-img {
   animation: slide-in 1ms ease-in;
@@ -387,47 +456,34 @@ table {
   filter: drop-shadow(0px -6px 6px var(--secondary-color));
 }
 
+/* Trip Detail Page */
+
+#single-details {
+  background-color: var(--secondary-bg-color);
+  color: var(--secondary-color);
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  padding: 50px 50px;
+  align-items: start;
+}
+
 @media only screen and (max-width: 1600px) {
   .fixed-site {
     margin: 0px 0.5vw;
   }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 880px) {
   .hide-xs {
     display: none;
   }
-  .polaroid {
+  .polaroid-1,
+  .polaroid-2,
+  .polaroid-3 {
     max-width: 20vw;
   }
+  .img-gallery {
+    rotate: 270deg;
+  }
 }
-
-/* Trip Detail Page */
-
-#single-details {
-  background-color: var(--secondary-bg-color);
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 50px 50px;
-  align-items:start;
-}
-
-
-/* #single-details {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  background-color: #9c4324;
-  color: var(--secondary-color);
-  overflow-y: clip;
-}
-
-#single-details > * {
-  margin: 25px 0px;
-  padding: 50px 0px;
-}
-
-#single-details > #teaser-single {
-  min-width: 70%;
-} */
