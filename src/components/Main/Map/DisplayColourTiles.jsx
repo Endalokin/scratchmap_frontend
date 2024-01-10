@@ -1,6 +1,7 @@
 import React from 'react'
 import { Popup, Rectangle } from 'react-leaflet'
 import filteredArray from './filteredArray'
+import { Link } from 'react-router-dom'
 
 
 
@@ -25,8 +26,8 @@ export default function DisplayColourTiles({ experiences, displaySeasons }) {
             {currentArray?.map(e => {
                 return <Rectangle key={e.id} bounds={[[Math.ceil(e.location.lat) - 0.005, Math.ceil(e.location.lon) - 0.005], [Math.floor(e.location.lat) + 0.005, Math.floor(e.location.lon) + 0.005]]} pathOptions={{ color: e.imgAccentColour ? e.imgAccentColour : e.imgColour, fillOpacity: 0.5 }} >
                     <Popup>
-                        {e.image.sys.id} <br />
-                        <a href={e.imgUrl} target="_blank">{e.imgUrl}</a>
+                        {e?.name} <br />
+                        <Link to={`${window.location.origin}/trip/${e?.trip.sys.id}/${e?.id}`}>Show Trip Details</Link>
                     </Popup>
                 </Rectangle>
 
