@@ -20,10 +20,11 @@ export default function Map() {
     }
 
     const [displaySeasons, setDisplaySeasons] = useState([])
+    const [displayDaytime, setDisplayDaytime] = useState([])
 
     return (
         <div className="fixed-site">
-            <MapFilters displaySeasons={displaySeasons} setDisplaySeasons={setDisplaySeasons}/>
+            <MapFilters displaySeasons={displaySeasons} setDisplaySeasons={setDisplaySeasons} displayDaytime={displayDaytime} setDisplayDaytime={setDisplayDaytime} />
             <MapContainer center={[40.505, -0.09]} zoom={zoomLevel} minZoom={1} maxZoom={19} scrollWheelZoom={true} className="map" /* ref={(ref) => { this.map = ref; }} */>
                 <ZoomTeller />
                 <TileLayer
@@ -32,8 +33,8 @@ export default function Map() {
 
                 />
                 {zoomLevel < 8 ?
-                    <DisplayColourTiles experiences={experiences} displaySeasons={displaySeasons}/>
-                    : <DisplayImages experiences={experiences} displaySeasons={displaySeasons} />
+                    <DisplayColourTiles experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime}/>
+                    : <DisplayImages experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime} />
                 }
             </MapContainer>
         </div>

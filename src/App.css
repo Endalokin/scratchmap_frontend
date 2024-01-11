@@ -398,6 +398,21 @@ menu {
   cursor: pointer;
 }
 
+.label-clock {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  /*   border: 1px solid var(--highlight-two); */
+  /* line-height: 2em; */
+  /*   font-size: 2em; */
+  cursor: pointer;
+  vertical-align: bottom;
+}
+
+#clock-filter {
+  gap: 0px;
+}
+
 #season-winter:checked ~ label[for="season-winter"],
 #season-spring:checked ~ label[for="season-spring"],
 #season-summer:checked ~ label[for="season-summer"],
@@ -406,11 +421,46 @@ menu {
   color: #fff;
 }
 
+#clock-night:checked ~ label[for="clock-night"] {
+  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Sun.svg/35px-Sun.svg.png");
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: top;
+  color: #fff;
+  font-weight: bold;
+}
+
+#clock-morning:checked ~ label[for="clock-morning"] {
+  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Sun.svg/35px-Sun.svg.png");
+  background-repeat: no-repeat;
+  background-position-x: left;
+  background-position-y: center;
+  color: #fff;
+  font-weight: bold;
+}
+
+#clock-midday:checked ~ label[for="clock-midday"] {
+  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Sun.svg/35px-Sun.svg.png");
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: bottom;
+  color: #fff;
+  font-weight: bold;
+}
+
+#clock-evening:checked ~ label[for="clock-evening"] {
+  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Sun.svg/35px-Sun.svg.png");
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: center;
+  color: #fff;
+  font-weight: bold;
+}
+
 /* Tooltip container */
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 }
 
 /* Tooltip text */

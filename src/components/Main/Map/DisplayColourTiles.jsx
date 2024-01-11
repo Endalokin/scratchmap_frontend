@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 
 
-export default function DisplayColourTiles({ experiences, displaySeasons }) {
+export default function DisplayColourTiles({ experiences, displaySeasons, displayDaytime }) {
 
     function uniquePlaces(data) {
         return [...new Map(data.map(x => {
@@ -18,7 +18,7 @@ export default function DisplayColourTiles({ experiences, displaySeasons }) {
 
     if (experiences) {
         let tileExperiences = uniquePlaces(experiences)
-        currentArray = filteredArray(tileExperiences, displaySeasons)
+        currentArray = filteredArray(tileExperiences, displaySeasons, displayDaytime)
     }
 
     return (
