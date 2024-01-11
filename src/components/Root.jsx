@@ -15,18 +15,34 @@ export default function Root() {
   const [trips, setTrips] = useState()
   const TRIPS_URL = `${VITE_SERVER_URL}/trips`
 
+  const TEST_URL = `${VITE_SERVER_URL}/experiences`
   const [loadingData, setLoadingData] = useState(false)
 
-  useEffect(() => {
+  useEffect(() => {    
     setLoadingData(true)
+    let controller = new AbortController();
+    let serverAvailable = false
+    fetchData(TEST_URL, (data) => {
+      serverAvailable = true
+    },"GET",null,controller)
+
     fetchData(EXPERIENCES_URL, (data) => {
       setExperiences(data)
       console.log(data)
-    })
+    },"GET",null,controller)
     fetchData(TRIPS_URL, (data) => {
       setTrips(data)
       console.log(data)
-    })
+    },"GET",null,controller)
+
+    setTimeout(() => {
+      if (!serverAvailable) {
+        console.log("Server is not available")
+        controller.abort()
+        location.reload();
+      }
+    }, 10000)
+
   }, [])
 
   if (experiences && trips && loadingData) {

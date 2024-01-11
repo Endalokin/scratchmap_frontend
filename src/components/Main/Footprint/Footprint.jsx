@@ -50,7 +50,7 @@ export default function Footprint() {
             </div>
             {display == "chart" ? <FootprintComparisonChart trips={trips} /> :
                 <div className="full-width">
-                    <div style={{ height: "89px" }} >{trips?.map((trip) => <CompensationTree key={`tree-${trip.id}`} compensatedTrip={trip.footprint.compensated} />)} </div>
+                    <div style={{ height: "89px" }} >{trips?.map((trip) => <CompensationTree key={`tree-${trip.id}`} compensatedTrip={trip.footprint?.compensated} />)} </div>
                     <table>
                         <thead>
                             <tr>

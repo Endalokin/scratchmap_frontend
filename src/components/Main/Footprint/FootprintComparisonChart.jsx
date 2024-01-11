@@ -54,7 +54,7 @@ export default function FootprintComparisonChart({ trips }) {
         let tripsThatYear = []
         tripsThatYear = trips.filter(t => t.periodFrom?.split("-")[0] == l)
         let tripsThatYearEmission = 0
-        tripsThatYear.length > 0 && (tripsThatYearEmission = tripsThatYear.reduce((acc, curr) => { return (acc.footprint.emission + curr.footprint.emission) / 1000 }))
+        tripsThatYear.length > 0 && (tripsThatYearEmission = tripsThatYear.reduce((acc, curr) => { return (acc.footprint?.emission + curr.footprint?.emission) / 1000 }))
         return tripsThatYearEmission
     })
 
@@ -79,8 +79,10 @@ export default function FootprintComparisonChart({ trips }) {
                     let tripsThatYear = []
                     tripsThatYear = trips.filter(t => t.periodFrom?.split("-")[0] == l)
                     let tripsThatYearEmission = 0
-                    tripsThatYear.length > 1 ? (tripsThatYearEmission = tripsThatYear.reduce((acc, curr) => { return (acc.footprint.emission + curr.footprint.emission) / 1000 })) : tripsThatYear.length == 1 ? tripsThatYearEmission = tripsThatYear[0].footprint.emission / 1000 : tripsThatYearEmission = 0
-                    return tripsThatYearEmission
+                    tripsThatYear.length > 1 ? (tripsThatYearEmission = tripsThatYear.reduce((acc, curr) => { 
+                        return ((acc.footprint ? acc.footprint?.emission : acc) + curr.footprint?.emission)  
+                    })) : tripsThatYear.length == 1 ? tripsThatYearEmission = tripsThatYear[0].footprint.emission  : tripsThatYearEmission = 0
+                    return tripsThatYearEmission / 1000
                 }),
                 borderColor: 'rgb(53, 162, 235)',
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
