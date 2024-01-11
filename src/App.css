@@ -180,14 +180,15 @@ menu {
   width: 100%;
   height: 10px;
   transform: skewX(-45deg);
-  background: 
-    linear-gradient(var(--secondary-bg-color) 0 0) left -30px top 0/30px 20px no-repeat 
-    #ccc;
+  background: linear-gradient(var(--secondary-bg-color) 0 0) left -30px top 0/30px
+    20px no-repeat #ccc;
   animation: l3 10s infinite linear;
 }
 
 @keyframes l3 {
-  100% {background-position: right -30px top 0}
+  100% {
+    background-position: right -30px top 0;
+  }
 }
 
 .vertical-scroll-80 {
@@ -203,7 +204,7 @@ menu {
   border-radius: 8px;
   background-color: #e7e7e7;
   border: 1px solid #cacaca;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 .vertical-scroll-80::-webkit-scrollbar-thumb {
@@ -454,7 +455,7 @@ table {
 }
 
 #footprint-comparison-chart {
-  min-height: 250px ;
+  min-height: 250px;
 }
 
 .drop-shadow {
@@ -464,8 +465,12 @@ table {
 /* Trip Detail Page */
 
 #single-details {
-  background-color: var(--secondary-bg-color);
-  color: var(--secondary-color);
+  /* background-color: var(--secondary-bg-color);
+  color: var(--secondary-color); */
+
+  /* width: calc(70% - 50px); */
+  margin: 25px 50px;
+  border: 2px dashed var(--highlight-one);
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
@@ -495,19 +500,24 @@ table {
 
 /* HTML: <div class="ribbon">Your text content</div> */
 .ribbon {
-  --f: .5em; /* control the folded part*/
-  --r: .8em; /* control the ribbon shape */
-  
+  --f: 0.5em; /* control the folded part*/
+  --r: 0.8em; /* control the ribbon shape */
+
   position: absolute;
   top: 15vh;
-  right: calc(-1*var(--f));
-  padding-inline: .25em;
+  right: calc(-1 * var(--f));
+  padding-inline: 0.25em;
   line-height: 1.8;
   background: var(--highlight-one);
   border-bottom: var(--f) solid #0005;
   border-left: var(--r) solid #0000;
-  clip-path: 
-    polygon(0 0,100% 0,100% calc(100% - var(--f)),calc(100% - var(--f)) 100%,
-      calc(100% - var(--f)) calc(100% - var(--f)),0 calc(100% - var(--f)),
-      var(--r) calc(50% - var(--f)/2));
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--f)),
+    calc(100% - var(--f)) 100%,
+    calc(100% - var(--f)) calc(100% - var(--f)),
+    0 calc(100% - var(--f)),
+    var(--r) calc(50% - var(--f) / 2)
+  );
 }

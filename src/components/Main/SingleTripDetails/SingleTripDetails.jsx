@@ -46,8 +46,8 @@ export default function SingleTripDetails() {
                     </div>
                     <div>
                         <div className="flex-between"><p>{'\u{1F5D3}'}</p> <p>{new Date(singleTripDetails?.periodFrom).toLocaleDateString()} - {new Date(singleTripDetails?.periodUntil).toLocaleDateString()}</p></div>
-                        <div className="flex-between"><p>CO₂</p> <p>{singleTripDetails?.footprint.emission} kg</p></div>
-                        <div className="flex-between"><p>{'\u{1F5BD}'}</p><p>{singleTripDetails?.experiences.length}</p></div>
+                        <div className="flex-between"><p>CO₂</p> <p>{singleTripDetails?.footprint?.emission} kg</p></div>
+                        <div className="flex-between"><p>{'\u{1F5BD}'}</p><p>{singleTripDetails?.experiences?.length}</p></div>
                     </div>
 
                 </div>
