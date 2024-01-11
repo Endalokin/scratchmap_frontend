@@ -11,7 +11,7 @@ export default function SeasonFilter({ displaySeasons, setDisplaySeasons }) {
     }
 
     return (
-        <div>
+        <div id="season-filter">
             <div className="tooltip">
                 <input className="checkbox-season" type="checkbox" id="season-winter" onChange={toggleSeason} />
                 <label className="label-season" htmlFor="season-winter">{'\u2603'}</label>

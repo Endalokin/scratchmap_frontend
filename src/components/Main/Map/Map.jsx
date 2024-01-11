@@ -4,6 +4,7 @@ import { useOutletContext } from 'react-router-dom'
 import DisplayImages from './DisplayImages'
 import DisplayColourTiles from './DisplayColourTiles'
 import MapFilters from './MapFilters'
+import { Link } from 'react-router-dom'
 
 
 export default function Map() {
@@ -21,10 +22,16 @@ export default function Map() {
 
     const [displaySeasons, setDisplaySeasons] = useState([])
     const [displayDaytime, setDisplayDaytime] = useState([])
+    const [displayState, setDisplayState] = useState("display-none")
+
+    function toggleFilterVisibility() {
+        setDisplayState(prev => prev == "display-none" ? "display-flex" : "display-none")
+    }
 
     return (
         <div className="fixed-site">
-            <MapFilters displaySeasons={displaySeasons} setDisplaySeasons={setDisplaySeasons} displayDaytime={displayDaytime} setDisplayDaytime={setDisplayDaytime} />
+            <button className="ribbon" onClick={toggleFilterVisibility}>Show Filter</button>
+            <div id="mapFilterSection" className={displayState}><MapFilters displaySeasons={displaySeasons} setDisplaySeasons={setDisplaySeasons} displayDaytime={displayDaytime} setDisplayDaytime={setDisplayDaytime} toggleFilterVisibility={toggleFilterVisibility} /></div>
             <MapContainer center={[40.505, -0.09]} zoom={zoomLevel} minZoom={1} maxZoom={19} scrollWheelZoom={true} className="map" /* ref={(ref) => { this.map = ref; }} */>
                 <ZoomTeller />
                 <TileLayer
