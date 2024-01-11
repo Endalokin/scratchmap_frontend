@@ -26,13 +26,13 @@ export default function filteredArray (array, displaySeasons = 0, displayDaytime
                 newArray2 = [...newArray2, ...newArray.filter(me => me.date.split("T")[1].split(":")[0] < 6)]
             }
             if (displayDaytime.includes("clock-morning")) {
-                newArray2 = [...newArray2, ...newArray.filter(me =>  6 < me.date.split("T")[1].split(":")[0] && me.date.split("T")[1].split(":")[0] < 12)]
+                newArray2 = [...newArray2, ...newArray.filter(me =>  6 <= me.date.split("T")[1].split(":")[0] && me.date.split("T")[1].split(":")[0] < 12)]
             }
             if (displayDaytime.includes("clock-midday")) {
-                newArray2 = [...newArray2, ...newArray.filter(me =>  12 < me.date.split("T")[1].split(":")[0] && me.date.split("T")[1].split(":")[0] < 18)]
+                newArray2 = [...newArray2, ...newArray.filter(me =>  12 <= me.date.split("T")[1].split(":")[0] && me.date.split("T")[1].split(":")[0] < 18)]
             }
             if (displayDaytime.includes("clock-evening")) {
-                newArray2 = [...newArray2, ...newArray.filter(me =>  18 < me.date.split("T")[1].split(":")[0])]
+                newArray2 = [...newArray2, ...newArray.filter(me =>  18 <= me.date.split("T")[1].split(":")[0])]
             }
         }
     }

@@ -7,7 +7,6 @@ export default function ClockFilter({ displayDaytime, setDisplayDaytime }) {
             setDisplayDaytime(prev => prev.filter(id => id !== e.target.id))
         } else {
             setDisplayDaytime(prev => [...prev, e.target.id])
-            console.log(displayDaytime)
         }
     }
 

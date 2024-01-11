@@ -15,15 +15,16 @@ export default function DisplayColourTiles({ experiences, displaySeasons, displa
     }
 
     let currentArray
+    let tileExperiences
 
     if (experiences) {
-        let tileExperiences = uniquePlaces(experiences)
-        currentArray = filteredArray(tileExperiences, displaySeasons, displayDaytime)
+        currentArray = filteredArray(experiences, displaySeasons, displayDaytime)
+        tileExperiences = uniquePlaces(currentArray)
     }
 
     return (
         <>
-            {currentArray?.map(e => {
+            {tileExperiences?.map(e => {
                 return <Rectangle key={e.id} bounds={[[Math.ceil(e.location.lat) - 0.005, Math.ceil(e.location.lon) - 0.005], [Math.floor(e.location.lat) + 0.005, Math.floor(e.location.lon) + 0.005]]} pathOptions={{ color: e.imgAccentColour ? e.imgAccentColour : e.imgColour, fillOpacity: 0.5 }} >
                     <Popup>
                         {e?.name} <br />
