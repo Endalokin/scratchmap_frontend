@@ -1,38 +1,21 @@
 import React from 'react'
+import SeasonFilter from './SeasonFilter'
+import ClockFilter from './ClockFilter'
 
-export default function MapFilters({ displaySeasons, setDisplaySeasons }) {
-
-    function toggleSeason(e) {
-        if (displaySeasons?.includes(e.target.id)) {
-            setDisplaySeasons(prev => prev.filter(id => id !== e.target.id))
-        } else {
-            setDisplaySeasons(prev => [...prev, e.target.id])
-        }
-    }
+export default function MapFilters({ displaySeasons, setDisplaySeasons, displayDaytime, setDisplayDaytime, toggleFilterVisibility }) {
 
     return (
-        <div>
-            <div className="tooltip">
-                <input className="checkbox-season" type="checkbox" id="season-winter" onChange={toggleSeason} />
-                <label className="label-season" htmlFor="season-winter">{'\u2603'}</label>
-                <span className="tooltiptext">Winter</span>
+        <>
+            <button onClick={toggleFilterVisibility}>Hide</button>
+            <h2>Filter</h2>
+            <div>
+                <h3>by Season</h3>
+                <SeasonFilter displaySeasons={displaySeasons} setDisplaySeasons={setDisplaySeasons} />
             </div>
-            <div className="tooltip">
-                <input className="checkbox-season" type="checkbox" id="season-spring" onChange={toggleSeason} />
-                <label className="label-season" htmlFor="season-spring" onChange={toggleSeason}>{'\u2698'}</label>
-                <span className="tooltiptext">Spring</span>
+            <div>
+                <h3>by Daytime</h3>
+                <ClockFilter displayDaytime={displayDaytime} setDisplayDaytime={setDisplayDaytime} />
             </div>
-            <br /> 
-            <div className="tooltip">
-                <input className="checkbox-season" type="checkbox" id="season-autumn" onChange={toggleSeason} />
-                <label className="label-season" htmlFor="season-autumn">{'\u{1F341}'}</label>
-                <span className="tooltiptext">Autumn</span>
-            </div>
-            <div className="tooltip">
-                <input className="checkbox-season" type="checkbox" id="season-summer" onChange={toggleSeason} />
-                <label className="label-season" htmlFor="season-summer">{'\u2600'}</label>
-                <span className="tooltiptext">Summer</span>
-            </div>
-        </div>
+        </>
     )
 }

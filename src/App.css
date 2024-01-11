@@ -95,6 +95,7 @@ button {
   color: white;
   font-size: inherit;
   margin: 1rem;
+  cursor: pointer;
 }
 
 .fixed-site {
@@ -381,6 +382,31 @@ menu {
 .map {
   width: 100%;
   height: 80vh;
+  z-index: 0 !important;
+}
+
+#mapFilterSection {
+justify-content: space-evenly;
+  flex-direction: column;
+  background-color: var(--primary-bg-color);
+  position: absolute;
+  z-index: 10;
+  top: 15vh;
+  width: 200px;
+  right: 2px;
+  height: 75vh;
+  border: 2px dashed var(--highlight-one);
+}
+
+#mapFilterSection > * {
+  margin: auto;
+}
+
+.display-none {
+  display: none;
+}
+.display-flex {
+  display: flex;
 }
 
 .checkbox-season {
@@ -389,13 +415,31 @@ menu {
 
 .label-season {
   display: inline-block;
-  width: 50px;
-  height: 50px;
+  width: 75px;
+  height: 75px;
   text-align: center;
-  border: 1px solid var(--highlight-two);
-  line-height: 50px;
+/*   border: 1px solid var(--highlight-two); */
+  line-height: 75px;
   font-size: 2em;
   cursor: pointer;
+  overflow: visible;
+}
+
+.label-clock {
+  display: inline-block;
+  width: 50px;
+  cursor: pointer;
+}
+
+#clock-filter {
+  gap: 0px;
+  overflow: visible;
+  grid-auto-rows: 50px;
+  align-items: center;
+}
+
+#season-filter, #clock-filter {
+  border: 2px dashed var(--highlight-two);
 }
 
 #season-winter:checked ~ label[for="season-winter"],
@@ -406,11 +450,60 @@ menu {
   color: #fff;
 }
 
+#clock-filter > div > input:checked ~ label {
+  color: var(--opposite-color);
+  font-weight: bold;
+}
+
+#clock-night:checked ~ label[for="clock-night"]::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 17.5px;
+  width: 35px;
+  height: 35px;
+  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Sun.svg/35px-Sun.svg.png")
+    no-repeat top left;
+}
+
+#clock-morning:checked ~ label[for="clock-morning"]::before {
+  content: "";
+  position: absolute;
+  top: -8.5px;
+  right: 0;
+  right: 35px;
+  width: 35px;
+  height: 35px;
+  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Sun.svg/35px-Sun.svg.png")
+    no-repeat top left;
+}
+
+#clock-midday:checked ~ label[for="clock-midday"]::before {
+  content: "";
+  position: absolute;
+  top: -135%;
+  right: 0;
+  width: 35px;
+  height: 35px;
+  padding-right: 1em;
+  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Sun.svg/35px-Sun.svg.png")
+    no-repeat top left;
+}
+#clock-evening:checked ~ label[for="clock-evening"]::before {
+  content: "";
+  position: absolute;
+  top: -8.25px;
+  right: -8.25px;
+  width: 35px;
+  height: 35px;
+  background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Sun.svg/35px-Sun.svg.png")
+    no-repeat top left;
+}
+
 /* Tooltip container */
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 }
 
 /* Tooltip text */
@@ -465,10 +558,6 @@ table {
 /* Trip Detail Page */
 
 #single-details {
-  /* background-color: var(--secondary-bg-color);
-  color: var(--secondary-color); */
-
-  /* width: calc(70% - 50px); */
   margin: 25px 50px;
   border: 2px dashed var(--highlight-one);
   display: flex;
@@ -502,9 +591,9 @@ table {
 .ribbon {
   --f: 0.5em; /* control the folded part*/
   --r: 0.8em; /* control the ribbon shape */
-
   position: absolute;
   top: 15vh;
+  z-index: 10;
   right: calc(-1 * var(--f));
   padding-inline: 0.25em;
   line-height: 1.8;

@@ -3,9 +3,9 @@ import L from 'leaflet'
 import { Marker, Popup } from 'react-leaflet'
 import filteredArray from './filteredArray'
 
-export default function DisplayImages({ experiences, displaySeasons }) {
+export default function DisplayImages({ experiences, displaySeasons, displayDaytime }) {
 
-    let currentArray = filteredArray(experiences, displaySeasons)
+    let currentArray = filteredArray(experiences, displaySeasons, displayDaytime)
 
     return (
         <>
