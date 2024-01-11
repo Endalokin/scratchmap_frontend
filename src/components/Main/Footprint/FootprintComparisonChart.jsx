@@ -89,6 +89,7 @@ export default function FootprintComparisonChart({ trips }) {
             },
         ],
     };
+    console.log(data)
 
     return (
         <>
