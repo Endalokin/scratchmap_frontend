@@ -83,10 +83,15 @@ h2 {
 a {
   color: var(--primary-color);
   text-decoration: none;
+  padding: 5px;
 }
 
-a:hover {
-  font-style: italic;
+a:hover:not(:has(button)) {
+background-color: var(--highlight-one);
+border: none;
+color: white;
+font-size: inherit;
+cursor: pointer;
 }
 
 button {
@@ -545,6 +550,10 @@ th {
 
 table {
   width: 100%;
+}
+
+tbody > tr:nth-child(even) {
+  background-color: rgba(81, 148, 112, 0.4);
 }
 
 #footprint-comparison-chart {

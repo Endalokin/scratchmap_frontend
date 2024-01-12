@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './Header/Header'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import Footer from './Footer/Footer'
 import { useState, useEffect } from 'react'
 import fetchData from '../utils/fetchAPI'
@@ -44,6 +44,13 @@ export default function Root() {
     }, 10000)
 
   }, [])
+
+  const { pathname } = useLocation();
+
+  // Automatically scrolls to top whenever pathname changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   if (experiences && trips && loadingData) {
       setLoadingData(false)

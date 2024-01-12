@@ -3,6 +3,7 @@ import { useParams, useOutletContext } from 'react-router-dom'
 import ImgGallery from './ImgGallery';
 import { MapContainer, Polyline, TileLayer, Marker } from 'react-leaflet'
 import DisplayImages from '../Map/DisplayImages';
+import { Link } from 'react-router-dom';
 
 export default function SingleTripDetails() {
 
@@ -41,8 +42,8 @@ export default function SingleTripDetails() {
                 <div >
                     <h2>{singleTripDetails?.name}</h2>
                     <div>
-                        <p style={{ textAlign:"center" }}>{singleTripDetails?.placeDeparture} ↔ {singleTripDetails?.placeArrival} </p>
-                        <p style={{ textAlign:"center" }}>{singleTripDetails?.vehicle == "flight-economy" ? `\u2708` : singleTripDetails?.vehicle == "car" ? '\u{1F697}' : '\u{1F686}'} {[...Array(singleTripDetails?.travellers)].map(() => '\u{026F9}')}</p>
+                        <p style={{ textAlign: "center" }}>{singleTripDetails?.placeDeparture} ↔ {singleTripDetails?.placeArrival} </p>
+                        <p style={{ textAlign: "center" }}>{singleTripDetails?.vehicle == "flight-economy" ? `\u2708` : singleTripDetails?.vehicle == "car" ? '\u{1F697}' : '\u{1F686}'} {[...Array(singleTripDetails?.travellers)].map(() => '\u{026F9}')}</p>
                     </div>
                     <div>
                         <div className="flex-between"><p>{'\u{1F5D3}'}</p> <p>{new Date(singleTripDetails?.periodFrom).toLocaleDateString()} - {new Date(singleTripDetails?.periodUntil).toLocaleDateString()}</p></div>
@@ -51,7 +52,13 @@ export default function SingleTripDetails() {
                     </div>
 
                 </div>
-                {singleTripExperiences && singleTripExperiences[0] && <div id="animated-img" className="polaroid polaroid-big"><img src={`${mainImage.imgUrl}?fm=webp&w=600`} alt={`${mainImage.name}`} /><h2 className="edding">{mainImage.name.substr(0, 29)}</h2></div>}
+                {singleTripExperiences && singleTripExperiences[0] &&
+                    <div id="animated-img" className="polaroid polaroid-big" style={{ position: "relative" }}>
+                        <img src={`${mainImage.imgUrl}?fm=webp&w=600`} alt={`${mainImage.name}`} />
+                        <h2 className="edding">{mainImage.name.substr(0, 29)}</h2>
+                        <Link to={`${window.location.origin}/3d/${mainImage?.id}`} ><button className='ribbon' style={{ position: "absolute", top: "0px", right: "0px" }}>3D</button></Link>
+                    </div>
+                }
                 <div className="img-gallery">
                     <ImgGallery singleTripExperiences={singleTripExperiences} />
                 </div>
