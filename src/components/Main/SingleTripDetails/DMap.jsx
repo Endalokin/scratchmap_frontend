@@ -1,21 +1,28 @@
 // The URL on your server where CesiumJS's static files are hosted.
-console.log("This is the 3d")
 window.CESIUM_BASE_URL = "/node_modules/cesium/Build/Cesium"
 
-import { Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer, ImageryLayer, IonWorldImageryStyle, Cartesian2, Color as CesiumColor, StripeMaterialProperty, CheckerboardMaterialProperty } from 'cesium';
+import { Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer, ImageryLayer, IonWorldImageryStyle, Cartesian2, Color as CesiumColor, Camera as CesiumCamera, StripeMaterialProperty, CheckerboardMaterialProperty, Rectangle } from 'cesium';
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import { useState } from 'react';
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useOutletContext } from "react-router-dom";
 
 // Your access token can be found at: https://ion.cesium.com/tokens.
 // This is the default access token from your ion account
 
-Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzNWVjNGNlZC0wYjA4LTQ2YzctOTg4Yi1iNjE5Y2Y0YjI2MTciLCJpZCI6MTg5MjQ2LCJpYXQiOjE3MDUwMDAwOTF9.gM5cArNvUIXSrmyqm67gV-Q6QQei9l7HvtajJqZCtP4';
+const { VITE_CESIUM_TOKEN } = import.meta.env;
+
+Ion.defaultAccessToken = VITE_CESIUM_TOKEN;
 
 
 
-async function doIt() {
+async function create3d(lon, lat, altitude = 400) {
   // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
+
+  const home_view = new Rectangle.fromDegrees(lon - 1, lat - 1, lon + 1, lat + 1)
+  console.log(home_view)
+  CesiumCamera.DEFAULT_VIEW_RECTANGLE = home_view
+  CesiumCamera.DEFAULT_VIEW_FACTOR = 0
+
   const viewer = new Viewer('cesiumContainer', {
     baseLayer: ImageryLayer.fromWorldImagery({
       style: IonWorldImageryStyle.AERIAL_WITH_LABELS,
@@ -26,13 +33,8 @@ async function doIt() {
   });
   // Fly the camera to San Francisco at the given longitude, latitude, and height.
   viewer?.camera.flyTo({
-    destination: Cartesian3.fromDegrees(-21.499795, 64.841967, 400),
-    orientation: {
-      heading: CesiumMath.toRadians(0.0),
-      pitch: CesiumMath.toRadians(-15.0),
-    }
+    destination: Cartesian3.fromDegrees(lon, lat, altitude)
   });
-
 
 
   // Add Cesium OSM Buildings, a global 3D buildings layer.
@@ -46,7 +48,7 @@ async function doIt() {
   });
 
   viewer.entities.add({
-    position: Cartesian3.fromDegrees(-21.499795, 64.841967),
+    position: Cartesian3.fromDegrees(lon, lat),
     ellipse: {
       semiMinorAxis: 50.0,
       semiMajorAxis: 50.0,
@@ -54,24 +56,24 @@ async function doIt() {
       material: checkedMaterial,
     },
   });
-
 }
 
 export default function DMap() {
 
   let navigate = useNavigate()
 
-  /*   let { imgid } = useParams()
-    let mainImage
-    if (imgid) {
-      mainImage = singleTripExperiences.find(e => e.id == imgid)
-    } */
+  const [experiences] = useOutletContext();
+  let { imgid } = useParams()
+  let mainImage
+  if (imgid) {
+    mainImage = experiences?.find(e => e.id == imgid)
+  }
 
   const [displayState, setDisplayState] = useState("display-flex")
 
   function toggleVisibility() {
     setDisplayState(prev => prev == "display-none" ? "display-flex" : "display-none")
-    doIt()
+    create3d(mainImage.location.lon, mainImage.location.lat)
   }
 
   return (
@@ -85,8 +87,8 @@ export default function DMap() {
         </div>
         <div className="polaroid polaroid-big" style={{ width: "150px" }}>
 
-          <img src='https://images.ctfassets.net/q0wjbbqqoctx/1IBOUyJDtxg5gaxTEXpZ0s/5bc5d54849e915f7d029922b538e0fe2/_DSC9455.JPG?fm=webp&w=150' />
-          <p>Haukadalsvatn</p>
+          <img src={`${mainImage?.imgUrl}?fm=webp&w=150`} />
+          <p>{mainImage?.name}</p>
         </div>
       </div>
     </>
