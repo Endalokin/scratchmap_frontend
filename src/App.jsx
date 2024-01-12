@@ -6,6 +6,7 @@ import Footprint from './components/Main/Footprint/Footprint'
 import Test from './utils/Test'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import SingleTripDetails from './components/Main/SingleTripDetails/SingleTripDetails'
+import DMap from './components/Main/SingleTripDetails/DMap'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +17,8 @@ const router = createBrowserRouter(
       <Route path="/footprint/:display?" element={<Footprint />} />
       <Route path="/test" element={<Test />} />
       <Route path="/trip/:id/:imgid?" element={<SingleTripDetails />} />
+      <Route path="/trip/:id/:imgid/3d" element={<DMap />} />
+      <Route path="/3d/:imgid" element={<DMap />} />
     </Route>
   )
 )

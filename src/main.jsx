@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import DMap from './components/Main/Map/DMap.jsx'
+import DMap from './components/Main/SingleTripDetails/DMap.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

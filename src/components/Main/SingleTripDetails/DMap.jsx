@@ -4,6 +4,8 @@ window.CESIUM_BASE_URL = "/node_modules/cesium/Build/Cesium"
 
 import { Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer, ImageryLayer, IonWorldImageryStyle, Cartesian2, Color as CesiumColor, StripeMaterialProperty, CheckerboardMaterialProperty } from 'cesium';
 import "cesium/Build/Cesium/Widgets/widgets.css";
+import { useState } from 'react';
+import { useNavigate, useParams } from "react-router-dom";
 
 // Your access token can be found at: https://ion.cesium.com/tokens.
 // This is the default access token from your ion account
@@ -31,6 +33,8 @@ async function doIt() {
     }
   });
 
+
+
   // Add Cesium OSM Buildings, a global 3D buildings layer.
   const buildingTileset = await createOsmBuildingsAsync();
   viewer?.scene.primitives.add(buildingTileset);
@@ -51,18 +55,39 @@ async function doIt() {
     },
   });
 
-
 }
 
 export default function DMap() {
 
+  let navigate = useNavigate()
+
+  /*   let { imgid } = useParams()
+    let mainImage
+    if (imgid) {
+      mainImage = singleTripExperiences.find(e => e.id == imgid)
+    } */
+
+  const [displayState, setDisplayState] = useState("display-flex")
+
+  function toggleVisibility() {
+    setDisplayState(prev => prev == "display-none" ? "display-flex" : "display-none")
+    doIt()
+  }
+
   return (
     <>
-      <button onClick={doIt}>Doti</button >
-      <div id="cesiumContainer" style={{ position: "absolute", width: "60vw", height: "60vh", zIndex: "10", top: "15vh", left: "15vw" }}>3D-Map</div>
-      <div className="polaroid polaroid-big" style={{width: "150px", position: "absolute", top: "15vh", left: "75vw", zIndex:"20"}}>
-        <img src='https://images.ctfassets.net/q0wjbbqqoctx/1IBOUyJDtxg5gaxTEXpZ0s/5bc5d54849e915f7d029922b538e0fe2/_DSC9455.JPG?fm=webp&w=150' />
-        <p>Haukadalsvatn</p>
+      <div id="single-details">
+        <h2>3D-Map</h2>
+        <button className='ribbon' onClick={() => navigate(-1)}>Back</button >
+        <div id="cesiumContainer" style={{ width: "calc(80vw - 250px)", height: "60vh" }}>
+
+          <button className={`${displayState} notching`} onClick={toggleVisibility}>START</button>
+        </div>
+        <div className="polaroid polaroid-big" style={{ width: "150px" }}>
+
+          <img src='https://images.ctfassets.net/q0wjbbqqoctx/1IBOUyJDtxg5gaxTEXpZ0s/5bc5d54849e915f7d029922b538e0fe2/_DSC9455.JPG?fm=webp&w=150' />
+          <p>Haukadalsvatn</p>
+        </div>
       </div>
     </>
   )
