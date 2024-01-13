@@ -1,25 +1,20 @@
 // The URL on your server where CesiumJS's static files are hosted.
-window.CESIUM_BASE_URL = "./cesium"
+
 
 import { Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer, ImageryLayer, IonWorldImageryStyle, Cartesian2, Color as CesiumColor, Camera as CesiumCamera, StripeMaterialProperty, CheckerboardMaterialProperty, Rectangle } from 'cesium';
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import { useState } from 'react';
 import { useNavigate, useParams, useOutletContext } from "react-router-dom";
 
-// Your access token can be found at: https://ion.cesium.com/tokens.
-// This is the default access token from your ion account
+window.CESIUM_BASE_URL = "./assets/cesium"
 
 const { VITE_CESIUM_TOKEN } = import.meta.env;
 
 Ion.defaultAccessToken = VITE_CESIUM_TOKEN;
 
-
-
 async function create3d(lon, lat, altitude = 400) {
-  // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
 
   const home_view = new Rectangle.fromDegrees(lon - 1, lat - 1, lon + 1, lat + 1)
-  console.log(home_view)
   CesiumCamera.DEFAULT_VIEW_RECTANGLE = home_view
   CesiumCamera.DEFAULT_VIEW_FACTOR = 0
 
@@ -31,13 +26,11 @@ async function create3d(lon, lat, altitude = 400) {
       requestVertexNormals: true,
     }),
   });
-  // Fly the camera to San Francisco at the given longitude, latitude, and height.
+
   viewer?.camera.flyTo({
     destination: Cartesian3.fromDegrees(lon, lat, altitude)
   });
 
-
-  // Add Cesium OSM Buildings, a global 3D buildings layer.
   const buildingTileset = await createOsmBuildingsAsync();
   viewer?.scene.primitives.add(buildingTileset);
 
