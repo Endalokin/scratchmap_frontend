@@ -6,8 +6,9 @@ import "cesium/Build/Cesium/Widgets/widgets.css";
 import { useState } from 'react';
 import { useNavigate, useParams, useOutletContext } from "react-router-dom";
 
-window.CESIUM_BASE_URL = "./assets/cesium"
+window.CESIUM_BASE_URL = "../assets/cesium"
 
+console.log(window.CESIUM_BASE_URL)
 const { VITE_CESIUM_TOKEN } = import.meta.env;
 
 Ion.defaultAccessToken = VITE_CESIUM_TOKEN;
