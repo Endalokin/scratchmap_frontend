@@ -1,5 +1,5 @@
 import React from 'react'
-import { Popup, Rectangle } from 'react-leaflet'
+import { Popup, Rectangle, Tooltip } from 'react-leaflet'
 import filteredArray from './filteredArray'
 import { Link } from 'react-router-dom'
 
@@ -27,12 +27,14 @@ export default function DisplayColourTiles({ experiences, displaySeasons, displa
             {tileExperiences?.map(e => {
                 return <Rectangle key={e.id} bounds={[[Math.ceil(e.location.lat) - 0.005, Math.ceil(e.location.lon) - 0.005], [Math.floor(e.location.lat) + 0.005, Math.floor(e.location.lon) + 0.005]]} pathOptions={{ color: e.imgAccentColour ? e.imgAccentColour : e.imgColour, fillOpacity: 0.5 }} >
                     <Popup>
-                        {e?.name} <br />
-                        <Link to={`${window.location.origin}/trip/${e?.trip.sys.id}/${e?.id}`}>Show Trip Details</Link>
+                        {e?.name}
+                        <p><Link to={`${window.location.origin}/trip/${e?.trip.sys.id}/${e?.id}`}>Show Trip Details</Link></p>
                     </Popup>
+                    {<Tooltip sticky>
+                        <p><span style={{ color: e.imgAccentColour, fontWeight: "bold" }}>{e?.name}</span> <br />
+                            {new Date(e?.date).toLocaleDateString()}</p>
+                    </Tooltip>}
                 </Rectangle>
-
-
             })}
         </>
     )
