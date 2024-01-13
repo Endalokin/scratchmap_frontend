@@ -44,7 +44,7 @@ export default function Footprint() {
         <div className="fixed-site">
             <div>
                 <div>
-                    {display == "chart" ? <Link to={`${window.location.origin}/footprint/table`}><button class="ribbon">Show Table</button></Link> : <Link to={`${window.location.origin}/footprint/chart`}><button class="ribbon">Show Chart</button></Link>}
+                    {display == "chart" ? <Link to={`${window.location.origin}/footprint/table`}><button className="ribbon">Show Table</button></Link> : <Link to={`${window.location.origin}/footprint/chart`}><button className="ribbon">Show Chart</button></Link>}
                 </div>
                 
             </div>
