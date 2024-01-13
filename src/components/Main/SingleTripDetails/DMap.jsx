@@ -63,25 +63,39 @@ export default function DMap() {
     mainImage = experiences?.find(e => e.id == imgid)
   }
 
-  const [displayState, setDisplayState] = useState("display-flex")
+  const [displayStartButton, setDisplayStartButton] = useState("display-flex")
+  const [displayMap, setDisplayMap] = useState(true)
 
   function toggleVisibility() {
-    setDisplayState(prev => prev == "display-none" ? "display-flex" : "display-none")
+    setDisplayStartButton(prev => prev == "display-none" ? "display-flex" : "display-none")
     create3d(mainImage.location.lon, mainImage.location.lat)
   }
+
+  function toggleMapImage(e) {
+    setDisplayMap(prev => !prev)
+  }
+
+  let mainElementWidth = Math.floor(window.innerWidth * 0.8 - 250)
+  let mainElementHeight = Math.floor(window.innerHeight * 0.6)
 
   return (
     <>
       <div id="single-details">
         <h2>3D-Map</h2>
         <button className='ribbon' onClick={() => navigate(-1)}>Back</button >
-        <div id="cesiumContainer" style={{ width: "calc(80vw - 250px)", height: "60vh" }}>
+        <div>
+          <button className={`${displayStartButton} notching`} onClick={toggleVisibility}>START</button>
+          <div id="cesiumContainer" className={displayMap ? "display-flex" : "display-none"} style={{ width: mainElementWidth, height: mainElementHeight }}>
 
-          <button className={`${displayState} notching`} onClick={toggleVisibility}>START</button>
+          </div>
+          <div className={displayMap ? "display-none" : "display-flex"} style={{ width: mainElementWidth, height: mainElementHeight, justifyContent: "center" }}>
+            <img src={`${mainImage?.imgUrl}?fm=webp&w=${mainElementWidth}&h=${mainElementHeight}`} alt=""  />
+          </div>
+
         </div>
         <div className="polaroid polaroid-big" style={{ width: "150px" }}>
 
-          <img src={`${mainImage?.imgUrl}?fm=webp&w=150`} />
+          <img src={`${mainImage?.imgUrl}?fm=webp&w=150`} className="magnifier" onMouseEnter={toggleMapImage} onMouseLeave={toggleMapImage} />
           <p>{mainImage?.name}</p>
         </div>
       </div>
