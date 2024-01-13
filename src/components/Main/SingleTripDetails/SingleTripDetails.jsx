@@ -1,14 +1,15 @@
 import React from 'react'
-import { useParams, useOutletContext } from 'react-router-dom'
+import { useParams, useOutletContext, useNavigate } from 'react-router-dom'
 import ImgGallery from './ImgGallery';
-import { MapContainer, Polyline, TileLayer, Marker } from 'react-leaflet'
+import { MapContainer, Polyline, TileLayer, Marker, Tooltip } from 'react-leaflet'
 import DisplayImages from '../Map/DisplayImages';
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 
 export default function SingleTripDetails() {
 
     const [experiences, , trips] = useOutletContext();
 
+    const navigate = useNavigate()
 
     let { id, imgid } = useParams()
 
@@ -63,14 +64,27 @@ export default function SingleTripDetails() {
                     <ImgGallery singleTripExperiences={singleTripExperiences} />
                 </div>
             </div>
-            <div>{singleTripExperiences?.length > 0 && <MapContainer center={[mainImage.location.lat, mainImage.location.lon]} zoom={9} minZoom={1} maxZoom={19} className="map" scrollWheelZoom={false} /* ref={(ref) => { this.map = ref; }} */>
+            <div>{singleTripExperiences?.length > 0 && <MapContainer center={[mainImage.location.lat, mainImage.location.lon]} zoom={9} minZoom={1} maxZoom={19} className="map" scrollWheelZoom={false}>
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                     url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                 />
                 <DisplayImages experiences={singleTripExperiences} />
                 <Polyline pathOptions={lineOptions} positions={singleTripExperiences?.map((ste) => [ste.location.lat, ste.location.lon])} />
-                <Marker position={[singleTripDetails?.placeArrivalCoords.lat, singleTripDetails?.placeArrivalCoords.lon]} />
+                <Marker position={[singleTripDetails?.placeArrivalCoords.lat, singleTripDetails?.placeArrivalCoords.lon]} >
+                    <Tooltip sticky>
+                        {singleTripDetails?.placeArrival} <br />
+                        Arrival: {new Date(singleTripDetails?.periodFrom).toLocaleDateString()} <br />
+                        Departure: {new Date(singleTripDetails?.periodUntil).toLocaleDateString()}
+                    </Tooltip>
+                </Marker>
+                <Marker position={[singleTripDetails?.placeDepartureCoords.lat, singleTripDetails?.placeDepartureCoords.lon]} eventHandlers={{click: () => console.log("I wish I'd forward you")}} >
+                    <Tooltip sticky>
+                        {singleTripDetails?.placeDeparture} <br />
+                        Departure: {new Date(singleTripDetails?.periodFrom).toLocaleDateString()} <br />
+                        Arrival: {new Date(singleTripDetails?.periodUntil).toLocaleDateString()}
+                    </Tooltip>
+                </Marker>
             </MapContainer>
             }
 
