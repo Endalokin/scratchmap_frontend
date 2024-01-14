@@ -1,19 +1,22 @@
-import React from 'react'
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import L from 'leaflet'
 import { Marker, Popup, Tooltip } from 'react-leaflet'
 import filteredArray from './filteredArray'
 
 export default function DisplayImages({ experiences, displaySeasons, displayDaytime }) {
+    const {pathname} = window.location
 
     let currentArray = filteredArray(experiences, displaySeasons, displayDaytime)
-
     return (
         <>
-            {currentArray?.map(e => {
-                return <Marker key={e.id} position={[e.location.lat, e.location.lon]} icon={L.icon({ iconUrl: `${e?.imgUrl}?fm=webp&w=100`, className: "polaroid", iconSize: [100, ] })} >
+            {currentArray?.reverse().map((e,index) => {
+                const htmlValue = pathname != "/map" ? `<p style="text-align: center">Stop ${index + 1}</p>` : `<p></p>`
+
+                return <Marker key={e.id}  position={[e.location.lat, e.location.lon]} icon={new L.DivIcon({ html: `<img src="${e?.imgUrl}?fm=webp&w=100"/>${htmlValue}`, className: "polaroid", iconSize: [100, ] })} >
                     <Popup>
                         {e.image.sys.id} <br />
-                        <a href={e.imgUrl} target="_blank">{e.imgUrl}</a>
+                        <a href={e.imgUrl} target="_blank" rel="noreferrer">{e.imgUrl}</a>
                     </Popup>
                     {<Tooltip sticky direction="bottom">
                         <p><span style={{color: e.imgAccentColour, fontWeight: "bold"}}>{e?.name}</span> <br />
