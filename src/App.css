@@ -118,6 +118,10 @@ form > * {
 
 /* Footer */
 
+.fine-print {
+  font-size: smaller;
+}
+
 footer {
   text-align: center;
   font-size: smaller;
@@ -140,7 +144,8 @@ footer {
   margin: 0px 5vw;
 } */
 
-html, body {
+html,
+body {
   margin: 0;
   height: 100%;
 }
@@ -198,12 +203,12 @@ menu > a {
 }
 
 .menu-button::before {
-  content: '';
+  content: "";
   margin-top: -8px;
 }
 
 .menu-button::after {
-  content: '';
+  content: "";
   margin-top: 8px;
 }
 
@@ -213,19 +218,13 @@ menu > a {
 }
 
 #menu-toggle:checked + .menu-button-container .menu-button {
-  background: var(--primary-bg-color)
+  background: var(--primary-bg-color);
 }
 
 #menu-toggle:checked + .menu-button-container .menu-button::after {
   margin-top: 0px;
   transform: rotate(-405deg);
 }
-
-/* menu {
-  display: flex;
-  gap: 5vw;
-  font-size: larger;
-} */
 
 .notching {
   padding: 5px 45px;
@@ -472,16 +471,38 @@ menu > a {
   z-index: 0 !important;
 }
 
-#mapFilterSection {
+.modal {
   justify-content: space-evenly;
   flex-direction: column;
   background-color: var(--primary-bg-color);
   position: absolute;
   z-index: 10;
+  border: 2px dashed var(--highlight-one);
+  padding: 20px;
+  box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal-back {
+  width: 100vw;
+  height: 100vh;
+  position:absolute;
+  top:0;
+  left:0;
+  background-color: rgba(148, 147, 147, 0.4);
+
+}
+
+#compensationModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#mapFilterSection {
   top: 15vh;
-  width: 200px;
   right: 2px;
-  height: 75vh;
   border: 2px dashed var(--highlight-one);
 }
 
@@ -635,6 +656,11 @@ table {
   width: 100%;
 }
 
+td,
+th {
+  padding: 10px;
+}
+
 tbody > tr:nth-child(even) {
   background-color: rgba(81, 148, 112, 0.4);
 }
@@ -693,7 +719,7 @@ tbody > tr:nth-child(even) {
   .menu-button-container {
     display: flex;
   }
- menu {
+  menu {
     position: absolute;
     top: 0;
     margin-top: 50px;
@@ -754,4 +780,25 @@ tbody > tr:nth-child(even) {
     0 calc(100% - var(--f)),
     var(--r) calc(50% - var(--f) / 2)
   );
+}
+
+/* HTML: <div class="ribbon">Your text content</div> */
+.ribbon2 {
+  /*   font-size: 28px; */
+  /* font-weight: bold; */
+  color: #fff;
+  --r: 0.8em; /* control the ribbon shape */
+  padding-inline: calc(var(--r) + 0.3em);
+  line-height: 1.8;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    calc(100% - var(--r)) 50%,
+    100% 100%,
+    0 100%,
+    var(--r) 50%
+  );
+  background: var(--primary-bg-color);
+  width: fit-content;
+  border: 2px solid var(--primary-color);
 }

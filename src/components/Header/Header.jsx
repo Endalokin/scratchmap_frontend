@@ -9,8 +9,8 @@ export default function Header({ experiences, trips, rotate, setRotate }) {
     <header>
       <NavLink to="/about"><h2>ScratchMap</h2></NavLink>
       <input id="menu-toggle" type="checkbox" />
-      <label class='menu-button-container' for="menu-toggle">
-        <div class='menu-button'></div>
+      <label className='menu-button-container' htmlFor="menu-toggle">
+        <div className='menu-button'></div>
       </label>
       <menu id="menu">
         <NavLink to="/map">Map</NavLink>
