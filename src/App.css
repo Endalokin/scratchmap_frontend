@@ -87,11 +87,11 @@ a {
 }
 
 a:hover:not(:has(button)) {
-background-color: var(--highlight-one);
-border: none;
-color: white;
-font-size: inherit;
-cursor: pointer;
+  background-color: var(--highlight-one);
+  border: none;
+  color: white;
+  font-size: inherit;
+  cursor: pointer;
 }
 
 button {
@@ -118,6 +118,10 @@ form > * {
 
 /* Footer */
 
+.fine-print {
+  font-size: smaller;
+}
+
 footer {
   text-align: center;
   font-size: smaller;
@@ -132,18 +136,94 @@ footer {
 
 /* Header */
 
-header {
+/* header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   margin: 0px 5vw;
+} */
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: var(--primary-color);
+  height: 50px;
+  padding: 1em;
+  z-index: 10;
+  box-sizing: border-box;
 }
 
 menu {
   display: flex;
-  gap: 5vw;
-  font-size: larger;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+menu > a {
+  margin: 0 1rem;
+  overflow: hidden;
+}
+
+.menu-button-container {
+  display: none;
+  height: 100%;
+  width: 30px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.menu-button,
+.menu-button::before,
+.menu-button::after {
+  display: block;
+  background-color: var(--primary-color);
+  position: absolute;
+  height: 4px;
+  width: 30px;
+  transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  border-radius: 2px;
+}
+
+.menu-button::before {
+  content: "";
+  margin-top: -8px;
+}
+
+.menu-button::after {
+  content: "";
+  margin-top: 8px;
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button::before {
+  margin-top: 0px;
+  transform: rotate(405deg);
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button {
+  background: var(--primary-bg-color);
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button::after {
+  margin-top: 0px;
+  transform: rotate(-405deg);
 }
 
 .notching {
@@ -384,22 +464,44 @@ menu {
 
 /* Map Page */
 
-.map, .map2 {
-  width: 100%;
-  height: 80vh;
+.map{
+  width: 100vw;
+  height: calc(100vh - 94px);
   z-index: 0 !important;
 }
 
-#mapFilterSection {
-justify-content: space-evenly;
+.modal {
+  justify-content: space-evenly;
   flex-direction: column;
   background-color: var(--primary-bg-color);
   position: absolute;
   z-index: 10;
+  border: 2px dashed var(--highlight-one);
+  padding: 20px;
+  box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal-back {
+  width: 100vw;
+  height: 100vh;
+  position:absolute;
+  top:0;
+  left:0;
+  background-color: rgba(148, 147, 147, 0.4);
+
+}
+
+#compensationModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#mapFilterSection {
   top: 15vh;
-  width: 200px;
   right: 2px;
-  height: 75vh;
   border: 2px dashed var(--highlight-one);
 }
 
@@ -423,7 +525,7 @@ justify-content: space-evenly;
   width: 75px;
   height: 75px;
   text-align: center;
-/*   border: 1px solid var(--highlight-two); */
+  /*   border: 1px solid var(--highlight-two); */
   line-height: 75px;
   font-size: 2em;
   cursor: pointer;
@@ -443,7 +545,8 @@ justify-content: space-evenly;
   align-items: center;
 }
 
-#season-filter, #clock-filter {
+#season-filter,
+#clock-filter {
   border: 2px dashed var(--highlight-two);
 }
 
@@ -552,6 +655,11 @@ table {
   width: 100%;
 }
 
+td,
+th {
+  padding: 10px;
+}
+
 tbody > tr:nth-child(even) {
   background-color: rgba(81, 148, 112, 0.4);
 }
@@ -594,6 +702,59 @@ tbody > tr:nth-child(even) {
   .img-gallery {
     rotate: 270deg;
   }
+
+  #single-details {
+    margin: 25px 15px;
+    border: 2px dashed var(--highlight-one);
+    padding: 15px 15px;
+  }
+
+  #mapFilterSection {
+    width: calc(100vw - 8px);
+    margin: auto;
+    height: calc(100vh - 8px);
+  }
+
+  .menu-button-container {
+    display: flex;
+  }
+  menu {
+    position: absolute;
+    top: 0;
+    margin-top: 50px;
+    left: 0;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+  }
+  #menu-toggle ~ menu a {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  #menu-toggle:checked ~ menu a {
+    border: 1px solid var(--primary-bg-color);
+    height: 2.5em;
+    padding: 0.5em;
+    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  menu > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0.5em 0;
+    width: 100%;
+    color: white;
+    background-color: var(--highlight-one);
+  }
+  menu > a:not(:last-child) {
+    border-bottom: 1px solid var(--primary-bg-color);
+  }
 }
 
 /* HTML: <div class="ribbon">Your text content</div> */
@@ -618,4 +779,25 @@ tbody > tr:nth-child(even) {
     0 calc(100% - var(--f)),
     var(--r) calc(50% - var(--f) / 2)
   );
+}
+
+/* HTML: <div class="ribbon">Your text content</div> */
+.ribbon2 {
+  /*   font-size: 28px; */
+  /* font-weight: bold; */
+  color: #fff;
+  --r: 0.8em; /* control the ribbon shape */
+  padding-inline: calc(var(--r) + 0.3em);
+  line-height: 1.8;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    calc(100% - var(--r)) 50%,
+    100% 100%,
+    0 100%,
+    var(--r) 50%
+  );
+  background: var(--primary-bg-color);
+  width: fit-content;
+  border: 2px solid var(--primary-color);
 }

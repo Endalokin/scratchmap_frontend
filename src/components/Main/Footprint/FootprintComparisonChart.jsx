@@ -40,6 +40,9 @@ export const options = {
 export default function FootprintComparisonChart({ trips }) {
 
     ChartJS.defaults.color = getComputedStyle(document.body).color;
+    ChartJS.defaults.font.family = getComputedStyle(document.body).fontFamily;
+    ChartJS.defaults.font.size = getComputedStyle(document.body).fontSize.split("px")[0];
+    console.log(getComputedStyle(document.body).fontSize)
 
     let minValue = Math.min.apply(null,
         trips?.map((o) => { return Number(o.periodFrom?.split("-")[0]) }));
@@ -62,13 +65,13 @@ export default function FootprintComparisonChart({ trips }) {
         labels,
         datasets: [
             {
-                label: 'German Average Total Mobility',
+                label: 'German Average Total Mobility*',
                 data: labels.map((l) => { return 0.24 + 1.41 + 0.53 }),
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
             {
-                label: 'German Average Travels by Plane',
+                label: 'German Average Travels by Plane*',
                 data: labels.map((l) => { return 0.53 }),
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
@@ -89,7 +92,6 @@ export default function FootprintComparisonChart({ trips }) {
             },
         ],
     };
-    console.log(data)
 
     return (
         <>
@@ -97,6 +99,7 @@ export default function FootprintComparisonChart({ trips }) {
             <div id="footprint-comparison-chart">
                 <Line options={options} data={data} height={"80vh"} />
             </div>
+            <p className="fine-print">*German Averages taken from "CO2-Rechner des Umweltbundesamtes. Meine CO2-Bilanz" 2024 (<a href="https://uba.co2-rechner.de/de_DE/mobility#panel-calc">https://uba.co2-rechner.de/de_DE/mobility#panel-calc</a>)</p>
         </>
     )
 }
