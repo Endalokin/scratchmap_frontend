@@ -465,8 +465,8 @@ menu > a {
 /* Map Page */
 
 .map{
-  width: 100vw;
-  height: calc(100vh - 94px);
+  width: 99vw;
+  height: calc(100vh - 100px);
   z-index: 0 !important;
 }
 
