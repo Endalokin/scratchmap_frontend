@@ -17,6 +17,8 @@ export default function CompensationTree({ compensatedTrip }) {
     let livingRandom = Math.floor(Math.random() * 3)
     let deadRandom = Math.floor(Math.random() * 3)
 
+    console.log(compensatedTrip)
+
     return (
         <>
             {compensatedTrip ? <img className="drop-shadow" src={livingTrees[livingRandom]} alt="living tree" /> : <img className="drop-shadow" src={deadTrees[deadRandom]} alt="dead tree" />}

@@ -4,6 +4,7 @@ import ImgGallery from './ImgGallery';
 import { MapContainer, Polyline, TileLayer, Marker, Tooltip } from 'react-leaflet'
 import DisplayImages from '../Map/DisplayImages';
 import { Link, redirect } from 'react-router-dom';
+import TripInfo from './TripInfo';
 
 export default function SingleTripDetails() {
 
@@ -41,17 +42,7 @@ export default function SingleTripDetails() {
         <>
             <div id="single-details">
                 <div >
-                    <h2>{singleTripDetails?.name}</h2>
-                    <div>
-                        <p style={{ textAlign: "center" }}>{singleTripDetails?.placeDeparture} ↔ {singleTripDetails?.placeArrival} </p>
-                        <p style={{ textAlign: "center" }}>{singleTripDetails?.vehicle == "flight-economy" ? `\u2708` : singleTripDetails?.vehicle == "car" ? '\u{1F697}' : '\u{1F686}'} {[...Array(singleTripDetails?.travellers)].map(() => '\u{026F9}')}</p>
-                    </div>
-                    <div>
-                        <div className="flex-between"><p>{'\u{1F5D3}'}</p> <p>{new Date(singleTripDetails?.periodFrom).toLocaleDateString()} - {new Date(singleTripDetails?.periodUntil).toLocaleDateString()}</p></div>
-                        <div className="flex-between"><p>CO₂</p> <p>{singleTripDetails?.footprint?.emission} kg</p></div>
-                        <div className="flex-between"><p>{'\u{1F5BD}'}</p><p>{singleTripDetails?.experiences?.length}</p></div>
-                    </div>
-
+                    <TripInfo trip={singleTripDetails} />
                 </div>
                 {singleTripExperiences && singleTripExperiences[0] &&
                     <div id="animated-img" className="polaroid polaroid-big" style={{ position: "relative" }}>
@@ -78,7 +69,7 @@ export default function SingleTripDetails() {
                         Departure: {new Date(singleTripDetails?.periodUntil).toLocaleDateString()}
                     </Tooltip>
                 </Marker>
-                <Marker position={[singleTripDetails?.placeDepartureCoords.lat, singleTripDetails?.placeDepartureCoords.lon]} eventHandlers={{click: () => console.log("I wish I'd forward you")}} >
+                <Marker position={[singleTripDetails?.placeDepartureCoords.lat, singleTripDetails?.placeDepartureCoords.lon]} eventHandlers={{ click: () => console.log("I wish I'd forward you") }} >
                     <Tooltip sticky>
                         {singleTripDetails?.placeDeparture} <br />
                         Departure: {new Date(singleTripDetails?.periodFrom).toLocaleDateString()} <br />

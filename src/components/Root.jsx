@@ -41,7 +41,7 @@ export default function Root() {
         controller.abort()
         location.reload();
       }
-    }, 10000)
+    }, 15000)
 
   }, [])
 
