@@ -8,7 +8,7 @@ import LoadingBar from './LoadingBar'
 
 export default function Root() {
 
-  const [userName, setUserName] = useState()
+  const [user, setUser] = useState({})
 
   const { VITE_SERVER_URL } = import.meta.env;
   const [experiences, setExperiences] = useState()
@@ -22,9 +22,9 @@ export default function Root() {
     let EXPERIENCES_URL
     let TRIPS_URL
     
-    if (userName) {
-      EXPERIENCES_URL = `${VITE_SERVER_URL}/experiences?user=${userName}`
-      TRIPS_URL = `${VITE_SERVER_URL}/trips?user=${userName}`
+    if (user?.username) {
+      EXPERIENCES_URL = `${VITE_SERVER_URL}/experiences?user=${user.username}`
+      TRIPS_URL = `${VITE_SERVER_URL}/trips?user=${user.username}`
     } else {
       EXPERIENCES_URL = `${VITE_SERVER_URL}/experiences`
       TRIPS_URL = `${VITE_SERVER_URL}/trips`
@@ -54,7 +54,7 @@ export default function Root() {
       }
     }, 15000)
 
-  }, [userName])
+  }, [user])
 
   const { pathname } = useLocation();
 
@@ -72,10 +72,10 @@ export default function Root() {
       <LoadingBar loadingData={loadingData} />
       <Header experiences={experiences} trips={trips} />
       <main>
-        <Outlet context={[experiences, setExperiences, trips, setTrips, userName, setUserName]} />
+        <Outlet context={[experiences, setExperiences, trips, setTrips, user, setUser]} />
 
       </main>
-      <Footer setLoginIsOpen={setLoginIsOpen} loginIsOpen={loginIsOpen} userName={userName} setUserName={setUserName} />
+      <Footer setLoginIsOpen={setLoginIsOpen} loginIsOpen={loginIsOpen} user={user} setUser={setUser} />
     </>
   )
 }

@@ -2,16 +2,17 @@ import React, { useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import fetchData from '../utils/fetchAPI';
 
-export default function LoginModal({ setIsOpen }) {
+export default function LoginModal() {
 
     const navigate = useNavigate()
-    const [, , , , userName, setUserName] = useOutletContext();
+    const [, , , , , setUser] = useOutletContext();
     const { VITE_SERVER_URL } = import.meta.env;
 
     const [pwd, setPwd] = useState()
     const [inputUser, setInputUser] = useState()
 
     function handleChange(e) {
+        setWarning()
         if (e.target.id == "userName") {
             setInputUser(e.target.value)
         } else if (e.target.id == "pwd") {
@@ -21,30 +22,34 @@ export default function LoginModal({ setIsOpen }) {
 
     function login(e) {
         e.preventDefault()
-        console.log(userName)
-        console.log(pwd)
-        const CHECK_URL = `${VITE_SERVER_URL}/test`
+        let body = { username: inputUser, password: pwd }
+        const CHECK_URL = `${VITE_SERVER_URL}/login`
         fetchData(CHECK_URL, (data) => {
-            console.log(data)
-            if (data.msg) {
-                setUserName(inputUser)
+            if (data.userid) {
+                setUser({ username: inputUser, userid: data.userid })
+                setWarning()
                 navigate(-1)
+            } else {
+                setWarning("Invalid user or password")
             }
-        })
-
+        }, "POST", body)
     }
 
     function cancleLogin(e) {
         e.preventDefault();
         setInputUser()
         setPwd()
+        setWarning()
         navigate(-1)
     }
+
+    const [warning, setWarning] = useState()
 
     return (
         <>
             <div className='modal' id="loginModal" >
                 <form action="" onSubmit={login}>
+                    <p style={{ color: "red" }}>{warning}</p>
                     <div className='input-fields'>
                         <div>
                             <label htmlFor="userName">User</label>

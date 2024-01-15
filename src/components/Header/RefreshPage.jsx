@@ -24,6 +24,7 @@ export default function RefreshPage({ experiences, trips}) {
         } else {
             console.log("this is a footprint")
             for (let trip of trips) {
+                console.log(trip)
                 if (!trip.footprint) {
                     console.log(trip)
                     const URL = `${VITE_SERVER_URL}/trips/${trip.id}`;
