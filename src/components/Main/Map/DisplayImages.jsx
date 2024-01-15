@@ -1,8 +1,8 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import L from 'leaflet'
 import { Marker, Popup, Tooltip } from 'react-leaflet'
 import filteredArray from './filteredArray'
+import { useNavigate } from 'react-router-dom';
 
 export default function DisplayImages({ experiences, displaySeasons, displayDaytime }) {
     const {pathname} = window.location

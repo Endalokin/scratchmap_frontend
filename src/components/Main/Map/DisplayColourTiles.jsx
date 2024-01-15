@@ -30,7 +30,7 @@ export default function DisplayColourTiles({ experiences, displaySeasons, displa
                         {e?.name}
                         <p><Link to={`${window.location.origin}/trip/${e?.trip.sys.id}/${e?.id}`}>Show Trip Details</Link></p>
                     </Popup>
-                    {<Tooltip sticky>
+                    {<Tooltip sticky direction="bottom">
                         <p><span style={{ color: e.imgAccentColour, fontWeight: "bold" }}>{e?.name}</span> <br />
                             {new Date(e?.date).toLocaleDateString()}</p>
                     </Tooltip>}

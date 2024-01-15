@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useOutletContext, useParams, Link } from 'react-router-dom'
-import TableRowPerTrip from './TableRowPerTrip'
 import CompensationTree from './CompensationTree'
 import CalculateNextTrip from './CalculateNextTrip'
 import FootprintComparisonChart from './FootprintComparisonChart'
@@ -26,24 +25,7 @@ export default function Footprint() {
 
     const { display = "table" } = useParams()
 
-    function sortBy(e) {
-        e.preventDefault();
-        let sortTerm = e.target.textContent.toLowerCase().split(" ")[0]
-        let sorted = [...trips]?.sort((a, b) => {
-            if (a.footprint && a.footprint[sortTerm] > b.footprint[sortTerm]) {
-                return -1
-            } else if (a.footprint && a.footprint[sortTerm] < b.footprint[sortTerm]) {
-                return 1
-            } else if (a[sortTerm] > b[sortTerm]) {
-                return 1
-            } else if (a[sortTerm] < b[sortTerm]) {
-                return -1
-            }
-            return 0
-        })
-        setTrips(sorted)
-    }
-    console.log(document.URL.split("/")[document.URL.split("/").length - 1])
+
 
     return (
         <div className="fixed-site">
@@ -57,7 +39,7 @@ export default function Footprint() {
                     <Link to={`${window.location.origin}/footprint/calc`}><button className={`ribbon ribbon-last ${display == "calc" && "ribbon-active"}`}>Calc</button></Link>
                 </div>
             </div>
-            {display == "chart" ? <FootprintComparisonChart trips={trips} /> : display == "table" ? <FootprintTable sortBy={sortBy} trips={trips} setTrips={setTrips} setActiveTrip={setActiveTrip} setIsOpen={setIsOpen} /> : <CalculateNextTrip />}
+            {display == "chart" ? <FootprintComparisonChart trips={trips} /> : display == "table" ? <FootprintTable trips={trips} setTrips={setTrips} setActiveTrip={setActiveTrip} setIsOpen={setIsOpen} /> : <CalculateNextTrip />}
             {isOpen && <CompensationModal activeTrip={activeTrip} setIsOpen={setIsOpen} />}
         </div>
     )

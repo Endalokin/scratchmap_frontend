@@ -81,7 +81,7 @@ export default function DMap() {
     <>
       <div id="single-details">
         <h2>3D-Map</h2>
-        <button className='ribbon' onClick={() => navigate(-1)}>Back</button >
+        <button className='ribbon ribbon-small' onClick={() => navigate(-1)}>Back</button >
         <div>
           <button className={`${displayStartButton} notching`} onClick={toggleVisibility}>START</button>
           <div id="cesiumContainer" className={displayMap ? "display-flex" : "display-none"} style={{ width: mainElementWidth, height: mainElementHeight }}>

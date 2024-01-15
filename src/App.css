@@ -43,7 +43,7 @@ body {
   color: var(--primary-color);
   font-family: Laila;
   margin: 0;
-  font-size: 18px;
+  font-size: 24px;
 }
 
 main {
@@ -238,14 +238,13 @@ menu > a {
 }
 
 .notching {
-  padding: 5px 45px;
+  padding: 1px 45px;
   background: linear-gradient(135deg, transparent 10px, var(--highlight-one) 0)
       top left,
     linear-gradient(-135deg, transparent 10px, var(--highlight-one) 0) top right,
     linear-gradient(-45deg, transparent 10px, var(--highlight-one) 0) bottom
       right,
     linear-gradient(45deg, transparent 10px, var(--highlight-one) 0) bottom left;
-  /* background-size: 50% 50%; */
   background-repeat: no-repeat;
   clip-path: polygon(
     15px 0,
@@ -290,7 +289,7 @@ menu > a {
 
 .vertical-scroll-80 {
   overflow: auto;
-  max-height: 80vh;
+  max-height: 70vh;
 }
 
 .vertical-scroll-80::-webkit-scrollbar {
@@ -346,7 +345,7 @@ menu > a {
   padding: 0.5rem !important;
   box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
   filter: grayscale(100%);
-  max-height: 80vh;
+  max-height: calc(70vh - 3rem);
   max-width: 80vw;
 }
 
@@ -476,9 +475,14 @@ menu > a {
 /* Map Page */
 
 .map {
-  width: 99vw;
   height: calc(100vh - 100px);
   z-index: 0 !important;
+}
+
+.leaflet-interactive:hover {
+  transition: all 0.5s;
+  box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+  transform: skew(-2deg);
 }
 
 .modal {
@@ -511,7 +515,6 @@ menu > a {
 }
 
 #mapFilterSection {
-  top: 15vh;
   right: 2px;
   border: 2px dashed var(--highlight-one);
 }
@@ -663,8 +666,9 @@ th {
 }
 
 table {
-  width: 100%;
+  width: calc(100% - 8px);
   padding: 20px 0px;
+  margin: auto;
   animation: showUp 0.25s ease-out;
 }
 
@@ -688,7 +692,6 @@ th {
 
 tbody > tr:hover {
   box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
-  /*   transform: scale(1.02); */
   transform: translateX(5px);
 }
 
@@ -724,6 +727,7 @@ tbody > tr:nth-child(even) {
   .fixed-site {
     margin: 0px 0.5vw;
   }
+
 }
 
 @media only screen and (max-width: 880px) {
@@ -743,12 +747,6 @@ tbody > tr:nth-child(even) {
     margin: 25px 15px;
     border: 2px dashed var(--highlight-one);
     padding: 15px 15px;
-  }
-
-  #mapFilterSection {
-    width: calc(100vw - 8px);
-    margin: auto;
-    height: calc(100vh - 8px);
   }
 
   .menu-button-container {
@@ -803,11 +801,9 @@ tbody > tr:nth-child(even) {
   background-color: var(--primary-color);
 }
 
-/* HTML: <div class="ribbon">Your text content</div> */
 .ribbon-last {
   --f: 0.5em; /* control the folded part*/
   --r: 0.8em; /* control the ribbon shape */
-
   border-bottom: var(--f) solid #0005;
   border-left: var(--r) solid #0000;
   clip-path: polygon(
@@ -823,13 +819,10 @@ tbody > tr:nth-child(even) {
   right: 0.5em;
 }
 
-/* HTML: <div class="ribbon">Your text content</div> */
-
 .ribbon-middle {
   color: #fff;
   --s: 0.5em; /* the ribbon size */
   --c: 0.8em; /* the cutout part */
-
   padding: 0 var(--c) 0 calc(var(--s) * 2 + 0.5em);
   clip-path: polygon(
     calc(100% - var(--c)) 0,
@@ -868,14 +861,29 @@ tbody > tr:nth-child(even) {
   );
 }
 
-/* HTML: <div class="ribbon">Your text content</div> */
-.ribbon2 {
-  /*   font-size: 28px; */
-  /* font-weight: bold; */
-  color: #fff;
+.ribbon-small {
+  --f: 0.5em; /* control the folded part*/
+  --r: 0.8em; /* control the ribbon shape */
+  position: absolute;
+  top: 15vh;
+  z-index: 10;
+  right: calc(0.5em + 0.5vw);
+  border-bottom: var(--f) solid #0005;
+  border-left: var(--r) solid #0000;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--f)),
+    calc(100% - var(--f)) 100%,
+    calc(100% - var(--f)) calc(100% - var(--f)),
+    0 calc(100% - var(--f)),
+    var(--r) calc(50% - var(--f) / 2)
+  );
+}
+
+.ribbon-secondary {
   --r: 0.8em; /* control the ribbon shape */
   padding-inline: calc(var(--r) + 0.3em);
-  line-height: 1.8;
   clip-path: polygon(
     0 0,
     100% 0,
