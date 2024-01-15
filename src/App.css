@@ -343,7 +343,7 @@ menu > a {
 
 .polaroid {
   background: #fff;
-  padding: 0.5rem  !important;
+  padding: 0.5rem !important;
   box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
   filter: grayscale(100%);
   max-height: 80vh;
@@ -475,7 +475,7 @@ menu > a {
 
 /* Map Page */
 
-.map{
+.map {
   width: 99vw;
   height: calc(100vh - 100px);
   z-index: 0 !important;
@@ -496,13 +496,14 @@ menu > a {
 .modal-back {
   width: 100vw;
   height: 100vh;
-  position:absolute;
-  top:0;
-  left:0;
+  position: absolute;
+  top: 0;
+  left: 0;
   background-color: rgba(148, 147, 147, 0.4);
 }
 
-#compensationModal, #loginModal {
+#compensationModal,
+#loginModal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -663,11 +664,33 @@ th {
 
 table {
   width: 100%;
+/*   transition: all 0.5s; */
+  animation: showUp 0.25s ease-out;
 }
+
+@keyframes showUp {
+  from {
+    transform: scale(1, 0.4) translateY(calc(100% * 0.4));
+  }
+  to {
+    transform: scale(1,1) translateY(0px);
+  }
+}
+
 
 td,
 th {
   padding: 10px;
+}
+
+tbody > tr:hover {
+  box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
+  /*   transform: scale(1.02); */
+  transform: translateX(5px);
+}
+
+tbody > tr {
+  transition: all 0.5s;
 }
 
 tbody > tr:nth-child(even) {
