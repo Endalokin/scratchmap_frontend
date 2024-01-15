@@ -1,7 +1,4 @@
-// The URL on your server where CesiumJS's static files are hosted.
-
-
-import { Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer, ImageryLayer, IonWorldImageryStyle, Cartesian2, Color as CesiumColor, Camera as CesiumCamera, StripeMaterialProperty, CheckerboardMaterialProperty, Rectangle } from 'cesium';
+import { Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer, ImageryLayer, IonWorldImageryStyle, Cartesian2, Color as CesiumColor, Camera as CesiumCamera, CheckerboardMaterialProperty, Rectangle } from 'cesium';
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import { useState } from 'react';
 import { useNavigate, useParams, useOutletContext } from "react-router-dom";
@@ -81,19 +78,16 @@ export default function DMap() {
     <>
       <div id="single-details">
         <h2>3D-Map</h2>
-        <button className='ribbon' onClick={() => navigate(-1)}>Back</button >
+        <button className='ribbon ribbon-small' onClick={() => navigate(-1)}>Back</button >
         <div>
           <button className={`${displayStartButton} notching`} onClick={toggleVisibility}>START</button>
           <div id="cesiumContainer" className={displayMap ? "display-flex" : "display-none"} style={{ width: mainElementWidth, height: mainElementHeight }}>
-
           </div>
           <div className={displayMap ? "display-none" : "display-flex"} style={{ width: mainElementWidth, height: mainElementHeight, justifyContent: "center" }}>
             <img src={`${mainImage?.imgUrl}?fm=webp&w=${mainElementWidth}&h=${mainElementHeight}`} alt=""  />
           </div>
-
         </div>
         <div className="polaroid polaroid-big" style={{ width: "150px" }}>
-
           <img src={`${mainImage?.imgUrl}?fm=webp&w=150`} className="magnifier" onMouseEnter={toggleMapImage} onMouseLeave={toggleMapImage} />
           <p>{mainImage?.name}</p>
         </div>

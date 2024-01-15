@@ -7,6 +7,5 @@ import DMap from './components/Main/SingleTripDetails/DMap.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
     /*   <React.StrictMode> */
     <App /> 
-/*     < DMap /> */
 /*   </React.StrictMode>, */
 )

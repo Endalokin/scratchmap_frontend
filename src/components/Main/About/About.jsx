@@ -33,7 +33,7 @@ export default function About() {
                 <Link to="/footprint"><button className="notching">Go to footprint overview</button></Link>
                 <div>{trips?.map((trip) => <CompensationTree key={`about-tree-${trip.id}`} compensatedTrip={trip?.footprint?.compensated} />)}</div>
             </div>
-            <div id="teaser-single">
+            <div id="teaser-single" className='centered-element'>
                 {trips && trips[0] && <SingleTripShortView trip={trips[0]} experiences={experiences} />}
             </div>
             <div id="teaser-all">

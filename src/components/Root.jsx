@@ -15,7 +15,6 @@ export default function Root() {
   const [trips, setTrips] = useState()
 
   const [loadingData, setLoadingData] = useState(false)
-  const [loginIsOpen, setLoginIsOpen] = useState(false)
 
   useEffect(() => {
     const TEST_URL = `${VITE_SERVER_URL}/test`
@@ -73,9 +72,8 @@ export default function Root() {
       <Header experiences={experiences} trips={trips} />
       <main>
         <Outlet context={[experiences, setExperiences, trips, setTrips, user, setUser]} />
-
       </main>
-      <Footer setLoginIsOpen={setLoginIsOpen} loginIsOpen={loginIsOpen} user={user} setUser={setUser} />
+      <Footer user={user} setUser={setUser} />
     </>
   )
 }

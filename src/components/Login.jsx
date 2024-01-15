@@ -61,11 +61,10 @@ export default function LoginModal() {
                         </div>
                     </div>
                     <div>
-                        <button className="ribbon2" onClick={cancleLogin}>Cancel</button>
+                        <button className="ribbon ribbon-secondary" onClick={cancleLogin}>Cancel</button>
                         <button className="notching" onClick={login}>Login</button>
                     </div>
                 </form>
-
             </div>
             <div className="modal-back"></div>
         </>

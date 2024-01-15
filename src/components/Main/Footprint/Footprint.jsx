@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useOutletContext, useParams, Link } from 'react-router-dom'
-import TableRowPerTrip from './TableRowPerTrip'
 import CompensationTree from './CompensationTree'
 import CalculateNextTrip from './CalculateNextTrip'
 import FootprintComparisonChart from './FootprintComparisonChart'
 import CompensationModal from './CompensationModal'
+import FootprintTable from './FootprintTable'
 
 export default function Footprint() {
 
@@ -25,54 +25,19 @@ export default function Footprint() {
 
     const { display = "table" } = useParams()
 
-    function sortBy(e) {
-        e.preventDefault();
-        let sortTerm = e.target.textContent.toLowerCase().split(" ")[0]
-        let sorted = [...trips]?.sort((a, b) => {
-            if (a.footprint && a.footprint[sortTerm] > b.footprint[sortTerm]) {
-                return -1
-            } else if (a.footprint && a.footprint[sortTerm] < b.footprint[sortTerm]) {
-                return 1
-            } else if (a[sortTerm] > b[sortTerm]) {
-                return 1
-            } else if (a[sortTerm] < b[sortTerm]) {
-                return -1
-            }
-            return 0
-        })
-        setTrips(sorted)
-    }
-
     return (
         <div className="fixed-site">
-            <div>
+            <div style={{ height: "89px", display: "flex", justifyContent: "space-between", alignItems: "end" }} >
                 <div>
-                    {display == "chart" ? <Link to={`${window.location.origin}/footprint/table`}><button className="ribbon">Show Table</button></Link> : <Link to={`${window.location.origin}/footprint/chart`}><button className="ribbon">Show Chart</button></Link>}
+                    {trips?.map((trip) => <CompensationTree key={`tree-${trip.id}`} compensatedTrip={trip.footprint?.compensated} />)}
                 </div>
-
+                <div>
+                    <Link to={`${window.location.origin}/footprint/table`}><button className={`ribbon ribbon-first ${display == "table" && "ribbon-active"}`}>Table</button></Link>
+                    <Link to={`${window.location.origin}/footprint/chart`}><button className={`ribbon ribbon-middle ${display == "chart" && "ribbon-active"}`}>Chart</button></Link>
+                    <Link to={`${window.location.origin}/footprint/calc`}><button className={`ribbon ribbon-last ${display == "calc" && "ribbon-active"}`}>Calc</button></Link>
+                </div>
             </div>
-            {display == "chart" ? <FootprintComparisonChart trips={trips} /> :
-                <div className="full-width">
-                    <div style={{ height: "89px" }} >{trips?.map((trip) => <CompensationTree key={`tree-${trip.id}`} compensatedTrip={trip.footprint?.compensated} />)} </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th onClick={sortBy}>Name of the Trip {'\u21F5'}</th>
-                                <th className="hide-xs">Directions</th>
-                                <th onClick={sortBy}>Distance* {'\u21F5'}</th>
-                                <th onClick={sortBy}>Emission* {'\u21F5'}</th>
-                                <th>Amount</th>
-                                <th>Compensated</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {trips?.map((trip) => <TableRowPerTrip key={`row-${trip.id}`} trip={trip} setTrips={setTrips} setIsOpen={setIsOpen} setActiveTrip={setActiveTrip} />)}
-                        </tbody>
-                    </table>
-                    <p className="fine-print">*Calculated by CarbonTracer (<a href="https://carbontracer.uni-graz.at/">https://carbontracer.uni-graz.at/</a>)</p>
-                    <CalculateNextTrip />
-                </div>
-            }
+            {display == "chart" ? <FootprintComparisonChart trips={trips} /> : display == "table" ? <FootprintTable trips={trips} setTrips={setTrips} setActiveTrip={setActiveTrip} setIsOpen={setIsOpen} /> : <CalculateNextTrip />}
             {isOpen && <CompensationModal activeTrip={activeTrip} setIsOpen={setIsOpen} />}
         </div>
     )

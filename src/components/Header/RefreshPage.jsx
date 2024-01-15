@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink} from 'react-router-dom'
 import fetchData from '../../utils/fetchAPI'
 
 export default function RefreshPage({ experiences, trips}) {
-    const location = useLocation()
     const [rotate, setRotate] = useState()
 
     const { VITE_SERVER_URL } = import.meta.env;

@@ -1,16 +1,14 @@
 import React from 'react'
-import { useParams, useOutletContext, useNavigate } from 'react-router-dom'
+import { useParams, useOutletContext } from 'react-router-dom'
 import ImgGallery from './ImgGallery';
 import { MapContainer, Polyline, TileLayer, Marker, Tooltip } from 'react-leaflet'
 import DisplayImages from '../Map/DisplayImages';
-import { Link, redirect } from 'react-router-dom';
 import TripInfo from './TripInfo';
+import PolaroidImageLarge from '../About/PolaroidImageLarge';
 
 export default function SingleTripDetails() {
 
     const [experiences, , trips] = useOutletContext();
-
-    const navigate = useNavigate()
 
     let { id, imgid } = useParams()
 
@@ -44,13 +42,7 @@ export default function SingleTripDetails() {
                 <div >
                     <TripInfo trip={singleTripDetails} />
                 </div>
-                {singleTripExperiences && singleTripExperiences[0] &&
-                    <div id="animated-img" className="polaroid polaroid-big" style={{ position: "relative" }}>
-                        <img src={`${mainImage.imgUrl}?fm=webp&w=600`} alt={`${mainImage.name}`} />
-                        <h2 className="edding">{mainImage.name.substr(0, 29)}</h2>
-                        <Link to={`${window.location.origin}/3d/${mainImage?.id}`} ><button className='ribbon' style={{ position: "absolute", top: "0px", right: "0px" }}>3D</button></Link>
-                    </div>
-                }
+                {singleTripExperiences && singleTripExperiences[0] && <PolaroidImageLarge mainImage={mainImage} />}
                 <div className="img-gallery">
                     <ImgGallery singleTripExperiences={singleTripExperiences} />
                 </div>
@@ -78,7 +70,6 @@ export default function SingleTripDetails() {
                 </Marker>
             </MapContainer>
             }
-
             </div>
         </>
     )
