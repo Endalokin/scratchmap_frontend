@@ -715,6 +715,9 @@ tbody > tr:nth-child(even) {
   .fixed-site {
     margin: 0px 0.5vw;
   }
+  body {
+  font-size: 18px;
+  }
 
 }
 
