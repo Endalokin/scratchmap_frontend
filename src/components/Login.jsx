@@ -57,7 +57,7 @@ export default function LoginModal() {
                         </div>
                         <div>
                             <label htmlFor="pwd">Password</label>
-                            <input type="text" value={pwd} onChange={handleChange} id="pwd" />
+                            <input type="password" value={pwd} onChange={handleChange} id="pwd" />
                         </div>
                     </div>
                     <div>
