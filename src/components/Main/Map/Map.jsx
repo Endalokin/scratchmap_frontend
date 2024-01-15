@@ -3,11 +3,13 @@ import { MapContainer, TileLayer, useMapEvents } from 'react-leaflet'
 import { useOutletContext } from 'react-router-dom'
 import DisplayImages from './DisplayImages'
 import DisplayColourTiles from './DisplayColourTiles'
-import MapFilters from './MapFilters'
+import MapFilters from './MapFilters';
+import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 
 export default function Map() {
+
     const [experiences, , , ] = useOutletContext();
     const [zoomLevel, setZoomLevel] = useState(3);
 
@@ -37,7 +39,8 @@ export default function Map() {
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                     url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-
+                    noWrap={true}
+                   
                 />
                 {zoomLevel < 8 ?
                     <DisplayColourTiles experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime}/>
