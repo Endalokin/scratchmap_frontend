@@ -140,20 +140,11 @@ footer {
   padding: 15px 15px;
   width: calc(100% - 30px);
   bottom: 0px;
-  /* background: linear-gradient(180deg, var(--secondary-bg-color) 0%, var(--primary-bg-color) 30%, var(--primary-bg-color) 70%, var(--secondary-bg-color) 100%); */
   background-color: var(--primary-bg-color);
   border-top: 2px dotted var(--secondary-bg-color);
 }
 
 /* Header */
-
-/* header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0px 5vw;
-} */
 
 html,
 body {
@@ -166,7 +157,6 @@ header {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: var(--primary-color);
   height: 50px;
   padding: 1em;
@@ -271,7 +261,6 @@ menu > a {
   }
 }
 
-/* HTML: <div class="loader"></div> */
 .loader {
   width: 100%;
   height: 10px;
@@ -539,7 +528,6 @@ menu > a {
   width: 75px;
   height: 75px;
   text-align: center;
-  /*   border: 1px solid var(--highlight-two); */
   line-height: 75px;
   font-size: 2em;
   cursor: pointer;
@@ -840,8 +828,6 @@ tbody > tr:nth-child(even) {
 .ribbon-active {
   background-color: var(--highlight-two);
 }
-
-/* HTML: <div class="ribbon">Your text content</div> */
 
 .ribbon-first {
   --f: 0.5em; /* control the folded part*/

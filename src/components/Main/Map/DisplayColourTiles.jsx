@@ -3,8 +3,6 @@ import { Rectangle, Tooltip } from 'react-leaflet'
 import filteredArray from './filteredArray'
 import { useNavigate } from 'react-router-dom'
 
-
-
 export default function DisplayColourTiles({ experiences, displaySeasons, displayDaytime }) {
 
     function uniquePlaces(data) {

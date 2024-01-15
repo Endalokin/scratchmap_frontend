@@ -25,8 +25,6 @@ export default function Footprint() {
 
     const { display = "table" } = useParams()
 
-
-
     return (
         <div className="fixed-site">
             <div style={{ height: "89px", display: "flex", justifyContent: "space-between", alignItems: "end" }} >

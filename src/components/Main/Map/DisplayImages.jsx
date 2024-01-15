@@ -1,6 +1,6 @@
 import React from 'react';
 import L from 'leaflet'
-import { Marker, Popup, Tooltip } from 'react-leaflet'
+import { Marker, Tooltip } from 'react-leaflet'
 import filteredArray from './filteredArray'
 import { useNavigate } from 'react-router-dom';
 

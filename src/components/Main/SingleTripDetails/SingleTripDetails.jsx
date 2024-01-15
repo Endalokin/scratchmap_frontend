@@ -1,9 +1,8 @@
 import React from 'react'
-import { useParams, useOutletContext, useNavigate } from 'react-router-dom'
+import { useParams, useOutletContext } from 'react-router-dom'
 import ImgGallery from './ImgGallery';
 import { MapContainer, Polyline, TileLayer, Marker, Tooltip } from 'react-leaflet'
 import DisplayImages from '../Map/DisplayImages';
-import { Link } from 'react-router-dom';
 import TripInfo from './TripInfo';
 import PolaroidImageLarge from '../About/PolaroidImageLarge';
 
@@ -71,7 +70,6 @@ export default function SingleTripDetails() {
                 </Marker>
             </MapContainer>
             }
-
             </div>
         </>
     )

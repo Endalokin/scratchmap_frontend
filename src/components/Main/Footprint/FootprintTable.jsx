@@ -1,6 +1,5 @@
 import React from 'react'
 import TableRowPerTrip from './TableRowPerTrip'
-import CalculateNextTrip from './CalculateNextTrip'
 
 export default function FootprintTable({trips, setTrips, setActiveTrip, setIsOpen}) {
 

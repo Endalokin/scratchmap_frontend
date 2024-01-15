@@ -65,7 +65,6 @@ export default function LoginModal() {
                         <button className="notching" onClick={login}>Login</button>
                     </div>
                 </form>
-
             </div>
             <div className="modal-back"></div>
         </>

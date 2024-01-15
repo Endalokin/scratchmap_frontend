@@ -36,7 +36,6 @@ export const options = {
     },
 };
 
-
 export default function FootprintComparisonChart({ trips }) {
 
     ChartJS.defaults.color = getComputedStyle(document.body).color;

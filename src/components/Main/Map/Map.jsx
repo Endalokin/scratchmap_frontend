@@ -4,9 +4,6 @@ import { useOutletContext } from 'react-router-dom'
 import DisplayImages from './DisplayImages'
 import DisplayColourTiles from './DisplayColourTiles'
 import MapFilters from './MapFilters';
-import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import { PositionProperty } from 'cesium'
 
 
 export default function Map() {
