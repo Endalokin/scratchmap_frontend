@@ -664,7 +664,11 @@ th {
 
 table {
   width: 100%;
-/*   transition: all 0.5s; */
+  padding: 20px 0px;
+  animation: showUp 0.25s ease-out;
+}
+
+.showUp {
   animation: showUp 0.25s ease-out;
 }
 
@@ -673,10 +677,9 @@ table {
     transform: scale(1, 0.4) translateY(calc(100% * 0.4));
   }
   to {
-    transform: scale(1,1) translateY(0px);
+    transform: scale(1, 1) translateY(0px);
   }
 }
-
 
 td,
 th {
@@ -790,17 +793,21 @@ tbody > tr:nth-child(even) {
   }
 }
 
-/* HTML: <div class="ribbon">Your text content</div> */
 .ribbon {
+  line-height: 1.8;
+  margin: 0px;
+  background-color: grey;
+}
+
+.ribbon:hover {
+  background-color: var(--primary-color);
+}
+
+/* HTML: <div class="ribbon">Your text content</div> */
+.ribbon-last {
   --f: 0.5em; /* control the folded part*/
   --r: 0.8em; /* control the ribbon shape */
-  position: absolute;
-  top: 15vh;
-  z-index: 10;
-  right: calc(-1 * var(--f));
-  padding-inline: 0.25em;
-  line-height: 1.8;
-  background: var(--highlight-one);
+
   border-bottom: var(--f) solid #0005;
   border-left: var(--r) solid #0000;
   clip-path: polygon(
@@ -811,6 +818,53 @@ tbody > tr:nth-child(even) {
     calc(100% - var(--f)) calc(100% - var(--f)),
     0 calc(100% - var(--f)),
     var(--r) calc(50% - var(--f) / 2)
+  );
+  position: relative;
+  right: 0.5em;
+}
+
+/* HTML: <div class="ribbon">Your text content</div> */
+
+.ribbon-middle {
+  color: #fff;
+  --s: 0.5em; /* the ribbon size */
+  --c: 0.8em; /* the cutout part */
+
+  padding: 0 var(--c) 0 calc(var(--s) * 2 + 0.5em);
+  clip-path: polygon(
+    calc(100% - var(--c)) 0,
+    var(--s) 0,
+    calc(var(--s) * 2) calc(50%),
+    var(--s) 100%,
+    calc(100% - var(--c)) 100%,
+    100% calc(50%)
+  );
+  width: fit-content;
+  position: relative;
+  right: 0.4em;
+}
+
+.ribbon-active {
+  background-color: var(--highlight-two);
+}
+
+/* HTML: <div class="ribbon">Your text content</div> */
+
+.ribbon-first {
+  --f: 0.5em; /* control the folded part*/
+  --r: 0.5em; /* control the ribbon shape */
+  padding-inline: 0.25em;
+  line-height: 1.8;
+  border-bottom: var(--f) solid #0005;
+  border-right: var(--r) solid #0000;
+  clip-path: polygon(
+    calc(100% - var(--r)) 0,
+    0 0,
+    0 calc(100% - var(--f)),
+    var(--f) 100%,
+    var(--f) calc(100% - var(--f)),
+    calc(100% - var(--r)) calc(100% - var(--f)),
+    100% calc(50% - var(--f) / 2)
   );
 }
 

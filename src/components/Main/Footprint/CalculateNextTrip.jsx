@@ -53,8 +53,13 @@ export default function CalculateNextTrip() {
     }
 
     return (
-        <div>
+        <div className='showUp'>
             {/* This needs some formatting */}
+            <div className="centered-element">
+                <h2>Calculator</h2>
+                <p>Type in the properties of your future trip to know the emissions it cause.</p>
+            </div>
+
             <form action="" className="centered-element" onSubmit={handleSubmit}>
                 <p style={{ color: "red" }}>{warning}</p>
                 <div className='input-fields'>
@@ -90,6 +95,7 @@ export default function CalculateNextTrip() {
                 <button type="submit" className="notching">Calculate Emissions</button>
             </form>
             <p className="centered-element">{nextTrip}</p>
+            <p className="fine-print">*Calculation by CarbonTracer (<a href="https://carbontracer.uni-graz.at/">https://carbontracer.uni-graz.at/</a>)</p>
         </div>
     )
 }
