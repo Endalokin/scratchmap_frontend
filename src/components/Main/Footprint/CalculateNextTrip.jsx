@@ -57,34 +57,36 @@ export default function CalculateNextTrip() {
             {/* This needs some formatting */}
             <form action="" className="centered-element" onSubmit={handleSubmit}>
                 <p style={{ color: "red" }}>{warning}</p>
-                <span>
-                    <label htmlFor="input-from">From</label>
-                    <input type="text" id="input-from" placeholder='Berlin' value={valueFrom} onChange={handleChange} />
-                </span>
-                <span>
-                    <label htmlFor="">To</label>
-                    <input type="text" id="input-to" placeholder='Paris' value={valueTo} onChange={handleChange} />
-                </span>
-                <span>
-                    <label htmlFor="vehicle">Per</label>
-                    <select name="vehicle" id="vehicle" value={valuePer} onChange={handleChange} >
-                        <option disabled selected value> -- select an option -- </option>
-                        <option value="car">car</option>
-                        <option value="e-car">e-car</option>
-                        <option value="bus">bus</option>
-                        <option value="e-bus">e-bus</option>
-                        <option value="train">train</option>
-                        <option value="flight-economy">flight-economy</option>
-                    </select>
-                </span>
-                <span>
-                    <label htmlFor="input-travellers">Travellers</label>
-                    <input type="number" min={1} id="input-travellers" value={valueTravellers} onChange={handleChange} />
-                </span>
-                <span>
-                    <label htmlFor="input-roundtrip">Round Trip</label>
-                    <input type="checkbox" id="input-roundtrip" value={valueRoundtrip} onChange={handleChange} />
-                </span>
+                <div className='input-fields'>
+                    <div>
+                        <label htmlFor="input-from">From</label>
+                        <input type="text" id="input-from" placeholder='Berlin' value={valueFrom} onChange={handleChange} />
+                    </div>
+                    <div>
+                        <label htmlFor="">To</label>
+                        <input type="text" id="input-to" placeholder='Paris' value={valueTo} onChange={handleChange} />
+                    </div>
+                    <div>
+                        <label htmlFor="vehicle">Per</label>
+                        <select name="vehicle" id="vehicle" value={valuePer} onChange={handleChange} >
+                            <option disabled selected value> -- select an option -- </option>
+                            <option value="car">car</option>
+                            <option value="e-car">e-car</option>
+                            <option value="bus">bus</option>
+                            <option value="e-bus">e-bus</option>
+                            <option value="train">train</option>
+                            <option value="flight-economy">flight-economy</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label htmlFor="input-travellers">Travellers</label>
+                        <input type="number" min={1} id="input-travellers" value={valueTravellers} onChange={handleChange} />
+                    </div>
+                    <div>
+                        <label htmlFor="input-roundtrip">Round Trip</label>
+                        <input type="checkbox" id="input-roundtrip" value={valueRoundtrip} onChange={handleChange} />
+                    </div>
+                </div>
                 <button type="submit" className="notching">Calculate Emissions</button>
             </form>
             <p className="centered-element">{nextTrip}</p>

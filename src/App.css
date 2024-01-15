@@ -113,7 +113,16 @@ button {
 }
 
 form > * {
-  margin: 10px;
+  margin: 15px;
+}
+
+.input-fields {
+  display: flex;
+  justify-content: space-around;
+}
+
+label {
+  display: block;
 }
 
 /* Footer */
@@ -123,11 +132,13 @@ form > * {
 }
 
 footer {
+  display: flex;
+  justify-content: space-between;
   text-align: center;
   font-size: smaller;
   position: fixed;
-  padding: 15px 0px;
-  width: 100%;
+  padding: 15px 15px;
+  width: calc(100% - 30px);
   bottom: 0px;
   /* background: linear-gradient(180deg, var(--secondary-bg-color) 0%, var(--primary-bg-color) 30%, var(--primary-bg-color) 70%, var(--secondary-bg-color) 100%); */
   background-color: var(--primary-bg-color);
@@ -489,10 +500,9 @@ menu > a {
   top:0;
   left:0;
   background-color: rgba(148, 147, 147, 0.4);
-
 }
 
-#compensationModal {
+#compensationModal, #loginModal {
   position: absolute;
   top: 50%;
   left: 50%;

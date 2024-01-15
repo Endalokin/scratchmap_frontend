@@ -8,32 +8,43 @@ import LoadingBar from './LoadingBar'
 
 export default function Root() {
 
+  const [user, setUser] = useState({})
+
   const { VITE_SERVER_URL } = import.meta.env;
   const [experiences, setExperiences] = useState()
-  const EXPERIENCES_URL = `${VITE_SERVER_URL}/experiences`
-
   const [trips, setTrips] = useState()
-  const TRIPS_URL = `${VITE_SERVER_URL}/trips`
 
-  const TEST_URL = `${VITE_SERVER_URL}/experiences`
   const [loadingData, setLoadingData] = useState(false)
+  const [loginIsOpen, setLoginIsOpen] = useState(false)
 
-  useEffect(() => {    
+  useEffect(() => {
+    const TEST_URL = `${VITE_SERVER_URL}/test`
+    let EXPERIENCES_URL
+    let TRIPS_URL
+    
+    if (user?.username) {
+      EXPERIENCES_URL = `${VITE_SERVER_URL}/experiences?user=${user.username}`
+      TRIPS_URL = `${VITE_SERVER_URL}/trips?user=${user.username}`
+    } else {
+      EXPERIENCES_URL = `${VITE_SERVER_URL}/experiences`
+      TRIPS_URL = `${VITE_SERVER_URL}/trips`
+    }
+
     setLoadingData(true)
     let controller = new AbortController();
     let serverAvailable = false
     fetchData(TEST_URL, (data) => {
       serverAvailable = true
-    },"GET",null,controller)
+    }, "GET", null, controller)
 
     fetchData(EXPERIENCES_URL, (data) => {
       setExperiences(data)
       console.log(data)
-    },"GET",null,controller)
+    }, "GET", null, controller)
     fetchData(TRIPS_URL, (data) => {
       setTrips(data)
       console.log(data)
-    },"GET",null,controller)
+    }, "GET", null, controller)
 
     setTimeout(() => {
       if (!serverAvailable) {
@@ -43,7 +54,7 @@ export default function Root() {
       }
     }, 15000)
 
-  }, [])
+  }, [user])
 
   const { pathname } = useLocation();
 
@@ -53,7 +64,7 @@ export default function Root() {
   }, [pathname]);
 
   if (experiences && trips && loadingData) {
-      setLoadingData(false)
+    setLoadingData(false)
   }
 
   return (
@@ -61,9 +72,10 @@ export default function Root() {
       <LoadingBar loadingData={loadingData} />
       <Header experiences={experiences} trips={trips} />
       <main>
-        <Outlet context={[experiences, setExperiences, trips, setTrips]} />
+        <Outlet context={[experiences, setExperiences, trips, setTrips, user, setUser]} />
+
       </main>
-      <Footer />
+      <Footer setLoginIsOpen={setLoginIsOpen} loginIsOpen={loginIsOpen} user={user} setUser={setUser} />
     </>
   )
 }

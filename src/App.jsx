@@ -7,6 +7,7 @@ import Test from './utils/Test'
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom'
 import SingleTripDetails from './components/Main/SingleTripDetails/SingleTripDetails'
 import DMap from './components/Main/SingleTripDetails/DMap'
+import Login from './components/Login'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
       <Route path="/trip/:id/:imgid?" element={<SingleTripDetails />} />
       <Route path="/trip/:id/:imgid/3d" element={<DMap />} />
       <Route path="/3d/:imgid" element={<DMap />} />
+      <Route path="/login" element={<Login />} />
     </Route>
   )
 )
