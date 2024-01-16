@@ -25,6 +25,7 @@
   --highlight-one: #7d9eb4;
   --highlight-two: #4a9470;
   --opposite-color: #032236;
+  --btn: white;
 }
 
 /* Dark Mode */
@@ -36,6 +37,7 @@
   --highlight-one: #d4a66a;
   --highlight-two: #196d45;
   --opposite-color: #ffebd1;
+  --btn: white;
 }
 
 body {
@@ -89,7 +91,7 @@ a {
 a:hover:not(:has(button)) {
   background-color: var(--highlight-one);
   border: none;
-  color: white;
+  color: var(--btn);
   font-size: inherit;
   cursor: pointer;
 }
@@ -97,7 +99,7 @@ a:hover:not(:has(button)) {
 button {
   background-color: var(--highlight-one);
   border: none;
-  color: white;
+  color: var(--btn);
   font-size: inherit;
   margin: 1rem;
   cursor: pointer;
@@ -795,7 +797,6 @@ tbody > tr:nth-child(even) {
     margin: 0;
     padding: 0.5em 0;
     width: 100%;
-    color: white;
     background-color: var(--highlight-one);
   }
   menu > a:not(:last-child) {
@@ -902,7 +903,7 @@ tbody > tr:nth-child(even) {
     0 100%,
     var(--r) 50%
   );
-  background: var(--primary-bg-color);
+  background: grey;
   width: fit-content;
-  border: 2px solid var(--primary-color);
+  color: var(--btn)
 }

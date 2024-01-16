@@ -38,7 +38,7 @@ export default function Footprint() {
                 </div>
             </div>
             {display == "chart" ? <FootprintComparisonChart trips={trips} /> : display == "table" ? <FootprintTable trips={trips} setTrips={setTrips} setActiveTrip={setActiveTrip} setIsOpen={setIsOpen} /> : <CalculateNextTrip />}
-            {isOpen && <CompensationModal activeTrip={activeTrip} setIsOpen={setIsOpen} />}
+            {isOpen && <CompensationModal activeTrip={activeTrip} setIsOpen={setIsOpen} setTrips={setTrips} />}
         </div>
     )
 }

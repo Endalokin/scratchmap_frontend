@@ -1,14 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function TableRowPerTrip({ trip, setTrips, setIsOpen, setActiveTrip }) {
+export default function TableRowPerTrip({ trip, setIsOpen, setActiveTrip }) {
 
     function compensateCheck(e) {
+        e.preventDefault();
         setActiveTrip(trip)
-        setTrips(prev => {
-            prev.find((p) => p.id == e.target.id.split("-")[0]).footprint.compensated = e.target.checked
-            return [...prev]
-        })
         setIsOpen(prev => !prev)  
     }
 
@@ -20,7 +17,7 @@ export default function TableRowPerTrip({ trip, setTrips, setIsOpen, setActiveTr
                 <td style={{ textAlign: "right" }}>{trip.footprint?.distance?.toFixed(0)} km</td>
                 <td style={{ textAlign: "right" }}>{trip.footprint?.emission?.toFixed(0)} kg</td>
                 <td style={{ textAlign: "right" }}>{trip.footprint?.amount?.toFixed(2)} €</td>
-                <td style={{ textAlign: "center" }}>{trip.footprint?.compensated ? <input id={`${trip?.id}-compensated`} type='checkbox' onChange={compensateCheck} checked /> : <input id={`${trip?.id}-compensated`} type='checkbox' onChange={compensateCheck} />}</td>
+                <td style={{ textAlign: "center" }}><input id={`${trip?.id}-compensated`} type='checkbox' onClick={compensateCheck} checked={trip.footprint?.compensated} /></td>
             </tr>
         </>
     )
