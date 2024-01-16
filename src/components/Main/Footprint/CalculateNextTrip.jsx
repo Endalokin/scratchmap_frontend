@@ -41,7 +41,7 @@ export default function CalculateNextTrip() {
             fetchData(NEXT_URL, (data) => {
                 console.log(data)
                 if (!data.errors) {
-                    setNextTrip(`This trip using a ${valuePer} will cause ~ ${Math.ceil(data.emission)} kg CO2 per person.`)
+                    setNextTrip(`This trip using a ${valuePer} will cause ~ ${Math.ceil(data.emission)} kg CO2 per person (${Math.ceil(data.amount)} €).`)
                 } else {
                     setWarning(`No emissions could be calculated with your input. ${data.errors.map(e => e)}`)
                 }
@@ -96,6 +96,7 @@ export default function CalculateNextTrip() {
             </form>
             <p className="centered-element">{nextTrip}</p>
             <p className="fine-print">*Calculation by CarbonTracer (<a href="https://carbontracer.uni-graz.at/">https://carbontracer.uni-graz.at/</a>)</p>
+            <p className="fine-print">**Amount equates CO2-price from 2022 of 30€ per tonne according to German Bundesfinanzministerium (<a href="https://www.bundesfinanzministerium.de/Content/DE/FAQ/klimaschutz.html">https://www.bundesfinanzministerium.de/Content/DE/FAQ/klimaschutz.html</a>)</p>
         </div>
     )
 }

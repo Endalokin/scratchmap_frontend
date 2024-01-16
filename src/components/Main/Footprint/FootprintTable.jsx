@@ -31,7 +31,7 @@ export default function FootprintTable({trips, setTrips, setActiveTrip, setIsOpe
                         <th className="hide-xs">Directions</th>
                         <th onClick={sortBy}>Distance * {'\u21F5'}</th>
                         <th onClick={sortBy}>Emission * {'\u21F5'}</th>
-                        <th>Amount</th>
+                        <th>Amount **</th>
                         <th>Compensated</th>
                     </tr>
                 </thead>
@@ -40,6 +40,7 @@ export default function FootprintTable({trips, setTrips, setActiveTrip, setIsOpe
                 </tbody>
             </table>
             <p className="fine-print">*Calculation by CarbonTracer (<a href="https://carbontracer.uni-graz.at/">https://carbontracer.uni-graz.at/</a>)</p>
+            <p className="fine-print">**Amount equates CO2-price from 2022 of 30€ per tonne according to German Bundesfinanzministerium (<a href="https://www.bundesfinanzministerium.de/Content/DE/FAQ/klimaschutz.html">https://www.bundesfinanzministerium.de/Content/DE/FAQ/klimaschutz.html</a>)</p>
         </div>
     )
 }
