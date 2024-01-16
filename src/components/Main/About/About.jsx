@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link, useOutletContext } from 'react-router-dom'
+import { useOutletContext } from 'react-router-dom'
 import SingleTripShortView from './SingleTripShortView'
 import AllTripsTagView from './AllTripsTagView'
 import TitleSection from './TitleSection'
 import FootprintSection from './FootprintSection'
 import SceneSection from './SceneSection'
+import MapSection from './MapSection'
 
 export default function About() {
 
@@ -16,17 +17,7 @@ export default function About() {
                 <TitleSection />
             </div>
             <div id="teaser-map">
-                <div>Here comes an image of the map</div>
-                <div>
-                    <h2>Your trips on the digital scratch map</h2>
-                    <div>
-                        <ul>
-                            <li>Have it everywhere with you</li>
-                            <li>No borders</li>
-                        </ul>
-                    </div>
-                    <Link to="/map"><button className="notching">Go to map</button></Link>
-                </div>
+                <MapSection />
             </div>
             <div id="teaser-single" className='centered-element'>
                 {trips && trips[0] && <SingleTripShortView trip={trips[0]} experiences={experiences} />}
