@@ -29,7 +29,7 @@ export default function Map() {
     }
 
     return (
-        <div className="fixed-site">
+        <div className="fixed-site showUp">
                 <button className="ribbon ribbon-small" onClick={toggleFilterVisibility}>Show Filter</button>
             <div id="mapFilterSection" className={`${displayState} modal showUp`}><MapFilters displaySeasons={displaySeasons} setDisplaySeasons={setDisplaySeasons} displayDaytime={displayDaytime} setDisplayDaytime={setDisplayDaytime} toggleFilterVisibility={toggleFilterVisibility} /></div>
             <MapContainer center={[40.505, -0.09]} zoom={zoomLevel} minZoom={1} maxZoom={19} scrollWheelZoom={true} className="map">

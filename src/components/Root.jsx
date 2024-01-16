@@ -9,7 +9,6 @@ import LoadingBar from './LoadingBar'
 export default function Root() {
 
   const [user, setUser] = useState({})
-
   const { VITE_SERVER_URL } = import.meta.env;
   const [experiences, setExperiences] = useState()
   const [trips, setTrips] = useState()

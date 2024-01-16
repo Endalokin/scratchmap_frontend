@@ -15,7 +15,7 @@ export default function Header({ experiences, trips, rotate, setRotate }) {
         </label>
         <menu id="menu">
           <NavLink to="/map">Map</NavLink>
-          <NavLink>Travels</NavLink>
+          <NavLink to="/trips">Trips</NavLink>
           <NavLink to="/footprint">Footprint</NavLink>
           <RefreshPage experiences={experiences} trips={trips} rotate={rotate} setRotate={setRotate} />
           <ChangeTheme />
