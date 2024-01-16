@@ -13,7 +13,6 @@ export default function Trips() {
         let sortTerm = e.target.id.split("-")[1]
         let sorted
         if (lastSort.term != sortTerm || lastSort.direction != "asc") {
-            console.log("hello")
             sorted = [...trips]?.sort((a, b) => {
                 if (a[sortTerm] > b[sortTerm]) {
                     return 1
