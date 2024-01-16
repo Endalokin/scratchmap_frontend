@@ -14,7 +14,7 @@ export default function TripsRows({ trip, experience }) {
         <>
             <tr onClick={goToTrip} style={{cursor: "pointer"}}>
                 <td style={{ textAlign: "center" }}>
-                    <ImgGalleryItem singleTripExperience={experience} />
+                    <ImgGalleryItem singleTripExperience={experience} widthSize="200" />
                 </td>
                 <td>{trip.name}</td>
                 <td className="hide-xs">{trip.placeDeparture} ↔ {trip.placeArrival} {trip.vehicle == "flight-economy" ? `\u2708` : trip.vehicle == "car" ? '\u{1F697}' : '\u{1F686}'} {[...Array(trip.travellers)].map(() => '\u{026F9}')}</td>
