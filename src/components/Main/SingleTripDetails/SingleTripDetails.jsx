@@ -1,5 +1,5 @@
-import React from 'react'
-import { useParams, useOutletContext } from 'react-router-dom'
+import React, { useRef } from 'react'
+import { useParams, useOutletContext, Link } from 'react-router-dom'
 import ImgGallery from './ImgGallery';
 import { MapContainer, Polyline, TileLayer, Marker, Tooltip } from 'react-leaflet'
 import DisplayImages from '../Map/DisplayImages';
@@ -7,6 +7,8 @@ import TripInfo from './TripInfo';
 import PolaroidImageLarge from '../About/PolaroidImageLarge';
 
 export default function SingleTripDetails() {
+
+    const ref = useRef(null)
 
     const [experiences, , trips] = useOutletContext();
 
@@ -36,18 +38,27 @@ export default function SingleTripDetails() {
         }
     }
 
+    function scrollToMap (e) {
+        e.preventDefault();
+        console.log(ref)
+        ref?.current?.scrollIntoView({behavior: 'smooth'});
+    }
+
+
     return (
         <>
-            <div id="single-details">
+            <div id="single-details" className='centered-element'>
                 <div >
                     <TripInfo trip={singleTripDetails} />
+                    <button className="notching" onClick={scrollToMap}>Map</button>
                 </div>
                 {singleTripExperiences && singleTripExperiences[0] && <PolaroidImageLarge mainImage={mainImage} />}
                 <div className="img-gallery">
                     <ImgGallery singleTripExperiences={singleTripExperiences} />
                 </div>
             </div>
-            <div>{singleTripExperiences?.length > 0 && <MapContainer center={[mainImage.location.lat, mainImage.location.lon]} zoom={9} minZoom={1} maxZoom={19} className="map" scrollWheelZoom={false}>
+            <div ref={ref}></div>
+            <div>{singleTripExperiences?.length > 0 && <MapContainer center={[mainImage.location.lat, mainImage.location.lon]} zoom={9} minZoom={1} maxZoom={19} className="map" scrollWheelZoom={false} id="trip-map">
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                     url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
