@@ -13,7 +13,6 @@ export default function SingleTripDetails() {
     const [experiences, , trips] = useOutletContext();
 
     let { id, imgid } = useParams()
-    console.log(id, imgid)
     const singleTripDetails = trips?.find(t => t.id == id)
     const singleTripExperiences = experiences?.filter(e => {
         return e.trip.sys.id == singleTripDetails?.id
@@ -52,7 +51,6 @@ export default function SingleTripDetails() {
 
     function scrollToMap(e) {
         e.preventDefault();
-        console.log(ref)
         ref?.current?.scrollIntoView({ behavior: 'smooth' });
     }
 

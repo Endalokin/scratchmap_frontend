@@ -11,8 +11,6 @@ export default function DisplayImages({ experiences, displaySeasons, displayDayt
 
     let currentArray = filteredArray(experiences, displaySeasons, displayDaytime)
 
-    console.log(window.location.pathname.split("/")[3])
-
 return (
     <>
         {currentArray?.reverse().map((experience, index) => {

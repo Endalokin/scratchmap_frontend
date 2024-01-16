@@ -13,7 +13,6 @@ export default function TableRowPerTrip({ trip, setIsOpen, setActiveTrip }) {
 
     function goToTrip(e) {
         e.preventDefault()
-        console.log(e.target)
         if (e.target.type != "checkbox") {
             navigate(`/trip/${trip.id}`)
         }
