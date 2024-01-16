@@ -47,10 +47,10 @@ export default function SingleTripDetails() {
 
     return (
         <>
-            <div id="single-details" className='centered-element'>
+            <div id="single-details" className='centered-element showUp'>
                 <div >
                     <TripInfo trip={singleTripDetails} />
-                    <button className="notching" onClick={scrollToMap}>Map</button>
+                    <button className="notching" onClick={scrollToMap}>⮟ Map ⮟</button>
                 </div>
                 {singleTripExperiences && singleTripExperiences[0] && <PolaroidImageLarge mainImage={mainImage} />}
                 <div className="img-gallery">
