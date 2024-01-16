@@ -27,7 +27,7 @@ export default function Footprint() {
 
     return (
         <div className="fixed-site">
-            <div style={{ height: "89px", display: "flex", justifyContent: "space-between", alignItems: "end" }} >
+            <div className="pre-table-content" >
                 <div>
                     {trips?.map((trip) => <CompensationTree key={`tree-${trip.id}`} compensatedTrip={trip.footprint?.compensated} />)}
                 </div>

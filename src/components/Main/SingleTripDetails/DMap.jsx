@@ -76,15 +76,15 @@ export default function DMap() {
 
   return (
     <>
-      <div id="single-details">
+      <div id="single-details" className='showUp flex-column-xs'>
         <h2>3D-Map</h2>
         <button className='ribbon ribbon-small' onClick={() => navigate(-1)}>Back</button >
         <div>
           <button className={`${displayStartButton} notching`} onClick={toggleVisibility}>START</button>
-          <div id="cesiumContainer" className={displayMap ? "display-flex" : "display-none"} style={{ width: mainElementWidth, height: mainElementHeight }}>
+          <div id="cesiumContainer" className={displayMap ? "display-flex" : "display-none"} style={{ width: mainElementWidth }}>
           </div>
           <div className={displayMap ? "display-none" : "display-flex"} style={{ width: mainElementWidth, height: mainElementHeight, justifyContent: "center" }}>
-            <img src={`${mainImage?.imgUrl}?fm=webp&w=${mainElementWidth}&h=${mainElementHeight}`} alt=""  />
+            <img src={`${mainImage?.imgUrl}?fm=webp&w=${mainElementWidth}&h=${mainElementHeight}`} alt="" />
           </div>
         </div>
         <div className="polaroid polaroid-big" style={{ width: "150px" }}>

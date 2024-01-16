@@ -8,6 +8,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import SingleTripDetails from './components/Main/SingleTripDetails/SingleTripDetails'
 import DMap from './components/Main/SingleTripDetails/DMap'
 import Login from './components/Login'
+import Trips from './components/Trips/Trips'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route path="/trip/:id/:imgid/3d" element={<DMap />} />
       <Route path="/3d/:imgid" element={<DMap />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/trips" element={<Trips />} />
     </Route>
   )
 )
