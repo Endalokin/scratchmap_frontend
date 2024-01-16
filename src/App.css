@@ -391,6 +391,10 @@ menu > a {
   z-index: 1000 !important;
 }
 
+.polaroid-text {
+  padding: 0.5rem;
+}
+
 .polaroid-big {
   filter: grayscale(0%);
   padding: 0.5rem;
