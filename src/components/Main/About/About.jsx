@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link, useOutletContext } from 'react-router-dom'
-import CompensationTree from '../Footprint/CompensationTree'
 import SingleTripShortView from './SingleTripShortView'
 import AllTripsTagView from './AllTripsTagView'
 import TitleSection from './TitleSection'
+import FootprintSection from './FootprintSection'
+import SceneSection from './SceneSection'
 
 export default function About() {
 
@@ -27,14 +28,14 @@ export default function About() {
                     <Link to="/map"><button className="notching">Go to map</button></Link>
                 </div>
             </div>
-            <div id="teaser-footprint">
-                <h2>Got to know your footprint</h2>
-                <p>Some further explanation about it</p>
-                <Link to="/footprint"><button className="notching">Go to footprint overview</button></Link>
-                <div>{trips?.map((trip) => <CompensationTree key={`about-tree-${trip.id}`} compensatedTrip={trip?.footprint?.compensated} />)}</div>
-            </div>
             <div id="teaser-single" className='centered-element'>
                 {trips && trips[0] && <SingleTripShortView trip={trips[0]} experiences={experiences} />}
+            </div>
+            <div id="teaser-3d">
+                <SceneSection trips={trips} />
+            </div>
+            <div id="teaser-footprint">
+                <FootprintSection trips={trips} />
             </div>
             <div id="teaser-all">
                 <AllTripsTagView trips={trips} />

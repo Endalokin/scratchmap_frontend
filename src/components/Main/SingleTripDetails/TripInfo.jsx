@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function TripInfo({trip}) {
+export default function TripInfo({ trip }) {
     return (
         <>
             <h2>{trip?.name}</h2>
