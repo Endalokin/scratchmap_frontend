@@ -23,7 +23,7 @@ export default function FootprintTable({trips, setTrips, setActiveTrip, setIsOpe
     }
 
     return (
-        <div className="full-width vertical-scroll-80">
+        <div className="full-width vertical-scroll-80" style={{maxHeight: "calc(100vh - 197px)"}}>
             <table>
                 <thead>
                     <tr>
