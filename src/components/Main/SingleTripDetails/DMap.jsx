@@ -64,7 +64,8 @@ export default function DMap() {
 
   function toggleVisibility() {
     setDisplayStartButton(prev => prev == "display-none" ? "display-flex" : "display-none")
-    create3d(mainImage.location.lon, mainImage.location.lat)
+    console.log(mainImage)
+    create3d(mainImage?.location.lon, mainImage?.location.lat)
   }
 
   function toggleMapImage(e) {
@@ -81,7 +82,7 @@ export default function DMap() {
         <button className='ribbon ribbon-small' onClick={() => navigate(-1)}>Back</button >
         <div>
           <button className={`${displayStartButton} notching`} onClick={toggleVisibility}>START</button>
-          <div id="cesiumContainer" className={displayMap ? "display-flex" : "display-none"} style={{ width: mainElementWidth }}>
+          <div id="cesiumContainer" className={displayMap ? "display-flex" : "display-none"} style={{ width: mainElementWidth, height: mainElementHeight }}>
           </div>
           <div className={displayMap ? "display-none" : "display-flex"} style={{ width: mainElementWidth, height: mainElementHeight, justifyContent: "center" }}>
             <img src={`${mainImage?.imgUrl}?fm=webp&w=${mainElementWidth}&h=${mainElementHeight}`} alt="" />

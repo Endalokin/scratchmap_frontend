@@ -1,36 +1,57 @@
 import React from 'react'
 import TableRowPerTrip from './TableRowPerTrip'
+import { useState } from 'react';
 
-export default function FootprintTable({trips, setTrips, setActiveTrip, setIsOpen}) {
+export default function FootprintTable({ trips, setTrips, setActiveTrip, setIsOpen }) {
+
+    const [lastSort, setLastSort] = useState({ term: "", direction: "" })
 
     function sortBy(e) {
         e.preventDefault();
-        let sortTerm = e.target.textContent.toLowerCase().split(" ")[0]
-        console.log(sortTerm)
-        let sorted = [...trips]?.sort((a, b) => {
-            if (a.footprint && a.footprint[sortTerm] > b.footprint[sortTerm]) {
-                return -1
-            } else if (a.footprint && a.footprint[sortTerm] < b.footprint[sortTerm]) {
-                return 1
-            } else if (a[sortTerm] > b[sortTerm]) {
-                return 1
-            } else if (a[sortTerm] < b[sortTerm]) {
-                return -1
-            }
-            return 0
-        })
+        let sortTerm = e.target.id.split("-")[2]
+        let sorted
+        if (lastSort.term != sortTerm || lastSort.direction != "asc") {
+            console.log("hello")
+            sorted = [...trips]?.sort((a, b) => {
+                if (a.footprint && a.footprint[sortTerm] > b.footprint[sortTerm]) {
+                    return -1
+                } else if (a.footprint && a.footprint[sortTerm] < b.footprint[sortTerm]) {
+                    return 1
+                } else if (a[sortTerm] > b[sortTerm]) {
+                    return 1
+                } else if (a[sortTerm] < b[sortTerm]) {
+                    return -1
+                }
+                return 0
+            })
+            setLastSort({ term: sortTerm, direction: "asc" })
+        } else {
+            sorted = [...trips]?.sort((a, b) => {
+                if (a.footprint && a.footprint[sortTerm] < b.footprint[sortTerm]) {
+                    return -1
+                } else if (a.footprint && a.footprint[sortTerm] > b.footprint[sortTerm]) {
+                    return 1
+                } else if (a[sortTerm] < b[sortTerm]) {
+                    return 1
+                } else if (a[sortTerm] > b[sortTerm]) {
+                    return -1
+                }
+                return 0
+            })
+            setLastSort({ term: sortTerm, direction: "desc" })
+        }
         setTrips(sorted)
     }
 
     return (
-        <div className="full-width vertical-scroll-80" style={{maxHeight: "calc(100vh - 197px)"}}>
+        <div className="full-width vertical-scroll-80" style={{ maxHeight: "calc(100vh - 197px)" }}>
             <table>
                 <thead>
                     <tr>
-                        <th onClick={sortBy}>Name of the Trip {'\u21F5'}</th>
+                        <th onClick={sortBy} id="th-footprint-name">Name of the Trip {'\u21F5'}</th>
                         <th className="hide-xs">Directions</th>
-                        <th onClick={sortBy}>Distance * {'\u21F5'}</th>
-                        <th onClick={sortBy}>Emission * {'\u21F5'}</th>
+                        <th onClick={sortBy} id="th-footprint-distance">Distance * {'\u21F5'}</th>
+                        <th onClick={sortBy} id="th-footprint-emission">Emission * {'\u21F5'}</th>
                         <th>Amount **</th>
                         <th>Compensated</th>
                     </tr>

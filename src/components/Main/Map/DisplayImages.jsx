@@ -13,14 +13,13 @@ export default function DisplayImages({ experiences, displaySeasons, displayDayt
 
 return (
     <>
-        {currentArray?.reverse().map((e, index) => {
-            const htmlValue = pathname != "/map" ? `<p style="text-align: center">Stop ${index + 1}</p>` : `<p></p>`
-
-            return <Marker key={e.id} position={[e.location.lat, e.location.lon]} icon={new L.DivIcon({ html: `<img src="${e?.imgUrl}?fm=webp&w=100"/>${htmlValue}`, className: "polaroid", iconSize: [100,] })} eventHandlers={{click: () => navigate(`/trip/${e?.trip.sys.id}/${e?.id}`)}} >
+        {currentArray?.reverse().map((experience, index) => {
+            const htmlValue = pathname != "/map" ? `<p style="text-align: center">Stop ${index + 1}</p>` : ``
+            return <Marker key={experience.id} position={[experience.location.lat, experience.location.lon]} icon={new L.DivIcon({ html: `<img src="${experience?.imgUrl}?fm=webp&w=100"/>${htmlValue}`, className: `polaroid polaroid-text ${window.location.pathname.split("/")[3] == experience?.id ? "activeTab" : ""}`, iconSize: [100,] })} eventHandlers={{click: () => navigate(`/trip/${experience?.trip.sys.id}/${experience?.id}`)}} >
                 {<Tooltip sticky direction="bottom">
-                    <p><span style={{ color: e.imgAccentColour, fontWeight: "bold" }}>{e?.name}</span> <br />
-                        {new Date(e?.date).toLocaleDateString()},
-                        {new Date(e?.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} Uhr
+                    <p><span style={{ color: experience.imgAccentColour, fontWeight: "bold" }}>{experience?.name}</span> <br />
+                        {new Date(experience?.date).toLocaleDateString()},
+                        {new Date(experience?.date).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} Uhr
                     </p>
                 </Tooltip>}
             </Marker>
