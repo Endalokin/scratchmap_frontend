@@ -8,12 +8,20 @@ export default function TableRowPerTrip({ trip, setIsOpen, setActiveTrip }) {
     function compensateCheck(e) {
         e.preventDefault();
         setActiveTrip(trip)
-        setIsOpen(prev => !prev)  
+        setIsOpen(prev => !prev)
+    }
+
+    function goToTrip(e) {
+        e.preventDefault()
+        console.log(e.target)
+        if (e.target.type != "checkbox") {
+            navigate(`/trip/${trip.id}`)
+        }
     }
 
     return (
         <>
-            <tr onClick={() => navigate(`/trip/${trip.id}`)} style={{cursor: "pointer"}}>
+            <tr onClick={goToTrip} style={{ cursor: "pointer" }}>
                 <td>{trip.name}</td>
                 <td className="hide-xs">{trip.placeDeparture} ↔ {trip.placeArrival} {trip.vehicle == "flight-economy" ? `\u2708` : trip.vehicle == "car" ? '\u{1F697}' : '\u{1F686}'} {[...Array(trip.travellers)].map(() => '\u{026F9}')}</td>
                 <td style={{ textAlign: "right" }}>{trip.footprint?.distance?.toFixed(0)} km</td>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useOutletContext } from 'react-router';
 import TripsRows from './TripsRows';
-import ImgGallery from '../Main/SingleTripDetails/ImgGallery';
 
 export default function Trips() {
 
@@ -37,8 +36,9 @@ export default function Trips() {
     }
 
     return (
-        <>
-            <div className="pre-table-content" >
+        <div className="fixed-site">
+            <div className="pre-table-content" style={{display:"flex", justifyContent: "center"}} >
+                <h2>All Trips</h2>
             </div>
             <div className="full-width vertical-scroll-80" style={{ maxHeight: "calc(100vh - 197px)" }}>
                 <table>
@@ -55,6 +55,6 @@ export default function Trips() {
                     </tbody>
                 </table>
             </div>
-        </>
+        </div>
     )
 }

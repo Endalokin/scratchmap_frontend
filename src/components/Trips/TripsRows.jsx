@@ -5,9 +5,14 @@ import ImgGalleryItem from '../Main/SingleTripDetails/ImgGalleryItem'
 export default function TripsRows({ trip, experience }) {
     const navigate = useNavigate()
 
+    function goToTrip (e) {
+        e.preventDefault()
+        navigate(`/trip/${trip.id}`)
+    }
+
     return (
         <>
-            <tr onClick={() => navigate(`/trip/${trip.id}`)} style={{cursor: "pointer"}}>
+            <tr onClick={goToTrip} style={{cursor: "pointer"}}>
                 <td style={{ textAlign: "center" }}>
                     <ImgGalleryItem singleTripExperience={experience} />
                 </td>

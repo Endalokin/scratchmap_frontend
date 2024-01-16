@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function PolaroidImageLarge({mainImage}) {
+
     return (
         <div id="animated-img" className="polaroid polaroid-big" style={{ position: "relative" }}>
             <img src={`${mainImage.imgUrl}?fm=webp&w=600`} alt={`${mainImage.name}`} />

@@ -89,7 +89,7 @@ a {
 }
 
 a:hover:not(:has(button)) {
-  background-color: var(--highlight-one);
+  background-color: var(--primary-color);
   border: none;
   color: var(--btn);
   font-size: inherit;
@@ -297,25 +297,41 @@ menu > a {
   }
 }
 
+.in-app-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
 .vertical-scroll-80 {
   overflow: auto;
   max-height: calc(70vh - 2rem);
 }
 
-.vertical-scroll-80::-webkit-scrollbar {
+.vertical-scroll-80::-webkit-scrollbar,
+.in-app-scroll::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
-.vertical-scroll-80::-webkit-scrollbar-track {
+.vertical-scroll-80::-webkit-scrollbar-track,
+.in-app-scroll::-webkit-scrollbar-track {
   border-radius: 8px;
   background-color: #e7e7e7;
   border: 1px solid #cacaca;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  position: relative;
+  top:0;
 }
 
-.vertical-scroll-80::-webkit-scrollbar-thumb {
+.vertical-scroll-80::-webkit-scrollbar-thumb,
+.in-app-scroll::-webkit-scrollbar-thumb {
   border-radius: 8px;
   background-color: var(--highlight-one);
+}
+
+.activeTab {
+  background-color: var(--highlight-one);
+  color: var(--btn);
 }
 
 /* About Page */
@@ -351,21 +367,28 @@ menu > a {
 }
 
 .polaroid {
-  background: #fff;
-  padding: 0.5rem !important;
+  background-color: #fff;
+  padding: 0.5rem 0.5rem 2rem 0.5rem;
   box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
   filter: grayscale(100%);
-  max-height: calc(70vh - 3rem);
-  max-width: 80vw;
+  max-height: 80vh;
+  width: auto;
+}
+
+.polaroid.activeTab {
+  background-color: var(--highlight-one) !important;
+  color: var(--btn) !important;
+  filter: grayscale(0%);
 }
 
 .polaroid > img {
-  max-height: 50vh;
-  max-width: 80vw;
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .polaroid:hover {
   filter: grayscale(0%);
+  z-index: 1000 !important;
 }
 
 .polaroid-big {
@@ -373,10 +396,14 @@ menu > a {
   padding: 0.5rem;
 }
 
+.polaroid-big > img {
+  max-height: calc(70vh - 8rem - 34px);
+}
+
 .polaroid-1,
 .polaroid-2,
 .polaroid-3 {
-  max-height: 30vh;
+  max-height: 20vh;
   max-width: 10vw;
   margin: auto;
 }
@@ -384,9 +411,6 @@ menu > a {
 .polaroid-1 > img,
 .polaroid-2 > img,
 .polaroid-3 > img {
-  max-width: 70%;
-  max-height: 70%;
-  height: auto;
   transition: 0.7s;
 }
 
@@ -675,6 +699,7 @@ menu > a {
   display: flex;
   justify-content: space-between;
   align-items: end;
+  margin-top: 20px;
 }
 
 th {
@@ -739,18 +764,24 @@ tbody > tr:nth-child(even) {
   align-items: start;
 }
 
+#trip-map {
+  position: none;
+  margin-top: 100px;
+  bottom:50px;
+  height:calc(100vh - 150px)
+}
+
 @media only screen and (max-width: 1600px) {
   .fixed-site {
     margin: 0px 0.5vw;
   }
   body {
-  font-size: 18px;
+    font-size: 18px;
   }
   .notching {
     padding: 4px 45px;
   }
 }
-
 
 @media only screen and (max-width: 880px) {
   .hide-xs {
@@ -768,11 +799,6 @@ tbody > tr:nth-child(even) {
     min-width: calc(100vw - 65px);
   }
 
-  .polaroid-1,
-  .polaroid-2,
-  .polaroid-3 {
-    max-width: 20vw;
-  }
   .img-gallery {
     rotate: 270deg;
   }
@@ -933,5 +959,5 @@ tbody > tr:nth-child(even) {
   );
   background: grey;
   width: fit-content;
-  color: var(--btn)
+  color: var(--btn);
 }

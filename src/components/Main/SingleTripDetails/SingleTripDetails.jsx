@@ -13,7 +13,7 @@ export default function SingleTripDetails() {
     const [experiences, , trips] = useOutletContext();
 
     let { id, imgid } = useParams()
-
+    console.log(id, imgid)
     const singleTripDetails = trips?.find(t => t.id == id)
     const singleTripExperiences = experiences?.filter(e => {
         return e.trip.sys.id == singleTripDetails?.id
@@ -22,6 +22,7 @@ export default function SingleTripDetails() {
     const lineOptions = { color: getComputedStyle(document.body).color }
 
     let mainImage
+    let bounds = {}
     if (singleTripExperiences) {
         singleTripExperiences.sort((a, b) => {
             if (a.date > b.date) {
@@ -36,14 +37,24 @@ export default function SingleTripDetails() {
         } else {
             mainImage = singleTripExperiences[0]
         }
+        if (singleTripExperiences.length > 1) {
+            bounds.maxLat = Math.max(...singleTripExperiences?.map(o => o.location.lat)) + 0.05
+            bounds.minLat = Math.min(...singleTripExperiences?.map(o => o.location.lat)) - 0.2
+            bounds.maxLon = Math.max(...singleTripExperiences?.map(o => o.location.lon)) + 0.1
+            bounds.minLon = Math.min(...singleTripExperiences?.map(o => o.location.lon)) - 0.1
+        } else {
+            bounds.maxLat = Math.max(...singleTripExperiences?.map(o => o.location.lat)) + 1
+            bounds.minLat = Math.min(...singleTripExperiences?.map(o => o.location.lat)) - 1
+            bounds.maxLon = Math.max(...singleTripExperiences?.map(o => o.location.lon)) + 1
+            bounds.minLon = Math.min(...singleTripExperiences?.map(o => o.location.lon)) - 1
+        }
     }
 
-    function scrollToMap (e) {
+    function scrollToMap(e) {
         e.preventDefault();
         console.log(ref)
-        ref?.current?.scrollIntoView({behavior: 'smooth'});
+        ref?.current?.scrollIntoView({ behavior: 'smooth' });
     }
-
 
     return (
         <>
@@ -58,7 +69,7 @@ export default function SingleTripDetails() {
                 </div>
             </div>
             <div ref={ref}></div>
-            <div>{singleTripExperiences?.length > 0 && <MapContainer center={[mainImage.location.lat, mainImage.location.lon]} zoom={9} minZoom={1} maxZoom={19} className="map" scrollWheelZoom={false} id="trip-map">
+            <div>{singleTripExperiences?.length > 0 && <MapContainer bounds={[[bounds?.minLat, bounds?.minLon], [bounds?.maxLat, bounds?.maxLon]]} maxBounds={[[(mainImage?.location.lat - 5), (mainImage?.location.lon - 5)], [(mainImage?.location.lat + 5), (mainImage?.location.lon + 5)]]} minZoom={1} maxZoom={19} className="map" scrollWheelZoom={false} id="trip-map">
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                     url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
@@ -72,7 +83,7 @@ export default function SingleTripDetails() {
                         Departure: {new Date(singleTripDetails?.periodUntil).toLocaleDateString()}
                     </Tooltip>
                 </Marker>
-                <Marker position={[singleTripDetails?.placeDepartureCoords.lat, singleTripDetails?.placeDepartureCoords.lon]} eventHandlers={{ click: () => console.log("I wish I'd forward you") }} >
+                <Marker position={[singleTripDetails?.placeDepartureCoords.lat, singleTripDetails?.placeDepartureCoords.lon]} >
                     <Tooltip sticky>
                         {singleTripDetails?.placeDeparture} <br />
                         Departure: {new Date(singleTripDetails?.periodFrom).toLocaleDateString()} <br />
