@@ -751,7 +751,7 @@ tbody > tr:nth-child(even) {
 
 /* Trip Detail Page */
 
-#single-details {
+.single-details {
   margin: 25px 50px;
   border: 2px dashed var(--highlight-one);
   display: flex;

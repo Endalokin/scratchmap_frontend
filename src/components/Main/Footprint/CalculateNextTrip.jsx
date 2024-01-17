@@ -60,41 +60,43 @@ export default function CalculateNextTrip() {
                 <p>Type in the properties of your future trip to know the emissions it cause.</p>
             </div>
 
-            <form action="" className="centered-element" onSubmit={handleSubmit}>
-                <p style={{ color: "red" }}>{warning}</p>
-                <div className='input-fields'>
-                    <div>
-                        <label htmlFor="input-from">From</label>
-                        <input type="text" id="input-from" placeholder='Berlin' value={valueFrom} onChange={handleChange} />
+            <div className='single-details centered-element' style={{ display: "block" }}>
+                <form action="" onSubmit={handleSubmit}>
+                    <p style={{ color: "red" }}>{warning}</p>
+                    <div className='input-fields'>
+                        <div>
+                            <label htmlFor="input-from">From</label>
+                            <input type="text" id="input-from" placeholder='Berlin' value={valueFrom} onChange={handleChange} />
+                        </div>
+                        <div>
+                            <label htmlFor="">To</label>
+                            <input type="text" id="input-to" placeholder='Paris' value={valueTo} onChange={handleChange} />
+                        </div>
+                        <div>
+                            <label htmlFor="vehicle">Per</label>
+                            <select name="vehicle" id="vehicle" value={valuePer} onChange={handleChange} >
+                                <option disabled selected value> -- select an option -- </option>
+                                <option value="car">car</option>
+                                <option value="e-car">e-car</option>
+                                <option value="bus">bus</option>
+                                <option value="e-bus">e-bus</option>
+                                <option value="train">train</option>
+                                <option value="flight-economy">flight-economy</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label htmlFor="input-travellers">Travellers</label>
+                            <input type="number" min={1} id="input-travellers" value={valueTravellers} onChange={handleChange} />
+                        </div>
+                        <div>
+                            <label htmlFor="input-roundtrip">Round Trip</label>
+                            <input type="checkbox" id="input-roundtrip" value={valueRoundtrip} onChange={handleChange} />
+                        </div>
                     </div>
-                    <div>
-                        <label htmlFor="">To</label>
-                        <input type="text" id="input-to" placeholder='Paris' value={valueTo} onChange={handleChange} />
-                    </div>
-                    <div>
-                        <label htmlFor="vehicle">Per</label>
-                        <select name="vehicle" id="vehicle" value={valuePer} onChange={handleChange} >
-                            <option disabled selected value> -- select an option -- </option>
-                            <option value="car">car</option>
-                            <option value="e-car">e-car</option>
-                            <option value="bus">bus</option>
-                            <option value="e-bus">e-bus</option>
-                            <option value="train">train</option>
-                            <option value="flight-economy">flight-economy</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label htmlFor="input-travellers">Travellers</label>
-                        <input type="number" min={1} id="input-travellers" value={valueTravellers} onChange={handleChange} />
-                    </div>
-                    <div>
-                        <label htmlFor="input-roundtrip">Round Trip</label>
-                        <input type="checkbox" id="input-roundtrip" value={valueRoundtrip} onChange={handleChange} />
-                    </div>
-                </div>
-                <button type="submit" className="notching">Calculate Emissions</button>
-            </form>
-            <p className="centered-element">{nextTrip}</p>
+                    <button type="submit" className="notching">Calculate Emissions</button>
+                </form>
+                {nextTrip && <p>{nextTrip}</p>}
+            </div>
             <p className="fine-print">*Calculation by CarbonTracer (<a href="https://carbontracer.uni-graz.at/">https://carbontracer.uni-graz.at/</a>)</p>
             <p className="fine-print">**Amount equates CO2-price from 2022 of 30€ per tonne according to German Bundesfinanzministerium (<a href="https://www.bundesfinanzministerium.de/Content/DE/FAQ/klimaschutz.html">https://www.bundesfinanzministerium.de/Content/DE/FAQ/klimaschutz.html</a>)</p>
         </div>

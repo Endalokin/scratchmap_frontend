@@ -25,10 +25,10 @@ export default function About() {
             <div id="teaser-3d">
                 <SceneSection trips={trips} />
             </div>
-            <div id="teaser-footprint">
+            <div id="teaser-footprint" className='centered-element'>
                 <FootprintSection trips={trips} />
             </div>
-            <div id="teaser-all">
+            <div id="teaser-all" className='centered-element'>
                 <AllTripsTagView trips={trips} />
             </div>
         </div>

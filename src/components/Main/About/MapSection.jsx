@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function MapSection() {
     return (<>
-        <div><img src="./assets/scratchmap.png" alt="" /></div>
+        <div><img src="./assets/scratchmap.png" alt="view of the scratch map"  style={{maxWidth: "100%"}} /></div>
         <div className='centered-element'>
             <h2>Your trips on the digital scratch map</h2>
             <div>
