@@ -352,7 +352,7 @@ menu > a {
 }
 
 #title {
-  background-image: url("./pexels-andrea-piacquadio-3769138.jpg");
+  background-image: url("./title-andrea-piacquadio-3840px.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -785,6 +785,10 @@ tbody > tr:nth-child(even) {
   .notching {
     padding: 4px 45px;
   }
+
+  #title {
+    background-image: url("./title-andrea-piacquadio-1600px.jpg");
+  }
 }
 
 @media only screen and (max-width: 880px) {
@@ -852,6 +856,11 @@ tbody > tr:nth-child(even) {
   menu > a:not(:last-child) {
     border-bottom: 1px solid var(--primary-bg-color);
   }
+
+  #title {
+    background-image: url("./title-andrea-piacquadio-880px.jpg");
+  }
+
   .flex-column-xs {
     align-content: center;
     flex-direction: column;

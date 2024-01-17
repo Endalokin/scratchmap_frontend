@@ -37,7 +37,6 @@ export default function Root() {
 
     fetchData(EXPERIENCES_URL, (data) => {
       setExperiences(data)
-      console.log(data)
     }, "GET", null, controller)
     fetchData(TRIPS_URL, (data) => {
       setTrips(data)

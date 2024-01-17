@@ -67,7 +67,7 @@ export default function SingleTripDetails() {
                 </div>
             </div>
             <div ref={ref}></div>
-            <div>{singleTripExperiences?.length > 0 && <MapContainer bounds={[[bounds?.minLat, bounds?.minLon], [bounds?.maxLat, bounds?.maxLon]]} maxBounds={[[(mainImage?.location.lat - 5), (mainImage?.location.lon - 5)], [(mainImage?.location.lat + 5), (mainImage?.location.lon + 5)]]} minZoom={1} maxZoom={19} className="map" scrollWheelZoom={false} id="trip-map">
+            <div>{singleTripExperiences?.length > 0 && <MapContainer bounds={[[bounds?.minLat, bounds?.minLon], [bounds?.maxLat, bounds?.maxLon]]} minZoom={2} maxZoom={19} className="map" scrollWheelZoom={false} id="trip-map">
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                     url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
