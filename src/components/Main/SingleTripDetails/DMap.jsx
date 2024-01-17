@@ -77,7 +77,7 @@ export default function DMap() {
 
   return (
     <>
-      <div id="single-details" className='showUp flex-column-xs'>
+      <div className='showUp flex-column-xs single-details'>
         <h2>3D-Map</h2>
         <button className='ribbon ribbon-small' onClick={() => navigate(-1)}>Back</button >
         <div>
