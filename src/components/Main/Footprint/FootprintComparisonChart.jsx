@@ -64,18 +64,6 @@ export default function FootprintComparisonChart({ trips }) {
         labels,
         datasets: [
             {
-                label: 'German Average Total Mobility*',
-                data: labels.map((l) => { return 0.24 + 1.41 + 0.53 }),
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            },
-            {
-                label: 'German Average Travels by Plane*',
-                data: labels.map((l) => { return 0.53 }),
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            },
-            {
                 label: 'Own Emissions due to Travels only',
                 data: labels.map((l) => {
                     let tripsThatYear = []
@@ -86,8 +74,20 @@ export default function FootprintComparisonChart({ trips }) {
                     })) : tripsThatYear.length == 1 ? tripsThatYearEmission = tripsThatYear[0].footprint.emission  : tripsThatYearEmission = 0
                     return tripsThatYearEmission / 1000
                 }),
-                borderColor: 'rgb(53, 162, 235)',
-                backgroundColor: 'rgba(53, 162, 235, 0.5)',
+                borderColor: 'rgb(129, 158, 179)',
+                backgroundColor: 'rgba(129, 158, 179, 0.5)',
+            },
+            {
+                label: 'German Average Total Mobility*',
+                data: labels.map((l) => { return 0.24 + 1.41 + 0.53 }),
+                borderColor: 'rgb(194, 65, 95)',
+                backgroundColor: 'rgba(194, 65, 95, 0.5)',
+            },
+            {
+                label: 'German Average Travels by Plane*',
+                data: labels.map((l) => { return 0.53 }),
+                borderColor: 'rgb(250, 136, 163)',
+                backgroundColor: 'rgba(250, 136, 163, 0.5)',
             },
         ],
     };
