@@ -78,16 +78,16 @@ export default function FootprintComparisonChart({ trips }) {
                 backgroundColor: 'rgba(129, 158, 179, 0.5)',
             },
             {
-                label: 'German Average Total Mobility*',
-                data: labels.map((l) => { return 0.24 + 1.41 + 0.53 }),
-                borderColor: 'rgb(194, 65, 95)',
-                backgroundColor: 'rgba(194, 65, 95, 0.5)',
-            },
-            {
                 label: 'German Average Travels by Plane*',
                 data: labels.map((l) => { return 0.53 }),
                 borderColor: 'rgb(250, 136, 163)',
                 backgroundColor: 'rgba(250, 136, 163, 0.5)',
+            },
+            {
+                label: 'German Average Total Mobility*',
+                data: labels.map((l) => { return 0.24 + 1.41 + 0.53 }),
+                borderColor: 'rgb(194, 65, 95)',
+                backgroundColor: 'rgba(194, 65, 95, 0.5)',
             },
         ],
     };

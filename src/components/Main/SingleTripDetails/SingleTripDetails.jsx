@@ -56,7 +56,7 @@ export default function SingleTripDetails() {
 
     return (
         <>
-            <div id="single-details" className='centered-element showUp'>
+            <div id="single-details" className='single-details centered-element showUp'>
                 <div >
                     <TripInfo trip={singleTripDetails} />
                     <button className="notching" onClick={scrollToMap}>⮟ Map ⮟</button>
