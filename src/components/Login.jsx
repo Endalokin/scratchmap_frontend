@@ -21,6 +21,7 @@ export default function LoginModal() {
     }
 
     function login(e) {
+        console.log("I am entered")
         e.preventDefault()
         let body = { username: inputUser, password: pwd }
         const CHECK_URL = `${VITE_SERVER_URL}/login`
@@ -61,8 +62,8 @@ export default function LoginModal() {
                         </div>
                     </div>
                     <div>
-                        <button className="ribbon ribbon-secondary" onClick={cancleLogin}>Cancel</button>
-                        <button className="notching" onClick={login}>Login</button>
+                        <button type="button" className="ribbon ribbon-secondary" onClick={cancleLogin}>Cancel</button>
+                        <button type="submit" className="notching">Login</button>
                     </div>
                 </form>
             </div>
