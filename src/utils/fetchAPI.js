@@ -1,6 +1,5 @@
 export default async function fetchData(url, dataCallback, method = 'GET', body, abortSignal) {
   const timeStamp = Date.now();
-  console.log(url)
   try {
     let requestOptions = {
       method: method,
