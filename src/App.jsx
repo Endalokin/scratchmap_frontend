@@ -23,6 +23,7 @@ const router = createBrowserRouter(
       <Route path="/3d/:imgid" element={<DMap />} />
       <Route path="/login" element={<Login />} />
       <Route path="/trips" element={<Trips />} />
+      <Route path="/*" element={<About />} />
     </Route>
   )
 )
