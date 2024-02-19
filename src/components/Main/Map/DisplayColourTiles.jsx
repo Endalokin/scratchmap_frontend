@@ -7,7 +7,7 @@ export default function DisplayColourTiles({ experiences, displaySeasons, displa
 
     function uniquePlaces(data) {
         return [...new Map(data.map(x => {
-            return [`${Math.ceil(x.location.lon)}, ${Math.ceil(x.location.lat)}`, x]
+            return [`${Math.ceil(x.exif.lon || x.location.lon)}, ${Math.ceil(x.exif.lat || x.location.lat)}`, x]
         })).values()
         ]
     }

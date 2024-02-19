@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import fetchData from '../../utils/fetchAPI'
 
-export default function RefreshPage({ experiences, trips}) {
+export default function RefreshPage({ experiences, trips }) {
     const [rotate, setRotate] = useState()
 
     const { VITE_SERVER_URL } = import.meta.env;
@@ -10,16 +10,16 @@ export default function RefreshPage({ experiences, trips}) {
     async function handleClick(e) {
         e.preventDefault();
         setRotate("rotating")
-        console.log("hello")
         if (!window.location.pathname.includes("/footprint")) {
-            for (let experience of experiences) {
-                if (!experience.imgColour) {
-                    const URL = `${VITE_SERVER_URL}/experiences/images/colour?id=${experience.image.sys.id}&url=${experience.imgUrl}`;
-                    await fetchData(URL, (data) => {
-                        console.log(`${experience.id} was updated`)
-                    }, 'POST')
-                }
-            }
+            let experiencesNeedUpdate = experiences.filter(experience => !experience.imgColour || !experience.imgExifDateTime).map(experience => ({
+                id: experience.image.sys.id,
+                url: experience.imgUrl
+            }))
+            console.log(experiencesNeedUpdate)
+            const URL = `${VITE_SERVER_URL}/experiences/images/colour`
+            await fetchData(URL, data => {
+                console.log(`Experiences were updated`)
+            }, 'POST', {experiencesNeedUpdate})
         } else {
             console.log("this is a footprint")
             for (let trip of trips) {
