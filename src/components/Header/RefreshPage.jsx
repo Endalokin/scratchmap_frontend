@@ -13,10 +13,12 @@ export default function RefreshPage({ experiences, trips }) {
         if (!window.location.pathname.includes("/footprint")) {
             let experiencesNeedUpdate = experiences.filter(experience => !experience.imgColour || !experience.imgExifDateTime).map(experience => ({
                 id: experience.image.sys.id,
-                url: experience.imgUrl
+                url: experience.imgUrl,
+                updateColour: experience.imgColour ? false : true,
+                updateExif: experience.exif ? false : true
             }))
             console.log(experiencesNeedUpdate)
-            const URL = `${VITE_SERVER_URL}/experiences/images/colour`
+            const URL = `${VITE_SERVER_URL}/experiences/images/update`
             await fetchData(URL, data => {
                 console.log(`Experiences were updated`)
             }, 'POST', {experiencesNeedUpdate})
