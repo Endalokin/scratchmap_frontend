@@ -4,7 +4,7 @@ import TripInfo from '../SingleTripDetails/TripInfo'
 import PolaroidImageLarge from './PolaroidImageLarge'
 
 export default function SingleTripShortView({ trip, experiences }) {
-    const mainImage = experiences?.find((e) => e.trip.sys.id == trip.id)
+    const mainImage = experiences?.find((e) => e.trip?.sys.id == trip.id)
     return (
         <>
             <div>

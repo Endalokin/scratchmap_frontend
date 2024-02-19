@@ -9,8 +9,8 @@ const { VITE_CESIUM_TOKEN } = import.meta.env;
 
 Ion.defaultAccessToken = VITE_CESIUM_TOKEN;
 
-async function create3d(lon, lat, altitude = 400) {
-
+async function create3d(lon, lat, altitude = 400, direction = 0) {
+  console.log(lon, lat, altitude, direction)
   const home_view = new Rectangle.fromDegrees(lon - 1, lat - 1, lon + 1, lat + 1)
   CesiumCamera.DEFAULT_VIEW_RECTANGLE = home_view
   CesiumCamera.DEFAULT_VIEW_FACTOR = 0
@@ -25,7 +25,12 @@ async function create3d(lon, lat, altitude = 400) {
   });
 
   viewer?.camera.flyTo({
-    destination: Cartesian3.fromDegrees(lon, lat, altitude)
+    destination: Cartesian3.fromDegrees(lon, lat, altitude),
+    orientation: {
+      heading: CesiumMath.toRadians(direction),
+      pitch: direction != 0 ? CesiumMath.toRadians(10.0) : CesiumMath.toRadians(-90.0),
+      roll: 0.0
+    }
   });
 
   const buildingTileset = await createOsmBuildingsAsync();
@@ -65,7 +70,12 @@ export default function DMap() {
   function toggleVisibility() {
     setDisplayStartButton(prev => prev == "display-none" ? "display-flex" : "display-none")
     console.log(mainImage)
-    create3d(mainImage?.location.lon, mainImage?.location.lat)
+    create3d(
+      mainImage.exif?.lon || mainImage?.location.lon,
+      mainImage.exif?.lat || mainImage?.location.lat,
+      mainImage?.exif?.altitude ? mainImage?.exif?.altitude + 50 : 400,
+      mainImage?.exif?.direction || 0
+    )
   }
 
   function toggleMapImage(e) {
