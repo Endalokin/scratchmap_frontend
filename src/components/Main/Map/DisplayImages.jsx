@@ -15,7 +15,7 @@ export default function DisplayImages({ experiences, displaySeasons, displayDayt
     return (
         <>
             {currentArray?.reverse().filter(experience => experience.exif || experience.location).map((experience, index) => {
-                let position = [experience.location?.lat || experience.exif?.lat, experience.location?.lon || experience.exif?.lon]
+                let position = experience.location ? [experience.location?.lat, experience.location?.lon] : [experience.exif.lat, experience.exif?.lon]
                 let htmlValue = pathname != "/map" ? `<p style="text-align: center">Stop ${index + 1}` : `<p style="text-align: center">`
                 htmlValue += !experience.location && experience.exif?.positioningError > 400 ? `<span style="color: red; font-weight: bold; text-shadow: 1px 0px 3px white, -1px 0px 3px white, 0px 1px 3px white, 0px -1px 3px white ;)"> ${"\uA71D"}</span></p>` : "</p>"
                 return <Marker key={experience.id} position={position} icon={new L.DivIcon({ html: `<img src="${experience?.imgUrl}?fm=webp&w=100"/>${htmlValue}`, className: `polaroid polaroid-text ${window.location.pathname.split("/")[3] == experience?.id ? "activeTab" : ""}`, iconSize: [100,] })} eventHandlers={{ click: () => navigate(`/trip/${experience?.trip.sys.id}/${experience?.id}`) }} >
