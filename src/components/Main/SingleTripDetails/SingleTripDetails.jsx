@@ -74,7 +74,7 @@ export default function SingleTripDetails() {
                         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                     />
                     <DisplayImages experiences={singleTripExperiences} />
-                    <Polyline pathOptions={lineOptions} positions={singleTripExperiences?.filter(ste => ste.exif || ste.location).map((ste) => [ste.exif.lat || ste.location?.lat, ste.exif.lon || ste.location?.lon])} />
+                    <Polyline pathOptions={lineOptions} positions={singleTripExperiences?.filter(ste => ste.exif || ste.location).map((ste) => [ste.location?.lat || ste.exif?.lat , ste.location?.lon || ste.exif?.lon])} />
                     <Marker position={[singleTripDetails?.placeArrivalCoords.lat, singleTripDetails?.placeArrivalCoords.lon]} >
                         <Tooltip sticky>
                             {singleTripDetails?.placeArrival} <br />

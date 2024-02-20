@@ -28,7 +28,7 @@ async function create3d(lon, lat, altitude = 400, direction = 0) {
     destination: Cartesian3.fromDegrees(lon, lat, altitude),
     orientation: {
       heading: CesiumMath.toRadians(direction),
-      pitch: direction != 0 ? CesiumMath.toRadians(10.0) : CesiumMath.toRadians(-90.0),
+      pitch: direction != 0 ? CesiumMath.toRadians(5.0) : CesiumMath.toRadians(-90.0),
       roll: 0.0
     }
   });
