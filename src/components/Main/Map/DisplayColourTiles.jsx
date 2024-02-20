@@ -24,8 +24,9 @@ export default function DisplayColourTiles({ experiences, displaySeasons, displa
 
     return (
         <>
-            {tileExperiences?.map(e => {
-                return <Rectangle key={e.id} bounds={[[Math.ceil(e.exif?.lat || e.location?.lat) - 0.005, Math.ceil(e.exif?.lon || e.location?.lon) - 0.005], [Math.floor(e.exif?.lat || e.location?.lat) + 0.005, Math.floor(e.exif?.lon || e.location?.lon) + 0.005]]} pathOptions={{ color: e.imgAccentColour ? e.imgAccentColour : e.imgColour, fillOpacity: 0.5 }} eventHandlers={{ click: () => navigate(`/trip/${e?.trip.sys.id}/${e?.id}`) }}>
+            {tileExperiences?.filter(e => e.location?.lat || e.exif?.lat).map(e => {
+                let locationField = e.location ? e.location : e.exif
+                return <Rectangle key={e.id} bounds={[[Math.ceil(locationField.lat) - 0.005, Math.ceil(locationField.lon) - 0.005], [Math.floor(locationField.lat) + 0.005, Math.floor(locationField.lon) + 0.005]]} pathOptions={{ color: e.imgAccentColour ? e.imgAccentColour : e.imgColour, fillOpacity: 0.5 }} eventHandlers={{ click: () => navigate(`/trip/${e?.trip.sys.id}/${e?.id}`) }}>
                     <Tooltip sticky direction="bottom">
                         <p><span style={{ color: e.imgAccentColour, fontWeight: "bold" }}>{e?.name}</span> <br />
                             {new Date(e?.exif?.dateTime || e?.date).toLocaleDateString()}</p>

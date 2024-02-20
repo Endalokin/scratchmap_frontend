@@ -36,16 +36,18 @@ export default function SingleTripDetails() {
         } else {
             mainImage = singleTripExperiences[0]
         }
-        if (singleTripExperiences.length > 1) {
-            bounds.maxLat = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.exif.lat || o.location?.lat)) + 0.05
-            bounds.minLat = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.exif.lat || o.location?.lat)) - 0.2
-            bounds.maxLon = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.exif.lon || o.location?.lon)) + 0.1
-            bounds.minLon = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.exif.lon || o.location?.lon)) - 0.1
+        if (singleTripExperiences?.length > 1) {
+            bounds.maxLat = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lat || o.exif?.lat)) + 0.05
+            bounds.minLat = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lat || o.exif?.lat)) - 0.2
+            bounds.maxLon = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) + 0.1
+            bounds.minLon = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) - 0.1
+            console.log("multiple", bounds)
         } else {
-            bounds.maxLat = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.exif.lat || o.location?.lat)) + 1
-            bounds.minLat = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.exif.lat || o.location?.lat)) - 1
-            bounds.maxLon = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.exif.lon || o.location?.lon)) + 1
-            bounds.minLon = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.exif.lon || o.location?.lon)) - 1
+            bounds.maxLat = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lat || o.exif?.lat)) + 1
+            bounds.minLat = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lat || o.exif?.lat)) - 1
+            bounds.maxLon = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) + 1
+            bounds.minLon = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) - 1
+            console.log("single", bounds)
         }
     }
 
@@ -74,7 +76,7 @@ export default function SingleTripDetails() {
                         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                     />
                     <DisplayImages experiences={singleTripExperiences} />
-                    <Polyline pathOptions={lineOptions} positions={singleTripExperiences?.filter(ste => ste.exif || ste.location).map((ste) => [ste.exif.lat || ste.location?.lat, ste.exif.lon || ste.location?.lon])} />
+                    <Polyline pathOptions={lineOptions} positions={singleTripExperiences?.filter(ste => ste.exif || ste.location).map((ste) => [ste.location?.lat || ste.exif?.lat, ste.location?.lon || ste.exif?.lon])} />
                     <Marker position={[singleTripDetails?.placeArrivalCoords.lat, singleTripDetails?.placeArrivalCoords.lon]} >
                         <Tooltip sticky>
                             {singleTripDetails?.placeArrival} <br />
