@@ -10,7 +10,6 @@ const { VITE_CESIUM_TOKEN } = import.meta.env;
 Ion.defaultAccessToken = VITE_CESIUM_TOKEN;
 
 async function create3d(lon, lat, altitude = 400, direction = 0) {
-  console.log(lon, lat, altitude, direction)
   const home_view = new Rectangle.fromDegrees(lon - 1, lat - 1, lon + 1, lat + 1)
   CesiumCamera.DEFAULT_VIEW_RECTANGLE = home_view
   CesiumCamera.DEFAULT_VIEW_FACTOR = 0
@@ -56,6 +55,7 @@ async function create3d(lon, lat, altitude = 400, direction = 0) {
 export default function DMap() {
 
   let navigate = useNavigate()
+  const [warning, setWarning] = useState()
 
   const [experiences] = useOutletContext();
   let { imgid } = useParams()
@@ -69,13 +69,17 @@ export default function DMap() {
 
   function toggleVisibility() {
     setDisplayStartButton(prev => prev == "display-none" ? "display-flex" : "display-none")
-    console.log(mainImage)
-    create3d(
-      mainImage.exif?.lon || mainImage?.location.lon,
-      mainImage.exif?.lat || mainImage?.location.lat,
-      mainImage?.exif?.altitude ? mainImage?.exif?.altitude + 50 : 400,
-      mainImage?.exif?.direction || 0
-    )
+    if (mainImage.exif?.lon || mainImage?.location?.lon) {
+      create3d(
+        mainImage?.exif?.lon || mainImage?.location?.lon,
+        mainImage.exif?.lat || mainImage?.location?.lat,
+        mainImage?.exif?.altitude ? mainImage?.exif?.altitude + 50 : 400,
+        mainImage?.exif?.direction || 0
+      )
+    } else {
+      setWarning("Sorry, this image does not contain all necessary location attributes to display it in the 3D scene.")
+    }
+
   }
 
   function toggleMapImage(e) {
@@ -92,6 +96,7 @@ export default function DMap() {
         <button className='ribbon ribbon-small' onClick={() => navigate(-1)}>Back</button >
         <div>
           <button className={`${displayStartButton} notching`} onClick={toggleVisibility}>START</button>
+          <p style={{ color: "red" }}>{warning}</p>
           <div id="cesiumContainer" className={displayMap ? "display-flex" : "display-none"} style={{ width: mainElementWidth, height: mainElementHeight }}>
           </div>
           <div className={displayMap ? "display-none" : "display-flex"} style={{ width: mainElementWidth, height: mainElementHeight, justifyContent: "center" }}>

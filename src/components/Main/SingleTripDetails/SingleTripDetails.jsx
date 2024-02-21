@@ -24,13 +24,20 @@ export default function SingleTripDetails() {
     let bounds = {}
     if (singleTripExperiences) {
         singleTripExperiences.sort((a, b) => {
-            if (a.date > b.date) {
+            let dateA = new Date(a.date ? a.date : a.exif.dateTime)
+            let dateB = new Date(b.date ? b.date : b.exif.dateTime)
+            console.log(dateA)
+            console.log(dateB)
+            if (dateA > dateB) {
+                console.log("a is bigger than b")
                 return -1
-            } else if (a.date < b.date) {
+            } else if (dateA < dateB) {
+                console.log("b is bigger than a")
                 return 1
             }
             return 0
         })
+        console.log(singleTripExperiences)
         if (imgid) {
             mainImage = singleTripExperiences.find(e => e.id == imgid)
         } else {
@@ -69,7 +76,7 @@ export default function SingleTripDetails() {
             </div>
             <div ref={ref}></div>
             <div>{
-                singleTripExperiences?.length > 0 && <MapContainer bounds={[[bounds?.minLat, bounds?.minLon], [bounds?.maxLat, bounds?.maxLon]]} minZoom={2} maxZoom={19} className="map" scrollWheelZoom={false} id="trip-map">
+                singleTripExperiences?.filter(e => e.location?.lat || e.exif?.lat).length > 0 && <MapContainer bounds={[[bounds?.minLat, bounds?.minLon], [bounds?.maxLat, bounds?.maxLon]]} minZoom={2} maxZoom={19} className="map" scrollWheelZoom={false} id="trip-map">
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
