@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import pjson from "../../../package.json"
 
 export default function Footer({ user, setUser }) {
 
@@ -9,6 +10,7 @@ export default function Footer({ user, setUser }) {
       <div>
         {user?.username && <a href="https://be.contentful.com/login/">Edit</a>}
         <a href="https://github.com/Endalokin/scratchmap_frontend" target="_blank">Documentation</a>
+        <a href="https://github.com/Endalokin/scratchmap_frontend" target="_blank">v{pjson.version}</a>
       </div>
     </footer>
   )

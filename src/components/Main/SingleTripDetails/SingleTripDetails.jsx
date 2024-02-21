@@ -15,7 +15,7 @@ export default function SingleTripDetails() {
     let { id, imgid } = useParams()
     const singleTripDetails = trips?.find(t => t.id == id)
     const singleTripExperiences = experiences?.filter(e => {
-        return e.trip.sys.id == singleTripDetails?.id
+        return e.trip?.sys.id == singleTripDetails?.id
     })
 
     const lineOptions = { color: getComputedStyle(document.body).color }
@@ -36,16 +36,17 @@ export default function SingleTripDetails() {
         } else {
             mainImage = singleTripExperiences[0]
         }
-        if (singleTripExperiences.length > 1) {
-            bounds.maxLat = Math.max(...singleTripExperiences?.map(o => o.location.lat)) + 0.05
-            bounds.minLat = Math.min(...singleTripExperiences?.map(o => o.location.lat)) - 0.2
-            bounds.maxLon = Math.max(...singleTripExperiences?.map(o => o.location.lon)) + 0.1
-            bounds.minLon = Math.min(...singleTripExperiences?.map(o => o.location.lon)) - 0.1
+        if (singleTripExperiences?.length > 1) {
+            bounds.maxLat = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lat || o.exif?.lat)) + 0.05
+            bounds.minLat = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lat || o.exif?.lat)) - 0.2
+            bounds.maxLon = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) + 0.1
+            bounds.minLon = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) - 0.1
         } else {
-            bounds.maxLat = Math.max(...singleTripExperiences?.map(o => o.location.lat)) + 1
-            bounds.minLat = Math.min(...singleTripExperiences?.map(o => o.location.lat)) - 1
-            bounds.maxLon = Math.max(...singleTripExperiences?.map(o => o.location.lon)) + 1
-            bounds.minLon = Math.min(...singleTripExperiences?.map(o => o.location.lon)) - 1
+            bounds.maxLat = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lat || o.exif?.lat)) + 1
+            bounds.minLat = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lat || o.exif?.lat)) - 1
+            bounds.maxLon = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) + 1
+            bounds.minLon = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) - 1
+            console.log("single", bounds)
         }
     }
 
@@ -67,30 +68,30 @@ export default function SingleTripDetails() {
                 </div>
             </div>
             <div ref={ref}></div>
-            <div>{singleTripExperiences?.length > 0 && <MapContainer bounds={[[bounds?.minLat, bounds?.minLon], [bounds?.maxLat, bounds?.maxLon]]} minZoom={2} maxZoom={19} className="map" scrollWheelZoom={false} id="trip-map">
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-                    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-                />
-                <DisplayImages experiences={singleTripExperiences} />
-                <Polyline pathOptions={lineOptions} positions={singleTripExperiences?.map((ste) => [ste.location.lat, ste.location.lon])} />
-                <Marker position={[singleTripDetails?.placeArrivalCoords.lat, singleTripDetails?.placeArrivalCoords.lon]} >
-                    <Tooltip sticky>
-                        {singleTripDetails?.placeArrival} <br />
-                        Arrival: {new Date(singleTripDetails?.periodFrom).toLocaleDateString()} <br />
-                        Departure: {new Date(singleTripDetails?.periodUntil).toLocaleDateString()}
-                    </Tooltip>
-                </Marker>
-                <Marker position={[singleTripDetails?.placeDepartureCoords.lat, singleTripDetails?.placeDepartureCoords.lon]} >
-                    <Tooltip sticky>
-                        {singleTripDetails?.placeDeparture} <br />
-                        Departure: {new Date(singleTripDetails?.periodFrom).toLocaleDateString()} <br />
-                        Arrival: {new Date(singleTripDetails?.periodUntil).toLocaleDateString()}
-                    </Tooltip>
-                </Marker>
-            </MapContainer>
-            }
-            </div>
+            <div>{
+                singleTripExperiences?.length > 0 && <MapContainer bounds={[[bounds?.minLat, bounds?.minLon], [bounds?.maxLat, bounds?.maxLon]]} minZoom={2} maxZoom={19} className="map" scrollWheelZoom={false} id="trip-map">
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                    />
+                    <DisplayImages experiences={singleTripExperiences} />
+                    <Polyline pathOptions={lineOptions} positions={singleTripExperiences?.filter(ste => ste.exif || ste.location).map((ste) => [ste.location?.lat || ste.exif?.lat, ste.location?.lon || ste.exif?.lon])} />
+                    <Marker position={[singleTripDetails?.placeArrivalCoords.lat, singleTripDetails?.placeArrivalCoords.lon]} >
+                        <Tooltip sticky>
+                            {singleTripDetails?.placeArrival} <br />
+                            Arrival: {new Date(singleTripDetails?.periodFrom).toLocaleDateString()} <br />
+                            Departure: {new Date(singleTripDetails?.periodUntil).toLocaleDateString()}
+                        </Tooltip>
+                    </Marker>
+                    <Marker position={[singleTripDetails?.placeDepartureCoords.lat, singleTripDetails?.placeDepartureCoords.lon]} >
+                        <Tooltip sticky>
+                            {singleTripDetails?.placeDeparture} <br />
+                            Departure: {new Date(singleTripDetails?.periodFrom).toLocaleDateString()} <br />
+                            Arrival: {new Date(singleTripDetails?.periodUntil).toLocaleDateString()}
+                        </Tooltip>
+                    </Marker>
+                </MapContainer>
+            }</div>
         </>
     )
 }
