@@ -24,8 +24,8 @@ export default function SingleTripDetails() {
     let bounds = {}
     if (singleTripExperiences) {
         singleTripExperiences.sort((a, b) => {
-            let dateA = new Date(a.date ? a.date : a.exif.dateTime)
-            let dateB = new Date(b.date ? b.date : b.exif.dateTime)
+            let dateA = new Date(a.date ? a.date : a.exif?.dateTime)
+            let dateB = new Date(b.date ? b.date : b.exif?.dateTime)
             console.log(dateA)
             console.log(dateB)
             if (dateA > dateB) {
