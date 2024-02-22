@@ -27,10 +27,8 @@ export default function SingleTripDetails() {
             let dateA = new Date(a.date ? a.date : a.exif?.dateTime)
             let dateB = new Date(b.date ? b.date : b.exif?.dateTime)
             if (dateA > dateB) {
-                console.log("a is bigger than b")
                 return -1
             } else if (dateA < dateB) {
-                console.log("b is bigger than a")
                 return 1
             }
             return 0

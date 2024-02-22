@@ -7,7 +7,7 @@ import DisplayImagesTooltip from './DisplayImagesTooltip';
 
 export default function DisplayImages({ experiences, displaySeasons, displayDaytime }) {
     const { pathname } = window.location
-    console.log("Within Display Images: " , experiences)
+    
     const navigate = useNavigate()
 
     let currentArray = filteredArray(experiences, displaySeasons, displayDaytime)

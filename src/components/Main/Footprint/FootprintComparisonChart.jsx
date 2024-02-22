@@ -41,7 +41,6 @@ export default function FootprintComparisonChart({ trips }) {
     ChartJS.defaults.color = getComputedStyle(document.body).color;
     ChartJS.defaults.font.family = getComputedStyle(document.body).fontFamily;
     ChartJS.defaults.font.size = getComputedStyle(document.body).fontSize.split("px")[0];
-    console.log(getComputedStyle(document.body).fontSize)
 
     let minValue = Math.min.apply(null,
         trips?.map((o) => { return Number(o.periodFrom?.split("-")[0]) }));
