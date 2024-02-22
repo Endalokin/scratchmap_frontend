@@ -7,14 +7,14 @@ import DisplayImagesTooltip from './DisplayImagesTooltip';
 
 export default function DisplayImages({ experiences, displaySeasons, displayDaytime }) {
     const { pathname } = window.location
-
+    console.log("Within Display Images: " , experiences)
     const navigate = useNavigate()
 
     let currentArray = filteredArray(experiences, displaySeasons, displayDaytime)
 
     return (
         <>
-            {currentArray?.reverse().filter(experience => experience.exif || experience.location).map((experience, index) => {
+            {currentArray?.reverse().filter(experience => experience.exif?.lat || experience.location?.lat).map((experience, index) => {
                 let position = experience.location ? [experience.location?.lat, experience.location?.lon] : [experience.exif.lat, experience.exif?.lon]
                 let htmlValue = pathname != "/map" ? `<p style="text-align: center">Stop ${index + 1}` : `<p style="text-align: center">`
                 htmlValue += !experience.location && experience.exif?.positioningError > 400 ? `<span style="color: red; font-weight: bold; text-shadow: 1px 0px 3px white, -1px 0px 3px white, 0px 1px 3px white, 0px -1px 3px white ;)"> ${"\uA71D"}</span></p>` : "</p>"

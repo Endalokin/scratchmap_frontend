@@ -26,8 +26,6 @@ export default function SingleTripDetails() {
         singleTripExperiences.sort((a, b) => {
             let dateA = new Date(a.date ? a.date : a.exif?.dateTime)
             let dateB = new Date(b.date ? b.date : b.exif?.dateTime)
-            console.log(dateA)
-            console.log(dateB)
             if (dateA > dateB) {
                 console.log("a is bigger than b")
                 return -1
