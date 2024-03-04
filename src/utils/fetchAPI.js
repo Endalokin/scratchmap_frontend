@@ -17,5 +17,6 @@ export default async function fetchData(url, dataCallback, method = 'GET', body,
     dataCallback(data, timeStamp);
   } catch (error) {
     console.log("Error", error.message);
+    throw error;
   }
 }

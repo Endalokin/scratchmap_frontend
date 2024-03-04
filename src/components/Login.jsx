@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import fetchData from '../utils/fetchAPI';
+import {toast} from 'react-hot-toast'
 
 export default function LoginModal() {
 
@@ -28,7 +29,12 @@ export default function LoginModal() {
         fetchData(CHECK_URL, (data) => {
             if (data.userid) {
                 setUser({ username: inputUser, userid: data.userid })
+                sessionStorage.setItem('username', inputUser)
+                sessionStorage.setItem('userid', data.userid)
                 setWarning()
+                toast.success(`Hello ${inputUser}, you are now logged in!`, {
+                    duration: 5000,
+                })
                 navigate(-1)
             } else {
                 setWarning("Invalid user or password")
