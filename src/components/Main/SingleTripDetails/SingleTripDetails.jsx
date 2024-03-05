@@ -33,7 +33,6 @@ export default function SingleTripDetails() {
             }
             return 0
         })
-        console.log(singleTripExperiences)
         if (imgid) {
             mainImage = singleTripExperiences.find(e => e.id == imgid)
         } else {
@@ -49,7 +48,6 @@ export default function SingleTripDetails() {
             bounds.minLat = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lat || o.exif?.lat)) - 1
             bounds.maxLon = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) + 1
             bounds.minLon = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) - 1
-            console.log("single", bounds)
         }
     }
 

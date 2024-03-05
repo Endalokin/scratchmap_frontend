@@ -1,15 +1,19 @@
-export default async function fetchData(url, dataCallback, method = 'GET', body, abortSignal) {
+export default async function fetchData(url, dataCallback, method = 'GET', body, token, abortSignal) {
   const timeStamp = Date.now();
   try {
     let requestOptions = {
       method: method,
       headers: {
-        'Content-Type' : 'application/json'
+        'Content-Type' : 'application/json',
       }
     };
+    if (token) { 
+      requestOptions.headers['x-access-token'] = token;
+    }
     if (method == "POST" && body) {
       requestOptions.body = JSON.stringify(body)
     }
+
     const response = await fetch(url, requestOptions, { abortSignal });
     //console.log("Response", response);
     const data = await response.json();
