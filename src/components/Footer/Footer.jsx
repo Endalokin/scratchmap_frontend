@@ -6,8 +6,8 @@ import toast from 'react-hot-toast'
 export default function Footer({ user, setUser }) {
 
   function logout () {
-    sessionStorage.removeItem('userid');
     sessionStorage.removeItem('username');
+    sessionStorage.removeItem('token');
     setUser()
     toast.success("You have successfully logged out.", {
       icon: "👋",
