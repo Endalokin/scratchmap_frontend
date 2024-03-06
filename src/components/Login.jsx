@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import fetchData from '../utils/fetchAPI';
+import {toast} from 'react-hot-toast'
 
 export default function LoginModal() {
 
@@ -21,14 +22,18 @@ export default function LoginModal() {
     }
 
     function login(e) {
-        console.log("I am entered")
         e.preventDefault()
         let body = { username: inputUser, password: pwd }
-        const CHECK_URL = `${VITE_SERVER_URL}/login`
+        const CHECK_URL = `${VITE_SERVER_URL}/user/login`
         fetchData(CHECK_URL, (data) => {
-            if (data.userid) {
-                setUser({ username: inputUser, userid: data.userid })
+            if (data.accessToken) {
+                setUser({ username: inputUser, token: data.accessToken })
+                sessionStorage.setItem('username', inputUser)
+                sessionStorage.setItem('token', data.accessToken)
                 setWarning()
+                toast.success(`Hello ${inputUser}, you are now logged in!`, {
+                    duration: 5000,
+                })
                 navigate(-1)
             } else {
                 setWarning("Invalid user or password")

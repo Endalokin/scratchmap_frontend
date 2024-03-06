@@ -30,7 +30,7 @@ export default function Map() {
 
     return (
         <div className="fixed-site showUp">
-                <button className="ribbon ribbon-small" onClick={toggleFilterVisibility}>Show Filter</button>
+            <button className="ribbon ribbon-small" onClick={toggleFilterVisibility}>Show Filter</button>
             <div id="mapFilterSection" className={`${displayState} modal showUp`}><MapFilters displaySeasons={displaySeasons} setDisplaySeasons={setDisplaySeasons} displayDaytime={displayDaytime} setDisplayDaytime={setDisplayDaytime} toggleFilterVisibility={toggleFilterVisibility} /></div>
             <MapContainer center={[40.505, -0.09]} zoom={zoomLevel} minZoom={1} maxZoom={19} scrollWheelZoom={true} className="map">
                 <ZoomTeller />
@@ -40,9 +40,15 @@ export default function Map() {
                     noWrap={true}
 
                 />
-                {zoomLevel < 8 ?
-                    <DisplayColourTiles experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime} />
-                    : <DisplayImages experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime} />
+                {zoomLevel < 5 ?
+                    <DisplayColourTiles experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime} factor={0.5} />
+                    : zoomLevel < 8 ?
+                        <DisplayColourTiles experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime} />
+                        : zoomLevel < 10 ?
+                            <DisplayColourTiles experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime} factor={2} />
+                            : zoomLevel < 11 ?
+                            <DisplayColourTiles experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime} factor={3} />
+                            : <DisplayImages experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime} />
                 }
             </MapContainer>
         </div>

@@ -24,20 +24,15 @@ export default function SingleTripDetails() {
     let bounds = {}
     if (singleTripExperiences) {
         singleTripExperiences.sort((a, b) => {
-            let dateA = new Date(a.date ? a.date : a.exif.dateTime)
-            let dateB = new Date(b.date ? b.date : b.exif.dateTime)
-            console.log(dateA)
-            console.log(dateB)
+            let dateA = new Date(a.date ? a.date : a.exif?.dateTime)
+            let dateB = new Date(b.date ? b.date : b.exif?.dateTime)
             if (dateA > dateB) {
-                console.log("a is bigger than b")
                 return -1
             } else if (dateA < dateB) {
-                console.log("b is bigger than a")
                 return 1
             }
             return 0
         })
-        console.log(singleTripExperiences)
         if (imgid) {
             mainImage = singleTripExperiences.find(e => e.id == imgid)
         } else {
@@ -53,7 +48,6 @@ export default function SingleTripDetails() {
             bounds.minLat = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lat || o.exif?.lat)) - 1
             bounds.maxLon = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) + 1
             bounds.minLon = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) - 1
-            console.log("single", bounds)
         }
     }
 

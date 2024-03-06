@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { useOutletContext } from 'react-router-dom'
 
 export default function TableRowPerTrip({ trip, setIsOpen, setActiveTrip }) {
 
     const navigate = useNavigate()
-
+    const [, , , , user] = useOutletContext();
     function compensateCheck(e) {
         e.preventDefault();
         setActiveTrip(trip)
@@ -26,7 +27,7 @@ export default function TableRowPerTrip({ trip, setIsOpen, setActiveTrip }) {
                 <td style={{ textAlign: "right" }}>{trip.footprint?.distance?.toFixed(0)} km</td>
                 <td style={{ textAlign: "right" }}>{trip.footprint?.emission?.toFixed(0)} kg</td>
                 <td style={{ textAlign: "right" }}>{trip.footprint?.amount?.toFixed(2)} €</td>
-                <td style={{ textAlign: "center" }}><input id={`${trip?.id}-compensated`} type='checkbox' onClick={compensateCheck} checked={trip.footprint?.compensated} /></td>
+                <td style={{ textAlign: "center" }}><input id={`${trip?.id}-compensated`} type='checkbox' onClick={compensateCheck} checked={trip.footprint?.compensated} disabled={!user?.username} /></td>
             </tr>
         </>
     )
