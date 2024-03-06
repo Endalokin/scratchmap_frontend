@@ -28,9 +28,7 @@ export default function Footprint() {
     return (
         <div className="fixed-site">
             <div className="pre-table-content" >
-                <div>
-                    {trips?.map((trip) => <CompensationTree key={`tree-${trip.id}`} compensatedTrip={trip.footprint?.compensated} />)}
-                </div>
+                {trips?.map((trip) => <CompensationTree key={`tree-${trip.id}`} compensatedTrip={trip.footprint?.compensated} />)}
                 <div>
                     <Link to={`${window.location.origin}/footprint/table`}><button className={`ribbon ribbon-first ${display == "table" && "ribbon-active"}`}>Table</button></Link>
                     <Link to={`${window.location.origin}/footprint/chart`}><button className={`ribbon ribbon-middle ${display == "chart" && "ribbon-active"}`}>Chart</button></Link>

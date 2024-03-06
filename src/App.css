@@ -589,7 +589,12 @@ menu > a {
   align-items: center;
 }
 
-#season-filter,
+#season-filter {
+  border: 2px dashed var(--highlight-two);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 #clock-filter {
   border: 2px dashed var(--highlight-two);
 }
@@ -655,11 +660,12 @@ menu > a {
 /* Tooltip container */
 .tooltip {
   position: relative;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
 }
 
 /* Tooltip text */
-.tooltip .tooltiptext {
+.tooltiptext {
   visibility: hidden;
   background-color: var(--opposite-color);
   color: var(--primary-bg-color);
@@ -669,11 +675,11 @@ menu > a {
   font-size: smaller;
   position: absolute;
   bottom: 100%;
-  left: 0%;
+  /*   left: 0%; */
   z-index: 1;
 }
 
-.tooltip .tooltiptext::after {
+.tooltiptext::after {
   content: " ";
   position: absolute;
   top: 100%; /* At the bottom of the tooltip */
@@ -685,7 +691,7 @@ menu > a {
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
+:hover > .tooltiptext {
   visibility: visible;
 }
 

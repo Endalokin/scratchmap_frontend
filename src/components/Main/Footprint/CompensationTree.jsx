@@ -19,7 +19,19 @@ export default function CompensationTree({ compensatedTrip }) {
 
     return (
         <>
-            {compensatedTrip ? <img className="drop-shadow" src={livingTrees[livingRandom]} alt="living tree" /> : <img className="drop-shadow" src={deadTrees[deadRandom]} alt="dead tree" />}
+            {
+                compensatedTrip ?
+                    <div className="tooltip">
+                        <span className="tooltiptext">Trip compensated</span>
+                        <img className="drop-shadow" src={livingTrees[livingRandom]} alt="living tree" />
+                    </div> :
+                    <div className="tooltip">
+                        <span className="tooltiptext">Missing compensation</span>
+                        <img className="drop-shadow" src={deadTrees[deadRandom]} alt="dead tree" />
+                    </div>
+
+
+            }
         </>
     )
 }
