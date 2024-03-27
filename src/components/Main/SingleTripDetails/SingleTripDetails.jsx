@@ -38,17 +38,20 @@ export default function SingleTripDetails() {
         } else {
             mainImage = singleTripExperiences[0]
         }
-        if (singleTripExperiences?.length > 1) {
-            bounds.maxLat = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lat || o.exif?.lat)) + 0.05
-            bounds.minLat = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lat || o.exif?.lat)) - 0.2
-            bounds.maxLon = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) + 0.1
-            bounds.minLon = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) - 0.1
-        } else {
-            bounds.maxLat = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lat || o.exif?.lat)) + 1
-            bounds.minLat = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lat || o.exif?.lat)) - 1
-            bounds.maxLon = Math.max(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) + 1
-            bounds.minLon = Math.min(...singleTripExperiences?.filter(o => o.exif || o.location).map(o => o.location?.lon || o.exif?.lon)) - 1
-        }
+    }
+
+    let singleTripExperiencesMapable = singleTripExperiences?.filter(e => (e.location?.lat || e.exif?.lat) && (e.location?.lon || e.exif?.lon))
+
+    if (singleTripExperiencesMapable?.length > 1) {
+        bounds.maxLat = Math.max(...singleTripExperiencesMapable?.map(o => o.location?.lat || o.exif?.lat)) + 0.05
+        bounds.minLat = Math.min(...singleTripExperiencesMapable?.map(o => o.location?.lat || o.exif?.lat)) - 0.2
+        bounds.maxLon = Math.max(...singleTripExperiencesMapable?.map(o => o.location?.lon || o.exif?.lon)) + 0.1
+        bounds.minLon = Math.min(...singleTripExperiencesMapable?.map(o => o.location?.lon || o.exif?.lon)) - 0.1
+    } else if (singleTripExperiences?.length > 0) {
+        bounds.maxLat = Math.max(...singleTripExperiencesMapable?.map(o => o.location?.lat || o.exif?.lat)) + 1
+        bounds.minLat = Math.min(...singleTripExperiencesMapable?.map(o => o.location?.lat || o.exif?.lat)) - 1
+        bounds.maxLon = Math.max(...singleTripExperiencesMapable?.map(o => o.location?.lon || o.exif?.lon)) + 1
+        bounds.minLon = Math.min(...singleTripExperiencesMapable?.map(o => o.location?.lon || o.exif?.lon)) - 1
     }
 
     function scrollToMap(e) {
@@ -61,7 +64,7 @@ export default function SingleTripDetails() {
             <div id="single-details" className='single-details centered-element showUp'>
                 <div >
                     <TripInfo trip={singleTripDetails} />
-                    <button className="notching" onClick={scrollToMap}>⮟ Map ⮟</button>
+                    {singleTripExperiencesMapable?.length > 0 && <button className="notching" onClick={scrollToMap}>⮟ Map ⮟</button>}
                 </div>
                 {singleTripExperiences && singleTripExperiences[0] && <PolaroidImageLarge mainImage={mainImage} />}
                 <div className="img-gallery">
@@ -70,13 +73,13 @@ export default function SingleTripDetails() {
             </div>
             <div ref={ref}></div>
             <div>{
-                singleTripExperiences?.filter(e => e.location?.lat || e.exif?.lat).length > 0 && <MapContainer bounds={[[bounds?.minLat, bounds?.minLon], [bounds?.maxLat, bounds?.maxLon]]} minZoom={2} maxZoom={19} className="map" scrollWheelZoom={false} id="trip-map">
+                singleTripExperiencesMapable?.length > 0 && <MapContainer bounds={[[bounds?.minLat, bounds?.minLon], [bounds?.maxLat, bounds?.maxLon]]} minZoom={2} maxZoom={19} className="map" scrollWheelZoom={false} id="trip-map">
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                     />
-                    <DisplayImages experiences={singleTripExperiences} />
-                    <Polyline pathOptions={lineOptions} positions={singleTripExperiences?.filter(ste => ste.exif || ste.location).map((ste) => [ste.location?.lat || ste.exif?.lat, ste.location?.lon || ste.exif?.lon])} />
+                    <DisplayImages experiences={singleTripExperiencesMapable} />
+                    <Polyline pathOptions={lineOptions} positions={singleTripExperiencesMapable?.map((ste) => [ste.location?.lat || ste.exif?.lat, ste.location?.lon || ste.exif?.lon])} />
                     <Marker position={[singleTripDetails?.placeArrivalCoords.lat, singleTripDetails?.placeArrivalCoords.lon]} >
                         <Tooltip sticky>
                             {singleTripDetails?.placeArrival} <br />
