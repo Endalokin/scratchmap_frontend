@@ -1,16 +1,17 @@
-import React, { useRef } from 'react'
-import { useParams, useOutletContext, Link } from 'react-router-dom'
+import React, { useRef, useState } from 'react'
+import { useParams, useOutletContext } from 'react-router-dom'
 import ImgGallery from './ImgGallery';
 import { MapContainer, Polyline, TileLayer, Marker, Tooltip } from 'react-leaflet'
 import DisplayImages from '../Map/DisplayImages';
 import TripInfo from './TripInfo';
 import PolaroidImageLarge from '../About/PolaroidImageLarge';
+import MapFilters from '../Map/MapFilters';
 
 export default function SingleTripDetails() {
 
     const ref = useRef(null)
 
-    const [experiences, , trips] = useOutletContext();
+    const [experiences, , trips, , user] = useOutletContext();
 
     let { id, imgid } = useParams()
     const singleTripDetails = trips?.find(t => t.id == id)
@@ -59,9 +60,20 @@ export default function SingleTripDetails() {
         ref?.current?.scrollIntoView({ behavior: 'smooth' });
     }
 
+    const [displayState, setDisplayState] = useState("display-none")
+
+    function toggleFilterVisibility() {
+        setDisplayState(prev => prev == "display-none" ? "display-flex" : "display-none")
+    }
+
     return (
         <>
+            {user && <div>
+                <button className="ribbon ribbon-small" onClick={toggleFilterVisibility}>Edit</button>
+                <div id="mapFilterSection" className={`${displayState} modal showUp`}><MapFilters toggleFilterVisibility={toggleFilterVisibility} /></div>
+            </div>}
             <div id="single-details" className='single-details centered-element showUp'>
+
                 <div >
                     <TripInfo trip={singleTripDetails} />
                     {singleTripExperiencesMapable?.length > 0 && <button className="notching" onClick={scrollToMap}>⮟ Map ⮟</button>}
