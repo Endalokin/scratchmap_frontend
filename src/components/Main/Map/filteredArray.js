@@ -1,6 +1,7 @@
 export default function filteredArray (array, displaySeasons = 0, displayDaytime = 0) {
     let newArray = []
     let newArray2 = []
+    
     if (array) {
         if (displaySeasons == 0) {
             newArray = [...array]

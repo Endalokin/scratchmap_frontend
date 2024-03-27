@@ -24,7 +24,7 @@ export default function DisplayColourTiles({ experiences, displaySeasons, displa
 
     return (
         <>
-            {tileExperiences?.filter(e => e.location?.lat || e.exif?.lat).map(e => {
+            {tileExperiences?.map(e => {
                 let locationField = e.location ? e.location : e.exif
                 return <Rectangle key={e.id} bounds={[[Math.ceil(locationField.lat * factor) / factor - 0.005, Math.ceil(locationField.lon * factor) / factor - 0.005], [Math.floor(locationField.lat * factor) / factor + 0.005, Math.floor(locationField.lon * factor) / factor + 0.005]]} pathOptions={{ color: e.imgAccentColour ? e.imgAccentColour : e.imgColour, fillOpacity: 0.5 }} eventHandlers={{ click: () => navigate(`/trip/${e?.trip.sys.id}/${e?.id}`) }}>
                     <Tooltip sticky direction="bottom">
