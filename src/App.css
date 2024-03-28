@@ -514,7 +514,7 @@ menu > a {
 .leaflet-interactive:hover {
   transition: all 0.5s;
   box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
-  transform: skew(-2deg);
+  transform: skew(-0.5deg);
 }
 
 .modal {

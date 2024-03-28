@@ -11,7 +11,6 @@ export default function DisplayImages({ experiences, displaySeasons, displayDayt
     const navigate = useNavigate()
 
     let currentArray = filteredArray(experiences, displaySeasons, displayDaytime)
-    console.log(currentArray)
 
     return (
         <>
