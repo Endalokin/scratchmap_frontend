@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { useParams, useOutletContext } from 'react-router-dom'
 import ImgGallery from './ImgGallery';
 import { MapContainer, Polyline, TileLayer, Marker, Tooltip } from 'react-leaflet'
@@ -6,9 +6,27 @@ import DisplayImages from '../Map/DisplayImages';
 import TripInfo from './TripInfo';
 import PolaroidImageLarge from '../About/PolaroidImageLarge';
 import MapFilters from '../Map/MapFilters';
+import gpxParser from 'gpxparser'
+import traumschleife from '../../../../public/assets/t3479518_traumschleife frau holle.gpx'
+import { parseGpxFile } from '../../../utils/parseGPXFile';
 
 export default function SingleTripDetails() {
 
+
+    /* var traumschleife = '../../../../public/assets/t3479518_traumschleife frau holle.gpx' */
+    /*     var gpx = new gpxParser(); //Create gpxParser Object
+        gpx.parse(traumschleife) */
+    console.log(traumschleife)
+    const [rawdata, setRawData] = useState([]);
+    useEffect(() => {
+        const parseGpx = async () => {
+            const parseGpxData = await parseGpxFile(traumschleife);
+            setRawData(parseGpxData[0])
+
+        }
+        parseGpx()
+    }, [])
+    console.log(rawdata)
     const ref = useRef(null)
 
     const [experiences, , trips, , user] = useOutletContext();
@@ -91,7 +109,12 @@ export default function SingleTripDetails() {
                         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                     />
                     <DisplayImages experiences={singleTripExperiencesMapable} />
-                    <Polyline pathOptions={lineOptions} positions={singleTripExperiencesMapable?.map((ste) => [ste.location?.lat || ste.exif?.lat, ste.location?.lon || ste.exif?.lon])} />
+                    {<Polyline pathOptions={lineOptions} positions={singleTripExperiencesMapable?.map((ste) => [ste.location?.lat || ste.exif?.lat, ste.location?.lon || ste.exif?.lon])} />}
+                    {rawdata?.positions && <Polyline pathOptions={lineOptions} positions={rawdata.positions?.map((ste) => [ste[0], ste[1]])} >
+                        <Tooltip sticky>
+                            {rawdata?.name}
+                        </Tooltip>
+                    </Polyline>}
                     <Marker position={[singleTripDetails?.placeArrivalCoords.lat, singleTripDetails?.placeArrivalCoords.lon]} >
                         <Tooltip sticky>
                             {singleTripDetails?.placeArrival} <br />
