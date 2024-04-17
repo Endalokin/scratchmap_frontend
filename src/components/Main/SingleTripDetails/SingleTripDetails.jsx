@@ -30,12 +30,14 @@ export default function SingleTripDetails() {
     const ref = useRef(null)
 
     const [experiences, , trips, , user] = useOutletContext();
+    
 
     let { id, imgid } = useParams()
     const singleTripDetails = trips?.find(t => t.id == id)
     const singleTripExperiences = experiences?.filter(e => {
         return e.trip?.sys.id == singleTripDetails?.id
     })
+    console.log(singleTripDetails?.tracks)
 
     const lineOptions = { color: getComputedStyle(document.body).color }
 
@@ -115,6 +117,11 @@ export default function SingleTripDetails() {
                             {rawdata?.name}
                         </Tooltip>
                     </Polyline>}
+                    {singleTripDetails?.tracks && singleTripDetails?.tracks.map(t => <Polyline pathOptions={lineOptions} positions={t.path} >
+                        <Tooltip sticky>
+                            {t?.name}
+                        </Tooltip>
+                    </Polyline>)}
                     <Marker position={[singleTripDetails?.placeArrivalCoords.lat, singleTripDetails?.placeArrivalCoords.lon]} >
                         <Tooltip sticky>
                             {singleTripDetails?.placeArrival} <br />
