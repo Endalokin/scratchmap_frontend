@@ -13,7 +13,6 @@ export default function Root() {
   const { VITE_SERVER_URL } = import.meta.env;
   const [experiences, setExperiences] = useState()
   const [trips, setTrips] = useState()
-
   const [loadingData, setLoadingData] = useState(false)
 
   useEffect(() => {

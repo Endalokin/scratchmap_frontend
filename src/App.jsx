@@ -8,7 +8,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import SingleTripDetails from './components/Main/SingleTripDetails/SingleTripDetails'
 import DMap from './components/Main/SingleTripDetails/DMap'
 import Login from './components/Login'
-import Trips from './components/Trips/Trips'
+import Trips from './components/Main/Trips/Trips'
 
 const router = createBrowserRouter(
   createRoutesFromElements(

@@ -5,28 +5,10 @@ import { MapContainer, Polyline, TileLayer, Marker, Tooltip } from 'react-leafle
 import DisplayImages from '../Map/DisplayImages';
 import TripInfo from './TripInfo';
 import PolaroidImageLarge from '../About/PolaroidImageLarge';
-import MapFilters from '../Map/MapFilters';
-import gpxParser from 'gpxparser'
-import traumschleife from '../../../../public/assets/t3479518_traumschleife frau holle.gpx'
-import { parseGpxFile } from '../../../utils/parseGPXFile';
+import EditTrip from './EditTrip';
 
 export default function SingleTripDetails() {
 
-
-    /* var traumschleife = '../../../../public/assets/t3479518_traumschleife frau holle.gpx' */
-    /*     var gpx = new gpxParser(); //Create gpxParser Object
-        gpx.parse(traumschleife) */
-    console.log(traumschleife)
-    const [rawdata, setRawData] = useState([]);
-    useEffect(() => {
-        const parseGpx = async () => {
-            const parseGpxData = await parseGpxFile(traumschleife);
-            setRawData(parseGpxData[0])
-
-        }
-        parseGpx()
-    }, [])
-    console.log(rawdata)
     const ref = useRef(null)
 
     const [experiences, , trips, , user] = useOutletContext();
@@ -37,7 +19,7 @@ export default function SingleTripDetails() {
         return e.trip?.sys.id == singleTripDetails?.id
     })
 
-    const lineOptions = { color: getComputedStyle(document.body).color }
+    let lineOptions = { color: getComputedStyle(document.body).color }
 
     let mainImage
     let bounds = {}
@@ -88,7 +70,7 @@ export default function SingleTripDetails() {
         <>
             {user && <div>
                 <button className="ribbon ribbon-small" onClick={toggleFilterVisibility}>Edit</button>
-                <div id="mapFilterSection" className={`${displayState} modal showUp`}><MapFilters toggleFilterVisibility={toggleFilterVisibility} /></div>
+                <div id="mapFilterSection" className={`${displayState} modal showUp`}><EditTrip singleTripDetails={singleTripDetails} toggleFilterVisibility={toggleFilterVisibility} /></div>
             </div>}
             <div id="single-details" className='single-details centered-element showUp'>
 
@@ -110,11 +92,37 @@ export default function SingleTripDetails() {
                     />
                     <DisplayImages experiences={singleTripExperiencesMapable} />
                     {<Polyline pathOptions={lineOptions} positions={singleTripExperiencesMapable?.map((ste) => [ste.location?.lat || ste.exif?.lat, ste.location?.lon || ste.exif?.lon])} />}
-                    {rawdata?.positions && <Polyline pathOptions={lineOptions} positions={rawdata.positions?.map((ste) => [ste[0], ste[1]])} >
-                        <Tooltip sticky>
-                            {rawdata?.name}
-                        </Tooltip>
-                    </Polyline>}
+
+                    {singleTripDetails?.tracks && singleTripDetails?.tracks?.map(t => {
+                        lineOptions = { dashArray: "0.1 50", weight: "2.5" }
+                        if (!t.altitude) {
+                            lineOptions.color = getComputedStyle(document.body).color
+                            return <Polyline key={`track${singleTripDetails.tracks.indexOf(t)}`} pathOptions={lineOptions} positions={t?.path} >
+                                <Tooltip sticky>
+                                    {t?.name}
+                                </Tooltip>
+                            </Polyline>
+                        } else {
+                            return t.path.map(p => {
+                                if (t.path[t.path.indexOf(p) + 1]) {
+                                    let positions = [[p[0], p[1]], [t.path[t.path.indexOf(p) + 1][0], t.path[t.path.indexOf(p) + 1][1]]]
+                                    if (t.altitude[t.path.indexOf(p)] < t.altitude[t.path.indexOf(p) + 1]) {
+                                        lineOptions.color = "red";
+                                    } else {
+                                        // I don't know why, but everything is blue if I delete the following line
+                                        lineOptions = { color: "blue", dashArray: "1 25", weight: "2.5" }
+                                        lineOptions.color = "blue";
+                                    }
+
+                                    return < Polyline key={`track${singleTripDetails.tracks.indexOf(t)}_segment${t.path.indexOf(p)}`} pathOptions={lineOptions} positions={positions} >
+                                        <Tooltip sticky>
+                                            {t?.name}
+                                        </Tooltip>
+                                    </Polyline>
+                                }
+                            })
+                        }
+                    })}
                     <Marker position={[singleTripDetails?.placeArrivalCoords.lat, singleTripDetails?.placeArrivalCoords.lon]} >
                         <Tooltip sticky>
                             {singleTripDetails?.placeArrival} <br />
@@ -130,7 +138,7 @@ export default function SingleTripDetails() {
                         </Tooltip>
                     </Marker>
                 </MapContainer>
-            }</div>
+            }</div >
         </>
     )
 }
