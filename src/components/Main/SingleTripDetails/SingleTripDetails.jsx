@@ -65,13 +65,15 @@ export default function SingleTripDetails() {
     function toggleFilterVisibility() {
         setDisplayState(prev => prev == "display-none" ? "display-flex" : "display-none")
     }
+    console.log(user)
 
     return (
         <>
-            {user && <div>
-                <button className="ribbon ribbon-small" onClick={toggleFilterVisibility}>Edit</button>
-                <div id="mapFilterSection" className={`${displayState} modal showUp`}><EditTrip singleTripDetails={singleTripDetails} toggleFilterVisibility={toggleFilterVisibility} /></div>
-            </div>}
+            {user &&
+                <div>
+                    <button className="ribbon ribbon-small" onClick={toggleFilterVisibility}>Edit</button>
+                    <div id="mapFilterSection" className={`${displayState} modal showUp`}><EditTrip singleTripDetails={singleTripDetails} toggleFilterVisibility={toggleFilterVisibility} /></div>
+                </div>}
             <div id="single-details" className='single-details centered-element showUp'>
 
                 <div >

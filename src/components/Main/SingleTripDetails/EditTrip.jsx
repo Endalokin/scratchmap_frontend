@@ -3,6 +3,7 @@ import { parseGpxFile } from '../../../utils/parseGPXFile';
 import fetchData from '../../../utils/fetchAPI';
 import RowPerTrack from './EditOptions/RowPerTrack';
 import { useOutletContext } from 'react-router-dom'
+import DeleteTrackModal from './EditOptions/DeleteTrackModal';
 
 export default function EditTrip({ singleTripDetails, toggleFilterVisibility }) {
 
@@ -53,24 +54,6 @@ export default function EditTrip({ singleTripDetails, toggleFilterVisibility }) 
         }
     }
 
-    function deleteNo(e) {
-        e.preventDefault()
-        setIsOpen(false)
-    }
-    function deleteYes(e) {
-        e.preventDefault()
-
-        setTrips(prev => {
-            prev.find((p) => p.id == singleTripDetails.id).tracks = singleTripDetails.tracks.filter(track => track != activeTrack)
-            return [...prev]
-        })
-
-        const DELETE_URL = `${VITE_SERVER_URL}/trips/deleteTrack/${activeTrack.id}`
-        fetchData(DELETE_URL, (data) => {
-        }, "DELETE")
-        setIsOpen(false)
-    }
-
     return (
         <>
             <button onClick={toggleFilterVisibility}>Hide</button>
@@ -85,18 +68,7 @@ export default function EditTrip({ singleTripDetails, toggleFilterVisibility }) 
                     {adder}
                 </form>
             </div>
-            {isOpen &&
-                <>
-                    <div className='modal' id="compensationModal" >
-                        Do you want to permanently delete track {activeTrack.name}?
-                        <div>
-                            <button className="ribbon ribbon-secondary" onClick={deleteNo}>No</button>
-                            <button className="notching" onClick={deleteYes}>Yes</button>
-                        </div>
-                    </div>
-                    <div className="modal-back"></div>
-                </>
-            }
+            {isOpen && <DeleteTrackModal setIsOpen={setIsOpen} activeTrack={activeTrack} singleTripDetails={singleTripDetails} /> }
         </>
     )
 }
