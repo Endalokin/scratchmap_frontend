@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import CompensationModal from '../../Footprint/CompensationModal'
 
-export default function RowPerTrack({ t, setIsOpen }) {
+export default function RowPerTrack({ t, setIsOpen, setActiveTrack }) {
 
     function openDeleteTrackDialog(e) {
         e.preventDefault();
+        setActiveTrack(t)
         setIsOpen(true)
     }
-    console.log(t)
 
     return (
         <>

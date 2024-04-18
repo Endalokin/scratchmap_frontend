@@ -27,7 +27,7 @@ export default function TableRowPerTrip({ trip, setIsOpen, setActiveTrip }) {
                 <td style={{ textAlign: "right" }}>{trip.footprint?.distance?.toFixed(0)} km</td>
                 <td style={{ textAlign: "right" }}>{trip.footprint?.emission?.toFixed(0)} kg</td>
                 <td style={{ textAlign: "right" }}>{trip.footprint?.amount?.toFixed(2)} €</td>
-                <td style={{ textAlign: "center" }}><input id={`${trip?.id}-compensated`} type='checkbox' onClick={compensateCheck} checked={trip.footprint?.compensated} disabled={!user?.username} /></td>
+                <td style={{ textAlign: "center" }}><input id={`${trip?.id}-compensated`} type='checkbox' onClick={compensateCheck} checked={trip.footprint?.compensated} disabled={!user} /></td>
             </tr>
         </>
     )
