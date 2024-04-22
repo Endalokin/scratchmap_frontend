@@ -517,6 +517,17 @@ menu > a {
   transform: skew(-0.5deg);
 }
 
+.leaflet-div-icon2
+{
+  background:transparent;
+  border:none;
+  font-weight:bold;
+  text-align:center;
+  border-radius:50%;
+  font-size: 24px;
+}
+
+
 .modal {
   justify-content: space-evenly;
   flex-direction: column;

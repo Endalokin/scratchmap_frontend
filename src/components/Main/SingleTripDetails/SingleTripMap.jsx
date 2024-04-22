@@ -2,6 +2,7 @@ import React from 'react'
 import { MapContainer, Polyline, TileLayer, Marker, Tooltip } from 'react-leaflet'
 import DisplayImages from '../Map/DisplayImages';
 import Track from './MapObjects/Track';
+import Peak from './MapObjects/Peak';
 
 export default function SingleTripMap({singleTripExperiencesMapable, singleTripDetails}) {
     
