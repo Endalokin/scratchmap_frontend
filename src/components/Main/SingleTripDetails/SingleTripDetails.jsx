@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import { useParams, useOutletContext } from 'react-router-dom'
 import ImgGallery from './ImgGallery';
 import TripInfo from './TripInfo';
@@ -59,7 +59,6 @@ export default function SingleTripDetails() {
                     <div id="mapFilterSection" className={`${displayState} modal showUp`}><EditTrip singleTripDetails={singleTripDetails} toggleFilterVisibility={toggleFilterVisibility} /></div>
                 </div>}
             <div id="single-details" className='single-details centered-element showUp'>
-
                 <div >
                     <TripInfo trip={singleTripDetails} />
                     {singleTripExperiencesMapable?.length > 0 && <button className="notching" onClick={scrollToMap}>⮟ Map ⮟</button>}
