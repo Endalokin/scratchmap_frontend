@@ -1,5 +1,5 @@
 import React from 'react'
-import { LayerGroup, LayersControl, Polyline, Tooltip } from 'react-leaflet'
+import { Polyline, Tooltip } from 'react-leaflet'
 import Peak from './Peak';
 import Path from './Path';
 

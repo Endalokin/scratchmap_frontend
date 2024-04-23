@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState } from 'react'
 import { useParams, useOutletContext } from 'react-router-dom'
 import ImgGallery from './ImgGallery';
 import TripInfo from './TripInfo';
