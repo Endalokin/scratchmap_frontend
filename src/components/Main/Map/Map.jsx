@@ -28,6 +28,8 @@ export default function Map() {
         setDisplayState(prev => prev == "display-none" ? "display-flex" : "display-none")
     }
 
+    let experiencesMapable = experiences?.filter(e => (e.location?.lat || e.exif?.lat) && (e.location?.lon || e.exif?.lon))
+
     return (
         <div className="fixed-site showUp">
             <button className="ribbon ribbon-small" onClick={toggleFilterVisibility}>Show Filter</button>
@@ -41,14 +43,14 @@ export default function Map() {
 
                 />
                 {zoomLevel < 5 ?
-                    <DisplayColourTiles experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime} factor={0.5} />
+                    <DisplayColourTiles experiences={experiencesMapable} displaySeasons={displaySeasons} displayDaytime={displayDaytime} factor={0.5} />
                     : zoomLevel < 8 ?
-                        <DisplayColourTiles experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime} />
+                        <DisplayColourTiles experiences={experiencesMapable} displaySeasons={displaySeasons} displayDaytime={displayDaytime} />
                         : zoomLevel < 10 ?
-                            <DisplayColourTiles experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime} factor={2} />
+                            <DisplayColourTiles experiences={experiencesMapable} displaySeasons={displaySeasons} displayDaytime={displayDaytime} factor={2} />
                             : zoomLevel < 11 ?
-                            <DisplayColourTiles experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime} factor={3} />
-                            : <DisplayImages experiences={experiences} displaySeasons={displaySeasons} displayDaytime={displayDaytime} />
+                            <DisplayColourTiles experiences={experiencesMapable} displaySeasons={displaySeasons} displayDaytime={displayDaytime} factor={3} />
+                            : <DisplayImages experiences={experiencesMapable} displaySeasons={displaySeasons} displayDaytime={displayDaytime} />
                 }
             </MapContainer>
         </div>

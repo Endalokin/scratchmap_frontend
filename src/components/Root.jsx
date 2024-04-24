@@ -9,11 +9,10 @@ import { Toaster, toast } from 'react-hot-toast'
 
 export default function Root() {
 
-  const [user, setUser] = useState({ username: sessionStorage.getItem('username'), token: sessionStorage.getItem('token') })
+  const [user, setUser] = useState(sessionStorage.getItem('username') ? {username: sessionStorage.getItem('username'), token: sessionStorage.getItem('token') } : null)
   const { VITE_SERVER_URL } = import.meta.env;
   const [experiences, setExperiences] = useState()
   const [trips, setTrips] = useState()
-
   const [loadingData, setLoadingData] = useState(false)
 
   useEffect(() => {

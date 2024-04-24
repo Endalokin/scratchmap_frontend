@@ -26,6 +26,11 @@
   --highlight-two: #4a9470;
   --opposite-color: #032236;
   --btn: white;
+
+  --box-margin-l: 25px 50px;
+  --box-margin-s: 25px 15px;
+  --box-padding-l: 50px;
+  --box-padding-s: 15px;
 }
 
 /* Dark Mode */
@@ -50,6 +55,7 @@ body {
 
 main {
   margin: 0px 0px 50px 0px;
+  
 }
 
 h1,
@@ -120,6 +126,7 @@ form > * {
 
 .input-fields {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
@@ -304,7 +311,7 @@ menu > a {
 
 .vertical-scroll-80 {
   overflow: auto;
-  max-height: calc(70vh - 2rem);
+  max-height: calc(70vh - 1.5rem);
 }
 
 .vertical-scroll-80::-webkit-scrollbar,
@@ -379,6 +386,7 @@ menu > a {
   background-color: var(--highlight-one) !important;
   color: var(--btn) !important;
   filter: grayscale(0%);
+  z-index: 900 !important;
 }
 
 .polaroid > img {
@@ -513,8 +521,19 @@ menu > a {
 .leaflet-interactive:hover {
   transition: all 0.5s;
   box-shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.2);
-  transform: skew(-2deg);
+  transform: skew(-0.5deg);
 }
+
+.leaflet-div-icon2
+{
+  background:transparent;
+  border:none;
+  font-weight:bold;
+  text-align:center;
+  border-radius:50%;
+  font-size: 24px;
+}
+
 
 .modal {
   justify-content: space-evenly;
@@ -758,12 +777,12 @@ tbody > tr:nth-child(even) {
 /* Trip Detail Page */
 
 .single-details {
-  margin: 25px 50px;
+  margin: var(--box-margin-l);
   border: 2px dashed var(--highlight-one);
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  padding: 50px 50px;
+  padding: var(--box-padding-l);
   align-items: start;
 }
 
@@ -788,6 +807,16 @@ tbody > tr:nth-child(even) {
   #title {
     background-image: url("./title-andrea-piacquadio-1600px.jpg");
   }
+
+  .vertical-scroll-80 {
+    margin: 25px 0px;
+    white-space: nowrap;
+    max-width: calc(100vw - 220px);
+  }
+
+  .vertical-scroll-80 > div {
+    display: inline-block;
+  }
 }
 
 @media only screen and (max-width: 880px) {
@@ -806,14 +835,14 @@ tbody > tr:nth-child(even) {
     min-width: calc(100vw - 65px);
   }
 
-  .img-gallery {
-    rotate: 270deg;
+  .single-details {
+    margin: var(--box-margin-s);
+    border: 2px dashed var(--highlight-one);
+    padding: var(--box-padding-s);
   }
 
-  #single-details {
-    margin: 25px 15px;
-    border: 2px dashed var(--highlight-one);
-    padding: 15px 15px;
+  .vertical-scroll-80 {
+    max-width: calc(100vw - 80px);
   }
 
   .menu-button-container {

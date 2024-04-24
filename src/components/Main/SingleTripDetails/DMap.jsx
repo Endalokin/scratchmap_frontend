@@ -100,7 +100,7 @@ export default function DMap() {
           <div id="cesiumContainer" className={displayMap ? "display-flex" : "display-none"} style={{ width: mainElementWidth, height: mainElementHeight }}>
           </div>
           <div className={displayMap ? "display-none" : "display-flex"} style={{ width: mainElementWidth, height: mainElementHeight, justifyContent: "center" }}>
-            <img src={`${mainImage?.imgUrl}?fm=webp&w=${mainElementWidth}&h=${mainElementHeight}`} alt="" />
+            <img src={`${mainImage?.imgUrl}?fm=webp&w=${mainElementWidth}&h=${mainElementHeight}&fit=fill`} alt="" />
           </div>
         </div>
         <div className="polaroid polaroid-big" style={{ width: "150px" }}>
