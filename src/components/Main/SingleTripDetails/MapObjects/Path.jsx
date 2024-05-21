@@ -1,7 +1,7 @@
 import React from 'react'
 import { Polyline, Tooltip } from 'react-leaflet'
 
-export default function Path({ singleTripDetails, t, p }) {
+export default function Path({ singleTripDetails, track, position }) {
 
     const distance = (positions) => {
         let dx = positions[0][0] - positions[1][0];
@@ -19,10 +19,9 @@ export default function Path({ singleTripDetails, t, p }) {
 
     let lineOptions
 
-    if (t.path[t.path.indexOf(p) + 1]) {
-        let positions = [[p[0], p[1]], [t.path[t.path.indexOf(p) + 1][0], t.path[t.path.indexOf(p) + 1][1]]]
-        let altitudeDifference = t.altitude[t.path.indexOf(p)] - t.altitude[t.path.indexOf(p) + 1]
-
+    if (track.path[track.path.indexOf(position) + 1]) {
+        let positions = [[position.lat, position.lon], [track.path[track.path.indexOf(position) + 1].lat, track.path[track.path.indexOf(position) + 1].lon]]
+        let altitudeDifference = position.alt - track.path[track.path.indexOf(position) + 1].alt
         let perc = Math.abs(altitudeDifference / distance(positions)) * 5
 
         if (altitudeDifference < 0) {
@@ -35,9 +34,9 @@ export default function Path({ singleTripDetails, t, p }) {
 
         return (
             <>
-                < Polyline key={`track${singleTripDetails.tracks.indexOf(t)}_segment${t.path.indexOf(p)}`} pathOptions={lineOptions} positions={positions} >
+                < Polyline key={`track${singleTripDetails.tracks.indexOf(track)}_segment${track.path.indexOf(position)}`} pathOptions={lineOptions} positions={positions} >
                     <Tooltip sticky>
-                        {t?.name}<br />
+                        {track?.name}<br />
                         Steigung: ~{Math.round(perc / 5 * 100)}% {altitudeDifference < 0 ? "↗" : "↘"}<br />
                     </Tooltip>
                 </Polyline>
