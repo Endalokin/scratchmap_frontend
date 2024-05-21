@@ -20,7 +20,7 @@ export default function DeleteTrackModal({setIsOpen, activeTrack, singleTripDeta
             return [...prev]
         })
 
-        const DELETE_URL = `${VITE_SERVER_URL}/trips/deleteTrack/${activeTrack.id}`
+        const DELETE_URL = `${VITE_SERVER_URL}/trips/deleteTrack/${activeTrack._id}`
         fetchData(DELETE_URL, (data) => {
         }, "DELETE")
         setIsOpen(false)
