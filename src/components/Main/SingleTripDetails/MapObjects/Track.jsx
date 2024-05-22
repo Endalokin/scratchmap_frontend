@@ -5,9 +5,6 @@ import Path from './Path';
 
 export default function Track({ singleTripDetails, track }) {
 
-    console.log("Track is accessed")
-    console.log(track)
-
     let lineOptions = { color: getComputedStyle(document.body).color, dashArray: "2 25", weight: "2.5" }
 
     if (!track.path[0].alt) {
