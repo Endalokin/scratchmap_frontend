@@ -1,10 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import pjson from "../../../package.json"
+import {version} from "../../../package.json"
 import toast from 'react-hot-toast'
 
 export default function Footer({ user, setUser }) {
-
   function logout() {
     sessionStorage.removeItem('username');
     sessionStorage.removeItem('token');
@@ -28,7 +27,7 @@ export default function Footer({ user, setUser }) {
       <div>
         {user?.username && <a href="https://be.contentful.com/login/">Edit</a>}
         <a href="https://github.com/Endalokin/scratchmap_frontend" target="_blank">Documentation</a>
-        <a href="https://github.com/Endalokin/scratchmap_frontend" target="_blank">v{pjson.version}</a>
+        <a href="https://github.com/Endalokin/scratchmap_frontend" target="_blank">v{version}</a>
       </div>
     </footer>
   )

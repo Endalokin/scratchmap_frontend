@@ -2,7 +2,7 @@ import React from 'react'
 import { Tooltip } from 'react-leaflet'
 
 export default function DisplayImagesTooltip({experience}) {
-    const htmlPositioningError = `Positioning Error of ${Math.round(experience.exif.positioningError)} m`
+    const htmlPositioningError = `Positioning Error of ${Math.round(experience.exif?.positioningError)} m`
     return (
         <Tooltip sticky direction="bottom">
             <p><span style={{ color: experience.imgAccentColour, fontWeight: "bold" }}>{experience?.name}</span> <br />
