@@ -44,7 +44,7 @@ export default function SingleTripMap({ singleTripExperiencesMapable, singleTrip
                     </LayersControl.Overlay>
                     <LayersControl.Overlay name="Tracks" checked>
                         <LayerGroup>
-                            {singleTripDetails?.tracks && singleTripDetails?.tracks?.map(t => <Track singleTripDetails={singleTripDetails} t={t} />)}
+                            {singleTripDetails?.tracks && singleTripDetails?.tracks?.map(t => <Track key={t._id} singleTripDetails={singleTripDetails} track={t} />)}
                         </LayerGroup>
                     </LayersControl.Overlay>
                     <LayersControl.Overlay name="Departure & Arrival" checked>

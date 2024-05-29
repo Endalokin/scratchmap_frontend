@@ -3,21 +3,22 @@ import { Polyline, Tooltip } from 'react-leaflet'
 import Peak from './Peak';
 import Path from './Path';
 
-export default function Track({ singleTripDetails, t }) {
+export default function Track({ singleTripDetails, track }) {
 
     let lineOptions = { color: getComputedStyle(document.body).color, dashArray: "2 25", weight: "2.5" }
 
-    if (!t.altitude) {
-        return (<Polyline key={`track${singleTripDetails.tracks.indexOf(t)}`} pathOptions={lineOptions} positions={t?.path} >
+    if (!track.path[0].alt) {
+        // This has to be made fit for mongoDB with pathObjects
+        return (<Polyline key={`track${singleTripDetails.tracks.indexOf(track)}`} pathOptions={lineOptions} positions={track?.path} >
             <Tooltip sticky>
-                {t?.name}
+                {track?.name}
             </Tooltip>
         </Polyline>)
     } else {
         return (
             <>
-                {t.path.map(p => <Path singleTripDetails={singleTripDetails} t={t} p={p} />)}
-                <Peak t={t} />
+                {track.path.map(position =><Path singleTripDetails={singleTripDetails} track={track} position={position} />)}
+                <Peak t={track} />
             </>
         )
     }
